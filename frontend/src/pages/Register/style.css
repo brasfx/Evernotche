@@ -1,0 +1,53 @@
+.register-container {
+  width: 100%;
+  max-width: 520px;
+  height: 110vh;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.register-container .content {
+  width: 100%;
+  padding: 30px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 800px rgb(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+.register-container .content section {
+  width: 100%;
+  max-width: 380px;
+}
+
+.register-container .content form {
+  width: 100%;
+  max-width: 450px;
+}
+
+.register-container .content form input {
+  margin-top: 15px;
+}
+
+.register-container .content form .input-group {
+  display: flex;
+  margin-bottom: 30px;
+}
+.register-container .content form .input-group input + input {
+  margin-left: 8px;
+}
+
+.logo-image {
+  width: 150px;
+}
+
+.register-container .content h1 {
+  text-align: center;
+  font-size: 22px;
+  margin-top: 0;
+  font-weight: bold;
+}
