@@ -1,0 +1,19 @@
+a#first {
+    color: #C4C4C4;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+i#first {
+    color: white;
+}
+
+a#first:hover {
+    background-color: #04C35C;
+    color: #000000;
+
+  }
+
+a#first:hover > i#first {
+    color: #000000;
+}

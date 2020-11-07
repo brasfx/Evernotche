@@ -9,7 +9,7 @@
     "@tinymce/tinymce-react": "^3.8.1",
     "axios": "^0.21.0",
     "materialize-css": "1.0.0",
-    "react": "16.13.1",
+    "react": "^17.0.1",
     "react-dom": "16.13.1",
     "react-icons": "^3.11.0",
     "react-router-dom": "^5.2.0",
