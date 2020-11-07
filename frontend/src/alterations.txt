@@ -1,0 +1,11 @@
+Alterações
+
+Davi-(07/11){
+  Alterei as páginas index da AddNote/Home e Navbar.js para functional components;
+  Mudei as tags 'a' para componente Link (mais intuitiva e usa as rotas com react-dom);
+  Alterei os icones para padrão do react icons;
+  Alterei o idioma do editor de texto para pt_BR;
+  Ajustei a Navbar para usar userEffect(estava dando o bug de só abrir se entrasse direto na home);
+  Retirei o icone da barra superior, pois achei que ficaria muito poluido tantos logos nas páginas(posso inserir novamente se necessário);
+},
+Fulano-(data){}

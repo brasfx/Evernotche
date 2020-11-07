@@ -7,7 +7,7 @@ export default function TextEditor() {
   };
   return (
     <Editor
-      initialValue="<p>This is the initial content of the editor</p>"
+      initialValue="<p>Esse é nosso editor de textos.</p>"
       init={{
         height: 500,
         menubar: true,
@@ -15,11 +15,13 @@ export default function TextEditor() {
           'advlist autolink lists link image charmap print preview anchor',
           'searchreplace visualblocks code fullscreen',
           'insertdatetime media table paste code help wordcount',
+          'language',
         ],
         toolbar:
           'undo redo | formatselect | bold italic backcolor | \
              alignleft aligncenter alignright alignjustify | \
              bullist numlist outdent indent | removeformat | help',
+        language: 'pt_BR',
       }}
       onEditorChange={handleEditorChange}
     />

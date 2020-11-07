@@ -1,19 +1,18 @@
 a#first {
-    color: #C4C4C4;
-    font-size: 18px;
-    font-weight: bold;
+  color: #c4c4c4;
+  font-size: 20px;
+  font-weight: bold;
 }
 
-i#first {
-    color: white;
+i #first {
+  color: white;
 }
 
 a#first:hover {
-    background-color: #04C35C;
-    color: #000000;
-
-  }
+  background-color: #04c35c;
+  color: #000000;
+}
 
 a#first:hover > i#first {
-    color: #000000;
+  color: #000000;
 }

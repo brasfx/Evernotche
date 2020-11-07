@@ -1,16 +1,10 @@
-import React, { Component } from 'react'
-import Navbar from './Navbar.js';
-//import TextEditor from './Editor.js';
+import React from 'react';
+import Navbar from './Navbar';
 
-export class Home extends Component {
-    render() {
-        return (
-            <div>
-                <Navbar/>
-               
-            </div>
-        )
-    }
+export default function Home() {
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
 }
-
-export default Home
