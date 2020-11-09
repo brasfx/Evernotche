@@ -12,6 +12,7 @@ export default function TextEditor() {
       init={{
         height: 500,
         menubar: true,
+        paste_data_images: true,
         plugins: [
           'advlist autolink lists link image charmap print preview anchor',
           'searchreplace visualblocks code fullscreen',
@@ -24,7 +25,9 @@ export default function TextEditor() {
              bullist numlist outdent indent | removeformat | help',
         language: 'pt_BR',
       }}
+      
       onEditorChange={handleEditorChange}
+      
     />
   );
 }
