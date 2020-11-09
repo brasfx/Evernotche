@@ -8,6 +8,7 @@ export default function TextEditor() {
   return (
     <Editor
       initialValue="<p>Esse é nosso editor de textos.</p>"
+      apiKey='jy6t6urrwi3ftemqyutf851d3ueq4y4q9cdqlud3havzhtbw'
       init={{
         height: 500,
         menubar: true,
