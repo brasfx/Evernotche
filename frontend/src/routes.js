@@ -5,7 +5,6 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import AddNote from './pages/AddNote';
 
-
 export default function Routes() {
   return (
     <BrowserRouter>
@@ -14,7 +13,6 @@ export default function Routes() {
         <Route path="/home" component={Home} />
         <Route path="/addnote" component={AddNote} />
         <Route path="/" component={Login} />
-
       </Switch>
     </BrowserRouter>
   );

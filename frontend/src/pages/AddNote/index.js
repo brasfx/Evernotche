@@ -1,11 +1,11 @@
 import React from 'react';
-import Navbar from '../Home/Navbar';
+import Navbar2 from '../Home/Navbar2';
 import TextEditor from '../Home/Editor';
 
 export default function AddNote() {
   return (
     <div>
-      <Navbar />
+      <Navbar2 />
       <TextEditor />
     </div>
   );

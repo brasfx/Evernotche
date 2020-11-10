@@ -8,8 +8,8 @@ import M from 'materialize-css';
 export default function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   useEffect(() => {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, {});
+    const sidebar = document.querySelectorAll('.sidenav');
+    const instances = M.Sidenav.init(sidebar, {});
   }, [sidebar, setSidebar]);
   const showSidebar = () => setSidebar(!sidebar);
   return (
