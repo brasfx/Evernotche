@@ -1,6 +1,5 @@
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-import Navbar2 from './Navbar2';
 
 export default function TextEditor() {
   const handleEditorChange = (content) => {

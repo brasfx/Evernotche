@@ -10,4 +10,7 @@ Davi-(07/11){
 },
 Davi-(09/11){
   Inserção de uma função pra testar click na sidebar, para evitar o bug de renderização.
+},
+Davi(10/11){
+  Reformulação da sidebar e nav (correção do bug de criação de multiplas divs).
 }

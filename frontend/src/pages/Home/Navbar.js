@@ -1,94 +1,70 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import * as FaIcons from 'react-icons/fa';
+import * as FiIcons from 'react-icons/fi';
+import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { FiFilePlus, FiLogOut, FiMenu } from 'react-icons/fi';
-import yuna from '../../assets/default_user.png';
+import { SidebarData } from './SideBarData';
 import './Navbar.css';
-import M from 'materialize-css';
+import { IconContext } from 'react-icons';
+import img from '../../assets/default_user.png';
 
-export default function Navbar() {
+function Navbar() {
   const [sidebar, setSidebar] = useState(false);
-  useEffect(() => {
-    const sidebar = document.querySelectorAll('.sidenav');
-    const instances = M.Sidenav.init(sidebar, {});
-  }, [sidebar, setSidebar]);
+
   const showSidebar = () => setSidebar(!sidebar);
+
   return (
     <div>
-      <nav>
-        <div className="nav-wrapper " style={{ backgroundColor: '#272727' }}>
-          <Link
-            onClick={showSidebar}
-            to="#"
-            data-target="slide-out"
-            className="sidenav-trigger show-on-large"
-          >
-            <FiMenu size={25} color="#fff" />
+      <IconContext.Provider value={{ color: '#fff' }}>
+        <div className="navbar">
+          <Link to="#" className="menu-bars">
+            <FaIcons.FaBars onClick={showSidebar} />
           </Link>
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li>
-              <Link id="first" to="/" style={{ textAlign: 'center' }}>
-                <FiLogOut size={20} color="#fff" />
-                <span style={{ padding: '10px' }}>Logout</span>
+
+          <Link
+            id="first"
+            className="navbar"
+            to="/"
+            style={{ textAlign: 'center' }}
+          >
+            <FiIcons.FiLogOut size={25} color="#fff" />
+            <span style={{ padding: '10px' }}>Logout</span>
+          </Link>
+        </div>
+        <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+          <ul className="nav-menu-items " onClick={showSidebar} id="slide-out">
+            <li className="navbar-toggle">
+              <Link to="#" className="menu-bars">
+                <AiIcons.AiOutlineClose />
               </Link>
             </li>
-          </ul>
-        </div>
-      </nav>
+            <li style={{ textAlign: 'center', marginBottom: '30px' }}>
+              <Link to="#">
+                <img
+                  className="circle "
+                  src={img}
+                  style={{ width: '100px', height: '100px' }}
+                />
+                <h6>John Doe</h6>
+                <h6> jdandturk@gmail.com</h6>
+              </Link>
+            </li>
 
-      <ul
-        id="slide-out"
-        className="sidenav"
-        style={{
-          width: '25vw',
-          minWidth: '400px',
-          backgroundColor: '#272727',
-        }}
-      >
-        <li>
-          <div className="user-view">
-            <Link to="/home">
-              {' '}
-              <img
-                className="circle"
-                src={yuna}
-                style={{ width: '100px', height: '100px' }}
-              />
-            </Link>
-            <Link to="#">
-              {' '}
-              <span
-                className="white-text name"
-                style={{
-                  fontSize: '20px',
-                  fontWeight: 'bold',
-                }}
-              >
-                John Doe
-              </span>
-            </Link>
-            <Link to="#">
-              <span
-                className="white-text email"
-                style={{ fontSize: '14px', fontWeight: 'bold' }}
-              >
-                jdandturk@gmail.com
-              </span>
-            </Link>
-          </div>
-        </li>
-        <li>
-          <div className="divider"></div>
-        </li>
-        <br />
-        <li>
-          <Link id="first" to="/addnote">
-            {' '}
-            <FiFilePlus size={20} color="#fff" />
-            <span style={{ padding: '10px' }}>Adicionar nota</span>
-          </Link>
-        </li>
-        <br />
-      </ul>
+            {SidebarData.map((item, index) => {
+              return (
+                <li key={index} className={item.cName}>
+                  <Link to={item.path}>
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </IconContext.Provider>
     </div>
   );
 }
+
+export default Navbar;
