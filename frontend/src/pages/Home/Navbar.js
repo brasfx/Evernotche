@@ -1,22 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiFilePlus, FiLogOut, FiMenu } from 'react-icons/fi';
 import yuna from '../../assets/default_user.png';
-import logo from '../../assets/logo.png';
 import './Navbar.css';
 import M from 'materialize-css';
 
 export default function Navbar() {
+  const [sidebar, setSidebar] = useState(false);
   useEffect(() => {
     var elems = document.querySelectorAll('.sidenav');
     var instances = M.Sidenav.init(elems, {});
-    return () => {};
-  });
+  }, [sidebar, setSidebar]);
+  const showSidebar = () => setSidebar(!sidebar);
   return (
     <div>
       <nav>
-        <div className="nav-wrapper" style={{ backgroundColor: '#272727' }}>
+        <div className="nav-wrapper " style={{ backgroundColor: '#272727' }}>
           <Link
+            onClick={showSidebar}
+            to="#"
             data-target="slide-out"
             className="sidenav-trigger show-on-large"
           >
@@ -52,7 +54,7 @@ export default function Navbar() {
                 style={{ width: '100px', height: '100px' }}
               />
             </Link>
-            <Link>
+            <Link to="#">
               {' '}
               <span
                 className="white-text name"
