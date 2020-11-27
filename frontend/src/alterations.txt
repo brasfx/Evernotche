@@ -1,5 +1,10 @@
 Alterações
 
+Felipe-(27/11){
+  Configuração do redux no projeto, foi adicionada uma nova rota /teste com uma implementação básica do redux e da estrutura ducks para referência futura
+  
+},
+
 Davi-(07/11){
   Alterei as páginas index da AddNote/Home e Navbar.js para functional components;
   Mudei as tags 'a' para componente Link (mais intuitiva e usa as rotas com react-dom);
