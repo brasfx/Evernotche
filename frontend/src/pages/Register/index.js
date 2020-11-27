@@ -5,7 +5,7 @@ import logoImg from '../../assets/logo.png';
 export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [age, setAge] = useState('');
+  const [password, setPassword] = useState('');
   const [city, setCity] = useState('');
   const [uf, setUf] = useState('');
 
@@ -32,9 +32,10 @@ export default function Register() {
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
-            placeholder="Idade"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
+            type="password"
+            placeholder="Senha"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <div className="input-group">
             <input
@@ -49,7 +50,7 @@ export default function Register() {
               onChange={(e) => setUf(e.target.value)}
             />
           </div>
-          <Link className="back-link" to="/login">
+          <Link className="back-link" to="/">
             <button
               className="waves-effect waves-light btn-small green darken-2"
               type="submit"
