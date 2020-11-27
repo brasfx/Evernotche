@@ -1,6 +1,7 @@
 Alterações
 Davi-(27/11){
   Conexão com MongoDB Atlas e inserção de dados para teste.
+  Instalação dos pacotes moongose,express,dotenv,winston,winston-mongodb.
 },
 Felipe-(27/11){
   Configuração do redux no projeto, foi adicionada uma nova rota /teste com uma implementação básica do redux e da estrutura ducks para referência futura
