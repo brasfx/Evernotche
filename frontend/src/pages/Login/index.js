@@ -13,6 +13,7 @@ export default function Login() {
   }
   return (
     <div className="login-container">
+
       <img src={provisionalImg} alt="provisoria" className="slogan-image" />
       <section className="form">
         <img className="logo-image" src={logoImg} />

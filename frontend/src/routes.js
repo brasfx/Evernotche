@@ -4,6 +4,7 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import AddNote from './pages/AddNote';
+import Teste from './pages/Teste';
 
 export default function Routes() {
   return (
