@@ -1,9 +1,17 @@
 Alterações
-
+Davi-(09/11){
+  Conexão com MongoDB Atlas e inserção de dados para teste.
+},
 Felipe-(27/11){
   Configuração do redux no projeto, foi adicionada uma nova rota /teste com uma implementação básica do redux e da estrutura ducks para referência futura
-  
 },
+},
+Davi-(09/11){
+  Inserção de uma função pra testar click na sidebar, para evitar o bug de renderização.
+},
+Davi(10/11){
+  Reformulação da sidebar e nav (correção do bug de criação de multiplas divs).
+}
 
 Davi-(07/11){
   Alterei as páginas index da AddNote/Home e Navbar.js para functional components;
@@ -12,10 +20,3 @@ Davi-(07/11){
   Alterei o idioma do editor de texto para pt_BR;
   Ajustei a Navbar para usar useEffect(estava dando o bug de só abrir se entrasse direto na home);
   Retirei o icone da barra superior, pois achei que ficaria muito poluido tantos logos nas páginas(posso inserir novamente se necessário);
-},
-Davi-(09/11){
-  Inserção de uma função pra testar click na sidebar, para evitar o bug de renderização.
-},
-Davi(10/11){
-  Reformulação da sidebar e nav (correção do bug de criação de multiplas divs).
-}
