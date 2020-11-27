@@ -4,6 +4,7 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import AddNote from './pages/AddNote';
+import Teste from './pages/Teste';
 
 export default function Routes() {
   return (
@@ -12,6 +13,8 @@ export default function Routes() {
         <Route path="/register" component={Register} />
         <Route path="/home" component={Home} />
         <Route path="/addnote" component={AddNote} />
+        <Route path="/teste" component={Teste} />
+        
         <Route path="/" component={Login} />
       </Switch>
     </BrowserRouter>
