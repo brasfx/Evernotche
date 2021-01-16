@@ -1,0 +1,27 @@
+.noteitem {
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    padding: 1%;
+
+}
+
+.selectionbox {
+    background-color: red;
+    width: 10px;
+    height: 10px;
+    margin: 2px;
+    
+
+}
+
+.container {
+    width: 100%;
+    min-width: 380px;
+
+}
+
+.teste {
+    color: green;
+}

@@ -1,8 +1,10 @@
 import {combineReducers, createStore} from "redux";
 import counterReducer from "./ducks/counter";
+import selectorReducer from "./ducks/selectnote";
 
 const reducer = combineReducers({
-    counter: counterReducer
+    counter: counterReducer,
+    selectnote: selectorReducer
 
 });
 

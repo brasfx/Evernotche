@@ -19,7 +19,7 @@ export const SidebarData = [
   },
   {
     title: 'Todas as notas',
-    path: '#',
+    path: '/viewnotes',
     icon: <FiIcons.FiFileText />,
     cName: 'nav-text',
   },
