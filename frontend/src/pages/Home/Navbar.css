@@ -4,6 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
 }
 .logout {
   background-color: #272727;

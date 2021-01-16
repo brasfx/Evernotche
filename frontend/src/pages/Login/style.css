@@ -38,3 +38,8 @@
 .slogan-image {
   width: 700px;
 }
+
+.resendRegister {
+  display: flex;
+  flex-direction: column;
+}

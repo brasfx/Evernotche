@@ -13,7 +13,6 @@ export default function Login() {
   }
   return (
     <div className="login-container">
-
       <img src={provisionalImg} alt="provisoria" className="slogan-image" />
       <section className="form">
         <img className="logo-image" src={logoImg} />
@@ -41,10 +40,14 @@ export default function Login() {
             </button>
           </Link>
         </form>
-
-        <Link className="back-link" to="/register">
-          Não possui cadastro?
-        </Link>
+        <div className="resendRegister">
+          <Link className="back-link" to="/register">
+            Não possui cadastro?
+          </Link>
+          <Link className="back-link" to="/register">
+            Recuperar senha
+          </Link>
+        </div>
       </section>
     </div>
   );
