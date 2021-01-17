@@ -16,13 +16,13 @@ import {useSelector} from "react-redux";
         
 } */
 
-export default function NoteSelect() {
+export default function NoteSelect(props) {
 
     const selectedAux = useSelector((state) => state.selectnote.selected);
     const dispatch = useDispatch();
     
     const handleSelect = e => {
-        dispatch(select());
+        dispatch(select(props.noteid));
 
         if (selectedAux) {
             e.target.style.backgroundColor = 'red';
