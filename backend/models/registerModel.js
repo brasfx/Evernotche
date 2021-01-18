@@ -13,11 +13,7 @@ const registerSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  city: {
-    type: String,
-    required: true,
-  },
-  uf: {
+  country: {
     type: String,
     required: true,
   },
