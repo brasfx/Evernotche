@@ -43,6 +43,7 @@ function Navbar() {
                 <img
                   className="circle "
                   src={img}
+                  alt="foto-perfil"
                   style={{ width: '100px', height: '100px' }}
                 />
                 <h6>John Doe</h6>

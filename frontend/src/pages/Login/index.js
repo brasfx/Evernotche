@@ -15,7 +15,7 @@ export default function Login() {
     <div className="login-container">
       <img src={provisionalImg} alt="provisoria" className="slogan-image" />
       <section className="form">
-        <img className="logo-image" src={logoImg} />
+        <img className="logo-image" src={logoImg} alt="logo" />
         <form onSubmit={handleLogin}>
           <h1>Faça seu login</h1>
           <input
