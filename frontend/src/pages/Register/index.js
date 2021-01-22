@@ -1,17 +1,57 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import routesServices from '../../services/routesServices';
 import './style.css';
 import logoImg from '../../assets/logo.png';
+
 export default function Register() {
-  const [name, setName] = useState('');
+  const initialUserState = {
+    name: '',
+    email: '',
+    password: '',
+    country: '',
+  };
+  const [register, setRegister] = useState(initialUserState);
+  const [submitted, setSubmitted] = useState(false);
+
+  /*const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [country, setCountry] = useState('');
+  const [country, setCountry] = useState('');*/
 
-  async function handleRegister(e) {
+  const handleInputChange = (event) => {
+    const { name, email, password, country } = event.target.value;
+    setRegister({ ...register, [name]: email });
+  };
+
+  /*async function handleRegister(e) {
     e.preventDefault();
-  }
+  }*/
+
+  const saveRegister = () => {
+    var data = {
+      name: register.name,
+      email: register.email,
+      password: register.password,
+      country: register.country,
+    };
+    routesServices
+      .create(data)
+      .then((res) => {
+        setRegister({
+          name: res.data.name,
+          email: res.data.email,
+          password: res.data.password,
+          country: res.data.country,
+        });
+        setSubmitted(true);
+        console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   return (
     <div className="register-container">
       <div className="content">
@@ -19,45 +59,44 @@ export default function Register() {
           <img src={logoImg} className="logo-image" alt="logo" />
           <h1>Faça seu cadastro</h1>
         </section>
-        <form onSubmit={handleRegister}>
+        <form>
           <input
+            id="name"
             placeholder="Nome"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={register.name}
+            onChange={handleInputChange}
           />
           <input
+            id="email"
             type="email"
             placeholder="E-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={register.email}
+            onChange={handleInputChange}
           />
           <input
+            id="password"
             type="password"
             placeholder="Senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={register.password}
+            onChange={handleInputChange}
           />
-          <input
-            type="password"
-            placeholder="Repetir senha"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
+
           <div className="input-group">
             <input
+              id="country"
               placeholder="País"
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
+              value={register.country}
+              onChange={handleInputChange}
             />
           </div>
-          <Link className="back-link" to="/">
-            <button
-              className="waves-effect waves-light btn-small green darken-2"
-              type="submit"
-            >
-              Cadastrar
-            </button>
-          </Link>
+
+          <button
+            className="waves-effect waves-light btn-small green darken-2"
+            type="submit"
+            onClick={saveRegister}
+          >
+            Cadastrar
+          </button>
         </form>
         <Link className="back-link" to="/">
           <button
