@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import './noteitem.css';
 import NoteSelect from './NoteSelect.js';
 import { useSelector } from 'react-redux';
