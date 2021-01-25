@@ -1,33 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import routesServices from '../../services/routesServices';
 import './style.css';
 import logoImg from '../../assets/logo.png';
+import axios from 'axios';
 
 export default function Register() {
-  const initialUserState = {
+
+  const [register, setRegister] = useState({
     name: '',
     email: '',
     password: '',
     country: '',
-  };
-  const [register, setRegister] = useState(initialUserState);
+  });
   const [submitted, setSubmitted] = useState(false);
 
-  /*const [name, setName] = useState('');
+ /* const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [country, setCountry] = useState('');*/
 
-  const handleInputChange = (event) => {
-    const { name, email, password, country } = event.target.value;
-    setRegister({ ...register, [name]: email });
+  const handleInputChange = (event) => {  
+    register[event.target.name] = event.target.value;
+    setRegister({...register});
   };
 
   /*async function handleRegister(e) {
     e.preventDefault();
   }*/
+
+  function handleFormSubmit(event){
+    //event.preventDefault();
+    console.log(register);
+}
+  
 
   const saveRegister = () => {
     var data = {
@@ -53,15 +60,17 @@ export default function Register() {
       });
   };
   return (
+    
     <div className="register-container">
       <div className="content">
         <section>
           <img src={logoImg} className="logo-image" alt="logo" />
           <h1>Faça seu cadastro</h1>
         </section>
-        <form>
+        <form onSubmit={handleFormSubmit}>
           <input
             id="name"
+            name="name"
             placeholder="Nome"
             value={register.name}
             onChange={handleInputChange}
@@ -69,6 +78,7 @@ export default function Register() {
           <input
             id="email"
             type="email"
+            name="email"
             placeholder="E-mail"
             value={register.email}
             onChange={handleInputChange}
@@ -76,6 +86,7 @@ export default function Register() {
           <input
             id="password"
             type="password"
+            name="password"
             placeholder="Senha"
             value={register.password}
             onChange={handleInputChange}
@@ -84,12 +95,13 @@ export default function Register() {
           <div className="input-group">
             <input
               id="country"
+              name="country"
               placeholder="País"
               value={register.country}
               onChange={handleInputChange}
             />
           </div>
-
+          
           <button
             className="waves-effect waves-light btn-small green darken-2"
             type="submit"
