@@ -37,7 +37,7 @@ export const SidebarData = [
   },
   {
     title: 'Suporte',
-    path: '#',
+    path: '/support',
     icon: <BiIcons.BiSupport />,
     cName: 'nav-text',
   },

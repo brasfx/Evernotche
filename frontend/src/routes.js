@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import AddNote from './pages/AddNote';
 import ViewNotes from './pages/ViewNotes';
+import Support from './pages/Support';
 //import Teste from './pages/Teste';
 
 export default function Routes() {
@@ -15,6 +16,7 @@ export default function Routes() {
         <Route exact path="/home" component={Home} />
         <Route exact path="/addnote" component={AddNote} />
         <Route exact path="/viewnotes" component={ViewNotes} />
+        <Route exact path="/support" component={Support} />
         <Route exact path="/" component={Login} />
       </Switch>
     </BrowserRouter>

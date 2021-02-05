@@ -1,0 +1,10 @@
+.divPrincipal {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+.textSpinner {
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 25px;
+}
