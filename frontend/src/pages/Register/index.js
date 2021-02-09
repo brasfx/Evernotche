@@ -31,8 +31,9 @@ export default function Register() {
       password: register.password,
       country: register.country,
     };
+    var type = 1;
     routesServices
-      .create(data)
+      .create(data, type)
       .then((res) => {
         setRegister({
           name: res.data.name,
