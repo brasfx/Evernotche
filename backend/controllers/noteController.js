@@ -18,7 +18,7 @@ const create = async (req, res) => {
   }
 };
 // Puxa Nota Pelo ID
-const find = async (_, res) => {
+const findNote = async (_, res) => {
   const noteid = req.params.noteid;
   try {
     const data = await Model.find({_id: noteid });
@@ -31,9 +31,12 @@ const find = async (_, res) => {
     logger.error(`GET /note - ${JSON.stringify(error.message)}`);
   }
 };
+
+//Puxa todas por Id do usuário
 const findAll = async (_, res) => {
+  const userid = req.params.noteid;
   try {
-    const data = await Model.find({});
+    const data = await Model.find({_id: userid});
     res.send(data);
     logger.info(`GET /note`);
   } catch (error) {
@@ -84,4 +87,4 @@ const remove = async (req, res) => {
     logger.error(`DELETE / note - ${JSON.stringify(error.message)}`);
   }
 };
-export default { create, findAll, remove, update };
+export default { create,findNote, findAll, remove, update };
