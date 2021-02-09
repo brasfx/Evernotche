@@ -1,25 +1,21 @@
-import React from 'react';
+import React, {useContext, useReducer} from 'react';
 import Navbar from '../Home/Navbar.js';
-import NoteItem from './NoteItem.js';
+import NotesContext from './context.js';
+import notesReducer from './reducer.js'; 
+import NoteList from './NoteList.js';
+import Panel from './Panel.js';
 
 export default function ViewNotes() {
-  const notes = [
-    { id: 1, content: 'a', owner: 'a' },
-    { id: 2, content: 'b', owner: 'b' },
-    { id: 3, content: 'c', owner: 'c' },
-  ];
-
-  //<NoteItem noteaux = {notes[0]} />
-  //<NoteItem noteaux = {notes[1]} />
+  const initialState = useContext(NotesContext);
+  const [state, dispatch] = useReducer(notesReducer, initialState);
+  console.log(state);
 
   return (
-    <div>
+    <NotesContext.Provider value={{state, dispatch}}>
       <Navbar />
-      <div className="container">
-        {notes.map((note, i) => (
-          <NoteItem noteaux={note} key={i} />
-        ))}
-      </div>
-    </div>
+      <Panel />
+      <NoteList />
+    </NotesContext.Provider>
+
   );
 }
