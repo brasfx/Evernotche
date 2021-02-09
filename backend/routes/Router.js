@@ -12,7 +12,7 @@ app.put('/register/:id', registerController.update);
 //Nota
 app.post('/new-note', noteController.create);
 app.get('/note', noteController.findAll);
-app.get('/note/:id', noteController.find);
+app.get('/note/:id', noteController.findNote);
 app.delete('/note/:id', noteController.remove);
 app.put('/note/:id', noteController.update);
 
