@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import routesServices from '../../services/routesServices';
 import './style.css';
 import logoSupp from '../../assets/logo-support.png';
-import axios from 'axios';
 import Spinner from '../../components/Spinner';
 
 export default function PageSupp() {
@@ -12,10 +10,13 @@ export default function PageSupp() {
     email: '',
     topic: '',
     textTopic: '',
-    sendFile: '',
+    //file: '',
   };
   const [dataSupport, setDataSupport] = useState(initialDataSupp);
   const [submitted, setSubmitted] = useState(false);
+
+  const getName = localStorage.getItem('name');
+  const getEmail = localStorage.getItem('email');
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -24,9 +25,10 @@ export default function PageSupp() {
 
   function handleFormSubmit(event) {
     event.preventDefault();
+    saveRegister();
     setTimeout(() => {
       newRegister();
-    }, 5000);
+    }, 3000);
   }
 
   const saveRegister = () => {
@@ -35,17 +37,17 @@ export default function PageSupp() {
       email: dataSupport.email,
       topic: dataSupport.topic,
       textTopic: dataSupport.textTopic,
-      sendFile: dataSupport.sendFile,
+      //file: dataSupport.file,
     };
     routesServices
-      .create(data)
+      .support(data)
       .then((res) => {
         setDataSupport({
           name: res.data.name,
           email: res.data.email,
           topic: res.data.topic,
           textTopic: res.data.textTopic,
-          sendFile: res.data.sendFile,
+          //file: res.data.file,
         });
         setSubmitted(true);
         console.log(res.data);
@@ -61,20 +63,8 @@ export default function PageSupp() {
   };
   return (
     <div className="register-container">
-      {submitted && <Spinner description="Enviando form" />}
       {submitted ? (
-        <div className="content">
-          <section>
-            <img src={logoSupp} className="logo-image" alt="logo-supp" />
-            <h1>Formulário enviado com sucesso!</h1>
-          </section>
-          <button
-            className="waves-effect waves-light btn-small green darken-2"
-            onClick={newRegister}
-          >
-            Nova solicitação
-          </button>
-        </div>
+        <Spinner description="Enviando formulário..." />
       ) : (
         <div className="content">
           <section>
@@ -118,20 +108,19 @@ export default function PageSupp() {
               ></textarea>
             </div>
 
-            <div className="input-group">
+            {/* <div className="input-group">
               <input
                 type="file"
-                id="sendFile"
-                name="sendFile"
-                value={dataSupport.sendFile}
+                id="file"
+                name="file"
+                value={dataSupport.file}
                 onChange={handleInputChange}
               ></input>
-            </div>
+            </div> */}
 
             <button
               className="waves-effect waves-light btn-small green darken-2"
               type="submit"
-              onClick={saveRegister}
             >
               Enviar
             </button>

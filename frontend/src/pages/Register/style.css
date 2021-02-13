@@ -1,7 +1,7 @@
 .register-container {
   width: 100%;
   max-width: 520px;
-  height: 110vh;
+  height: 10vh;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -10,6 +10,7 @@
 }
 
 .register-container .content {
+  margin-top: 150px;
   width: 100%;
   padding: 30px;
   border-radius: 8px;

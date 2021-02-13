@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from 'react-router-dom';
 import Register from './pages/Register';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -7,18 +12,23 @@ import AddNote from './pages/AddNote';
 import ViewNotes from './pages/ViewNotes';
 import Support from './pages/Support';
 //import Teste from './pages/Teste';
+//import { history } from './history';
+import NotFound from './pages/NotFound';
+import PrivateRoute from './pages/PrivateRoute';
 
 export default function Routes() {
+  const history = useHistory();
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <Switch>
         <Route exact path="/register" component={Register} />
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/addnote" component={AddNote} />
-        <Route exact path="/viewnotes" component={ViewNotes} />
-        <Route exact path="/support" component={Support} />
+        <PrivateRoute exact path="/home" component={Home} />
+        <PrivateRoute exact path="/addnote" component={AddNote} />
+        <PrivateRoute exact path="/viewnotes" component={ViewNotes} />
+        <PrivateRoute exact path="/support" component={Support} />
         <Route exact path="/" component={Login} />
+        <PrivateRoute component={NotFound} />
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 }

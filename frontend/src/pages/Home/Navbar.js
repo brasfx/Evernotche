@@ -13,6 +13,16 @@ function Navbar() {
 
   const showSidebar = () => setSidebar(!sidebar);
 
+  const getName = localStorage.getItem('name');
+  const getEmail = localStorage.getItem('email');
+
+  const resetSession = () => {
+    localStorage.removeItem('app-token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('name');
+    localStorage.removeItem('email');
+  };
+
   return (
     <div>
       <IconContext.Provider value={{ color: '#fff' }}>
@@ -22,6 +32,7 @@ function Navbar() {
           </Link>
 
           <Link
+            onClick={resetSession}
             id="first"
             className="navbar"
             to="/"
@@ -46,8 +57,8 @@ function Navbar() {
                   alt="foto-perfil"
                   style={{ width: '100px', height: '100px' }}
                 />
-                <h6>John Doe</h6>
-                <h6> jdandturk@gmail.com</h6>
+                <h6>{getName}</h6>
+                <h6>{getEmail}</h6>
               </Link>
             </li>
 

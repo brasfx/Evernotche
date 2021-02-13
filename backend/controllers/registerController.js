@@ -1,5 +1,12 @@
 import { db } from '../models/index.js';
 import { logger } from '../config/logger.js';
+//import { error } from 'winston';
+import pkg from 'winston';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+
+dotenv.config();
+const { error } = pkg;
 
 const Model = db.register;
 const create = async (req, res) => {
@@ -8,8 +15,49 @@ const create = async (req, res) => {
   try {
     const register = new Model({ name, email, password, country });
     const data = await register.save(register);
-    res.send(register);
+    res.send(data);
     logger.info(`POST /register - ${JSON.stringify(register)}`);
+
+    let message = `
+    <h3>Obrigado por nos escolher</h3>
+    <h3>Seus dados do Evernotche Web</h3>
+    <ul>
+      <li>Nome: ${name}</li>
+      <li>Email: ${email}</li>
+      <li>Senha: ${password}</li>
+    </ul>
+    `;
+
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      host: 'smtp.gmail.com',
+
+      auth: {
+        user: `${process.env.EMAIL_LOGIN}`, // generated ethereal user
+        pass: `${process.env.EMAIL_PASSWORD}`,
+        port: 587,
+        secure: true,
+      },
+      tls: {
+        rejectUnauthorized: false,
+      },
+    });
+
+    let mailOptions = {
+      from: `Evernotche Web <${process.env.EMAIL_LOGIN}>`,
+      to: `${email}`, // list of receivers
+      subject: 'Confirmação criação de conta ',
+      text: 'Hello world?',
+      html: message,
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
+      console.log('Message sent: %s', info.messageId);
+      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+      res.render('contact', { message: 'Email enviado com sucesso!' });
+    });
   } catch (error) {
     res
       .status(500)
@@ -25,10 +73,32 @@ const findAll = async (_, res) => {
   } catch (error) {
     res
       .status(500)
-      .send({ message: error.message || 'Erro ao listar todos os documentos' });
+      .send({ message: error.message || 'Erro ao listar todos os usuarios' });
     logger.error(`GET /register - ${JSON.stringify(error.message)}`);
   }
 };
+
+const findOne = async (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  try {
+    const data = await Model.findOne(
+      { email: email, password: password },
+      res.body
+    );
+
+    res.send(data);
+
+    logger.info(`GET /login - ${email} - ${JSON.stringify(req.body)}`);
+  } catch (error) {
+    res.status(500).send({
+      message: error.message || 'Email cadastrado: ' + email,
+    });
+    logger.error(`GET /login - ${JSON.stringify(error.message)}`);
+  }
+};
+
 //usuário é atualiado a partir de seu ID
 const update = async (req, res) => {
   if (!req.body) {
@@ -68,4 +138,53 @@ const remove = async (req, res) => {
     logger.error(`DELETE / register - ${JSON.stringify(error.message)}`);
   }
 };
-export default { create, findAll, remove, update };
+
+const support = async (req, res) => {
+  const { name, email, topic, textTopic, file } = req.body;
+
+  let message = `
+    <p>Solicitação de suporte do cliente</p>
+    <p>Favor verificar e fornecer um retorno o mais rápido possivel!</p>
+
+    <h4>Dados para suporte</h4>
+    <ul>
+      <li><b>Nome do usuário:</b> ${name}</li>
+      <li><b>Email do usuário:</b> ${email}</li>
+      <li><b>Assunto:</b> ${topic}</li>
+      <li><b>Mensagem:</b> ${textTopic}</li>
+    </ul>
+    `;
+
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+
+    auth: {
+      user: `${process.env.EMAIL_LOGIN}`, // generated ethereal user
+      pass: `${process.env.EMAIL_PASSWORD}`,
+      port: 587,
+      secure: true,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+  let mailOptions = {
+    from: `Suporte <${process.env.EMAIL_LOGIN}>`,
+    to: `${process.env.EMAIL_LOGIN}`, // list of receivers
+    subject: 'Pedido de suporte',
+    text: 'Suporte ao usuário',
+    html: message,
+  };
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
+    console.log('Message sent: %s', info.messageId);
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    res.render('support', { message: 'Email de suporte enviado com sucesso!' });
+  });
+};
+
+export default { create, findAll, remove, update, findOne, support };

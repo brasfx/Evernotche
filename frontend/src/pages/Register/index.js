@@ -6,7 +6,7 @@ import logoImg from '../../assets/logo.png';
 import { useForm } from 'react-hook-form';
 import Spinner from '../../components/Spinner';
 import { yupResolver } from '@hookform/resolvers/yup';
-import schemaValidation from './validationForm';
+import schemaValidation from './validateForm';
 
 export default function Register() {
   const initialUserState = {
