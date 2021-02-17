@@ -5,7 +5,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-import { registerRouter } from './routes/registerRouter.js';
+//import { registerRouter } from './routes/registerRouter.js';
+import { Router } from './routes/Router.js';
 import { logger } from './config/logger.js';
 import { db } from './models/index.js';
 //conexão com o banco
@@ -30,7 +31,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors());
-app.use(registerRouter);
+app.use(Router);
 
 app.listen(process.env.PORT || 8081, () => {
   logger.info(`Servidor em execução na porta ${process.env.PORT}`);
