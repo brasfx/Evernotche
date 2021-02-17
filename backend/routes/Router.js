@@ -5,12 +5,12 @@ import noteController from '../controllers/noteController.js';
 const app = express();
 
 //Registro
-app.post('/new-register', controller.create);
-app.get('/register', controller.findAll);
-app.post('/login', controller.findOne);
-app.post('/support', controller.support);
-app.delete('/register/:id', controller.remove);
-app.put('/register/:id', controller.update);
+app.post('/new-register', registerController.create);
+app.get('/register', registerController.findAll);
+app.post('/login', registerController.findOne);
+app.post('/support', registerController.support);
+app.delete('/register/:id', registerController.remove);
+app.put('/register/:id', registerController.update);
 //Nota
 app.post('/new-note', noteController.create);
 app.get('/note', noteController.findAll);
