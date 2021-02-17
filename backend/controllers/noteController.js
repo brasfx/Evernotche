@@ -34,7 +34,6 @@ const findNote = async (_, res) => {
 
 //Puxa todas por Id do usuário
 const findAll = async (_, res) => {
-  const userid = req.params.noteid;
   try {
     const data = await Model.find({});
     res.send(data);
