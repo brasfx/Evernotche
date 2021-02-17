@@ -17,7 +17,6 @@ export default function TextEditor() {
     console.log('Content was updated:', content);
     
 
-    
 
     var data = {
       title: note.tile,
@@ -25,9 +24,8 @@ export default function TextEditor() {
       userid: note.userid,
       timestamp: note.timestamp,
     };
-    var type = 2;
     routesServices
-      .create(data, type)
+      .createNote(data)
       .then((res) => {
         setNote({
           title: res.data.title,
