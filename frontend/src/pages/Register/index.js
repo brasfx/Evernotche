@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import routesServices from '../../services/routesServices';
 import './style.css';
 import logoImg from '../../assets/logo.png';
@@ -9,6 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import schemaValidation from './validateForm';
 
 export default function Register() {
+  const history = useHistory();
   const initialUserState = {
     name: '',
     email: '',
@@ -30,7 +31,7 @@ export default function Register() {
   function handleFormSubmit() {
     saveRegister();
     setTimeout(() => {
-      newRegister();
+      history.push('/');
     }, 5000);
   }
 
@@ -59,15 +60,15 @@ export default function Register() {
       });
   };
 
-  const newRegister = () => {
-    setRegisterUser(initialUserState);
-    setSubmitted(false);
-  };
+  // const newRegister = () => {
+  //   setRegisterUser(initialUserState);
+  //   setSubmitted(false);
+  // };
 
   return (
     <div className="register-container">
       {submitted ? (
-        <Spinner description="Enviando dados..." />
+        <Spinner description="Realizando cadastro..." />
       ) : (
         <div className="content">
           <section>

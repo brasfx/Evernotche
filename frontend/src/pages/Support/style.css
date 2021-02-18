@@ -1,7 +1,7 @@
-.register-container {
+.support-container {
   width: 100%;
   max-width: 520px;
-  height: 110vh;
+  height: 89vh;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -9,7 +9,7 @@
   text-align: center;
 }
 
-.register-container .content {
+.support-container .content {
   width: 100%;
   padding: 30px;
   border-radius: 8px;
@@ -19,25 +19,25 @@
   box-shadow: 0 0 800px rgb(0, 0, 0, 0.1);
   border-radius: 10px;
 }
-.register-container .content section {
+.support-container .content section {
   width: 100%;
   max-width: 380px;
 }
 
-.register-container .content form {
+.support-container .content form {
   width: 100%;
   max-width: 450px;
 }
 
-.register-container .content form input {
+.support-container .content form input {
   margin-top: 15px;
 }
 
-.register-container .content form .input-group {
+.support-container .content form .input-group {
   display: flex;
   margin-bottom: 30px;
 }
-.register-container .content form .input-group input + input {
+.support-container .content form .input-group input + input {
   margin-left: 8px;
 }
 
@@ -45,12 +45,9 @@
   width: 200px;
 }
 
-.register-container .content h1 {
+.support-container .content h1 {
   text-align: center;
   font-size: 22px;
   margin-top: 0;
   font-weight: bold;
-}
-.button-back {
-  margin-top: 30px;
 }

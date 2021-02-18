@@ -16,6 +16,7 @@ import ShowNote from './pages/ShowNote';
 //import { history } from './history';
 import NotFound from './pages/NotFound';
 import PrivateRoute from './pages/PrivateRoute';
+import RecoverPassword from './pages/RecoverPassword';
 
 export default function Routes() {
   const history = useHistory();
@@ -28,6 +29,7 @@ export default function Routes() {
         <PrivateRoute exact path="/viewnotes" component={ViewNotes} />
         <PrivateRoute exact path="/note/:id" component={ShowNote} />
         <PrivateRoute exact path="/support" component={Support} />
+        <Route exact path="/recover-password" component={RecoverPassword} />
         <Route exact path="/" component={Login} />
         <PrivateRoute component={NotFound} />
       </Switch>

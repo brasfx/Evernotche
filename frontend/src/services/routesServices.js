@@ -4,14 +4,14 @@ const create = (data) => {
 };
 
 const createNote = (data) => {
-  return http.post('/new-note',data);
+  return http.post('/new-note', data);
 };
 
 //const findNote  = (id) => {
 //  return http.get('/note/:id',id);
 //};
 
-const findAllNotes  = () => {
+const findAllNotes = () => {
   return http.get('/note');
 };
 
@@ -23,10 +23,15 @@ const support = (data) => {
   return http.post(`/support`, data);
 };
 
+const recover = (data) => {
+  return http.put(`/recover-password`, data);
+};
+
 export default {
   create,
   createNote,
   findAllNotes,
   login,
   support,
+  recover,
 };

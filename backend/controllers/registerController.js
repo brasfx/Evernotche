@@ -187,4 +187,75 @@ const support = async (req, res) => {
   });
 };
 
-export default { create, findAll, remove, update, findOne, support };
+//recuperar senha
+const recoverPassword = async (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({
+      message: 'Dados para atualizacao vazio',
+    });
+  }
+
+  const { email } = req.body;
+
+  try {
+    const data = await Model.updateOne({ email: email }, req.body);
+
+    res.send(req.body.password);
+    logger.info(
+      `PUT /recover-password - ${email} - ${JSON.stringify(req.body)}`
+    );
+
+    let message = `
+    <p>Você solicitou a recuperação de senha a partir de nosso sistema, por isso estamos enviando uma senha provisória de acesso.</p>
+    <p>Após logar com a senha provisória, poderá fazer a alteração a partir do seu perfil,modificando por uma outra de sua escolha.</p>
+    <h4>Senha provisória de acesso: ${req.body.password}</h4>
+    <p>Caso não tenha solicitado esse serviço, favor entrar em contato conosco pelo email: ${process.env.EMAIL_LOGIN} e informe o problema.</p>
+    `;
+
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      host: 'smtp.gmail.com',
+
+      auth: {
+        user: `${process.env.EMAIL_LOGIN}`, // generated ethereal user
+        pass: `${process.env.EMAIL_PASSWORD}`,
+        port: 587,
+        secure: true,
+      },
+      tls: {
+        rejectUnauthorized: false,
+      },
+    });
+
+    let mailOptions = {
+      from: `Evernotche Web <${process.env.EMAIL_LOGIN}>`,
+      to: `${email}`, // list of receivers
+      subject: 'Recuperação de senha ',
+      text: 'Hello world?',
+      html: message,
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
+      console.log('Message sent: %s', info.messageId);
+      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+      res.render('contact', { message: 'Email enviado com sucesso!' });
+    });
+  } catch (error) {
+    res.status(500).send({
+      message: error.message || 'Erro ao atualizar o usuario de id: ' + id,
+    });
+    logger.error(`PUT /register - ${JSON.stringify(error.message)}`);
+  }
+};
+
+export default {
+  create,
+  findAll,
+  remove,
+  update,
+  findOne,
+  support,
+  recoverPassword,
+};

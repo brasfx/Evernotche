@@ -62,7 +62,7 @@ export default function PageSupp() {
     setSubmitted(false);
   };
   return (
-    <div className="register-container">
+    <div className="support-container">
       {submitted ? (
         <Spinner description="Enviando formulário..." />
       ) : (

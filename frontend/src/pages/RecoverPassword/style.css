@@ -1,7 +1,7 @@
-.register-container {
+.recover-container {
   width: 100%;
   max-width: 520px;
-  height: 110vh;
+  height: 89vh;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -9,8 +9,7 @@
   text-align: center;
 }
 
-.register-container .content {
-  margin-top: 150px;
+.recover-container .content {
   width: 100%;
   padding: 30px;
   border-radius: 8px;
@@ -20,38 +19,36 @@
   box-shadow: 0 0 800px rgb(0, 0, 0, 0.1);
   border-radius: 10px;
 }
-.register-container .content section {
+.recover-container .content section {
   width: 100%;
   max-width: 380px;
 }
 
-.register-container .content form {
+.recover-container .content form {
   width: 100%;
   max-width: 450px;
 }
 
-.register-container .content form input {
+.recover-container .content form input {
   margin-top: 15px;
+  margin-bottom: 30px;
 }
 
-.register-container .content form .input-group {
+.recover-container .content form .input-group {
   display: flex;
   margin-bottom: 30px;
 }
-.register-container .content form .input-group input + input {
+.recover-container .content form .input-group input + input {
   margin-left: 8px;
 }
 
 .logo-image {
-  width: 150px;
+  width: 200px;
 }
 
-.register-container .content h1 {
+.recover-container .content h1 {
   text-align: center;
   font-size: 22px;
   margin-top: 0;
   font-weight: bold;
-}
-.button-back {
-  margin-top: 30px;
 }

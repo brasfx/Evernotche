@@ -113,7 +113,7 @@ export default function Login() {
           <Link className="back-link" to="/register">
             Não possui cadastro?
           </Link>
-          <Link className="back-link" to="/register">
+          <Link className="back-link" to="/recover-password">
             Recuperar senha
           </Link>
         </div>
