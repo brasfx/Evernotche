@@ -4,6 +4,7 @@ import Note from './Note.js';
 
 export default function NoteList() {
     const {state} = useContext(NotesContext);
+    const {dispatch} = useContext(NotesContext);
 
     return (
         <div className="notes-container">

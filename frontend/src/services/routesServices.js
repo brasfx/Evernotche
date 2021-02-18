@@ -11,8 +11,8 @@ const createNote = (data) => {
 //  return http.get('/note/:id',id);
 //};
 
-const findAllNote  = (id) => {
-  return http.get('/note',id);
+const findAllNotes  = () => {
+  return http.get('/note');
 };
 
 const login = (data) => {
@@ -26,7 +26,7 @@ const support = (data) => {
 export default {
   create,
   createNote,
-  findAllNote,
+  findAllNotes,
   login,
   support,
 };

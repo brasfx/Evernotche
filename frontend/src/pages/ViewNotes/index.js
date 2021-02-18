@@ -1,4 +1,4 @@
-import React, {useContext, useReducer} from 'react';
+import React, {useContext, useReducer, useEffect} from 'react';
 import Navbar from '../Home/Navbar.js';
 import NotesContext from './context.js';
 import notesReducer from './reducer.js'; 

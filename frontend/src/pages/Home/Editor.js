@@ -19,7 +19,7 @@ export default function TextEditor() {
 
 
     var data = {
-      title: note.tile,
+      title: note.title,
       payload: content,
       userid: note.userid,
       timestamp: note.timestamp,

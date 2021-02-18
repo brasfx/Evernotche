@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import AddNote from './pages/AddNote';
 import ViewNotes from './pages/ViewNotes';
 import Support from './pages/Support';
+import ShowNote from './pages/ShowNote';
 //import Teste from './pages/Teste';
 //import { history } from './history';
 import NotFound from './pages/NotFound';
@@ -25,6 +26,7 @@ export default function Routes() {
         <PrivateRoute exact path="/home" component={Home} />
         <PrivateRoute exact path="/addnote" component={AddNote} />
         <PrivateRoute exact path="/viewnotes" component={ViewNotes} />
+        <PrivateRoute exact path="/note/:id" component={ShowNote} />
         <PrivateRoute exact path="/support" component={Support} />
         <Route exact path="/" component={Login} />
         <PrivateRoute component={NotFound} />
