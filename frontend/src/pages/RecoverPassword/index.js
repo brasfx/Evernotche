@@ -4,6 +4,7 @@ import './style.css';
 import logoReset from '../../assets/resetPassword.png';
 import Spinner from '../../components/Spinner';
 import { Link, useHistory } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function RecoverPassword() {
   const history = useHistory();
@@ -59,7 +60,16 @@ export default function RecoverPassword() {
     setSubmitted(false);
   };
   return (
-    <div className="recover-container">
+    <motion.div
+      className="recover-container"
+      transition={{ delay: 0, duration: 0.7 }}
+      variants={{
+        show: { opacity: 1, z: '0' },
+        hiden: { opacity: 0, z: '100%' },
+      }}
+      initial="hiden"
+      animate="show"
+    >
       {submitted ? (
         <Spinner description="Enviando dados para seu email..." />
       ) : (
@@ -95,6 +105,6 @@ export default function RecoverPassword() {
           </Link>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }

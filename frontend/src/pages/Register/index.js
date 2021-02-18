@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import Spinner from '../../components/Spinner';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schemaValidation from './validateForm';
+import { motion } from 'framer-motion';
 
 export default function Register() {
   const history = useHistory();
@@ -66,7 +67,16 @@ export default function Register() {
   // };
 
   return (
-    <div className="register-container">
+    <motion.div
+      className="register-container"
+      transition={{ delay: 0, duration: 0.7 }}
+      variants={{
+        show: { opacity: 1, z: '0' },
+        hiden: { opacity: 0, z: '100%' },
+      }}
+      initial="hiden"
+      animate="show"
+    >
       {submitted ? (
         <Spinner description="Realizando cadastro..." />
       ) : (
@@ -163,6 +173,6 @@ export default function Register() {
           </Link>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
