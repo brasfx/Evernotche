@@ -18,7 +18,7 @@ const schemaValidation = yup.object().shape({
     .oneOf([yup.ref('password'), null], 'As senhas são imcompativeis!'),
   country: yup
     .string('Por favor, insira um país!')
-    .required('O campo é obrigatório!'),
+  // .required('O campo é obrigatório!'),
 });
 
 export default schemaValidation;
