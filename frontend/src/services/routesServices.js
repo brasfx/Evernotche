@@ -28,7 +28,7 @@ const recover = (data) => {
 };
 
 const removeNote = (data) => {
-  return http.delete('/note', data);
+  return http.post('/notedelete', data);
 };
 
 export default {

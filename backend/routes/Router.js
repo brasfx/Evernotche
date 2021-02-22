@@ -17,7 +17,7 @@ app.put('/recover-password', registerController.recoverPassword);
 app.post('/new-note', noteController.create);
 app.get('/note', noteController.findAll);
 app.get('/note/:id', noteController.findNote);
-app.delete('/note/:id', noteController.remove);
+app.post('/notedelete', noteController.remove);
 app.put('/note/:id', noteController.update);
 
 export { app as Router };

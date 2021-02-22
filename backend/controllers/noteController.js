@@ -71,7 +71,7 @@ const update = async (req, res) => {
 };
 //Nota é removida a partir de seu ID
 const remove = async (req, res) => {
-  const noteid = req.params.noteid;
+  const noteid = req.body.id;
 
   try {
     const data = await Model.deleteOne({ _id: noteid });
