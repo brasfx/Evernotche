@@ -5,6 +5,7 @@ import routesServices from '../../services/routesServices';
 export default function TextEditor() {
   const LogContent = (content) => {
     note.payload = content
+    note.userid = localStorage.getItem('id');
   }
   const initialUserState = {
     title: 'teste',
@@ -12,6 +13,8 @@ export default function TextEditor() {
     userid: 'teste',
     timestamp: 'teste',
   };
+
+  
 
   const [note, setNote] = useState(initialUserState);
 
