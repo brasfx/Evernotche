@@ -10,18 +10,9 @@ export default function NoteList() {
     if (state.deleteNote) {
         console.log("DELETE NOTE");
         console.log(state.currentNote);
-        //routesServices.removeNote(state.currentNote.id);
         const data = state.currentNote
         routesServices
-        .removeNote(data)
-        /*.then((res) => {
-          setNote({
-            id: res.data.id,
-          });*/
-      /*  })
-        .catch((e) => {
-          console.log(e);
-        })*/;
+        .removeNote(data);
 
     }
 
