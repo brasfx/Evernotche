@@ -3,12 +3,14 @@ import { Editor } from '@tinymce/tinymce-react';
 import routesServices from '../../services/routesServices';
 
 export default function TextEditor() {
-
+  const LogContent = (content) => {
+    note.payload = content
+  }
   const initialUserState = {
     title: 'teste',
-    payload: '',
+    payload: 'teste',
     userid: 'teste',
-    timestamp: '',
+    timestamp: 'teste',
   };
 
   const [note, setNote] = useState(initialUserState);
@@ -20,7 +22,7 @@ export default function TextEditor() {
 
     var data = {
       title: note.title,
-      payload: content,
+      payload: note.payload,
       userid: note.userid,
       timestamp: note.timestamp,
     };
@@ -41,9 +43,9 @@ export default function TextEditor() {
   };
   return (
     <div>
-      <form>
+      <form onSubmit={SaveNote}>
         <Editor
-          initialValue="<p>Esse é nosso editor de textos.</p>"
+          initialValue=""
           apiKey="jy6t6urrwi3ftemqyutf851d3ueq4y4q9cdqlud3havzhtbw"
           init={{
             height: 500,
@@ -84,13 +86,12 @@ export default function TextEditor() {
               bullist numlist outdent indent | removeformat | help',
             language: 'pt_BR',
           }}
-          //onEditorChange={SaveNote}
+          onEditorChange={LogContent}
           
         />
         <button
               className="waves-effect waves-light btn-small green darken-2"
               type="submit"
-              onClick={SaveNote}
             >
               Criar
         </button>
