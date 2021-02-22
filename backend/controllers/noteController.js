@@ -19,9 +19,9 @@ const create = async (req, res) => {
 };
 // Puxa Nota Pelo ID
 const findNote = async (_, res) => {
-  const noteid = req.params.noteid;
+  const userid = req.body.id;
   try {
-    const data = await Model.find({_id: noteid });
+    const data = await Model.find({_id: userid });
     res.send(data);
     logger.info(`GET /note`);
   } catch (error) {
