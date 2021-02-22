@@ -8,7 +8,7 @@ const createNote = (data) => {
 };
 
 const findNote  = (id) => {
-  return http.get('/note/:id',id);
+  return http.get('/note',id);
 };
 
 const findAllNotes = () => {
