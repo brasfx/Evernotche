@@ -8,7 +8,6 @@ import Panel from './Panel.js';
 export default function ViewNotes() {
   const initialState = useContext(NotesContext);
   const [state, dispatch] = useReducer(notesReducer, initialState);
-  console.log(state);
 
   return (
     <NotesContext.Provider value={{state, dispatch}}>

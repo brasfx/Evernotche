@@ -27,11 +27,17 @@ const recover = (data) => {
   return http.put(`/recover-password`, data);
 };
 
+const removeNote = (data) => {
+  return http.delete('/note', data);
+};
+
 export default {
   create,
   createNote,
   findAllNotes,
+  removeNote,
   login,
   support,
   recover,
+
 };

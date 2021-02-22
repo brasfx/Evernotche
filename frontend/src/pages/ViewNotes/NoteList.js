@@ -1,10 +1,18 @@
 import React, {useContext} from 'react';
 import NotesContext from './context.js';
 import Note from './Note.js';
+import routesServices from '../../services/routesServices'
 
 export default function NoteList() {
     const {state} = useContext(NotesContext);
-    const {dispatch} = useContext(NotesContext);
+    
+    
+    if (state.deleteNote) {
+        console.log("DELETE NOTE");
+        console.log(state.currentNote.id);
+        routesServices.removeNote(state.currentNote.id);
+
+    }
 
     return (
         <div className="notes-container">

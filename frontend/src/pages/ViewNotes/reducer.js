@@ -10,6 +10,14 @@ export default function reducer(state, action) {
             return {
                 ...state,
             }
+        
+        case 'DELETE_NOTE':
+            
+            return {
+                ...state,
+                currentNote: action.payload,
+                deleteNote: true,
+            }
 
         default:
             return state;

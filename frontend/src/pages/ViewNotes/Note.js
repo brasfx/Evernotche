@@ -14,7 +14,7 @@ export default function Note({note}) {
                 <Link to={{pathname: 'note/' + note.id, state: {notes: note}}}>
                     <button className="view" onClick={() => dispatch({type: 'SET_CURRENT_NOTE', payload: note})}>View</button>
                 </Link>
-                
+                    <button className="delete" onClick={() => dispatch({type: 'DELETE_NOTE', payload: note})}>Delete</button>
                
                 
                 <label>
