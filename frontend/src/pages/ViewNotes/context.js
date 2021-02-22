@@ -1,8 +1,11 @@
 import React, {useState} from 'react'
 import routesServices from '../../services/routesServices'
 
-const user = localStorage.getItem('id');
-console.log('user ' + user);
+const user = {
+    userid: localStorage.getItem('id')
+};
+console.log('user ' + user.userid);
+
 
 const getNotes = routesServices.findNote(user);
 
