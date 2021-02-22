@@ -1,7 +1,10 @@
 import React, {useState} from 'react'
 import routesServices from '../../services/routesServices'
 
-const getNotes = routesServices.findAllNotes();
+const user = localStorage.getItem('id');
+console.log('user ' + user);
+
+const getNotes = routesServices.findNote(user);
 
 const aux = [];
 
