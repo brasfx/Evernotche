@@ -35,6 +35,7 @@ export default {
   create,
   createNote,
   findAllNotes,
+  findNote,
   removeNote,
   login,
   support,
