@@ -19,7 +19,7 @@ const create = async (req, res) => {
 };
 // Puxa Nota Pelo ID
 const findNote = async (req, res) => {
-  const userid = req.body.id;
+  const userid = req.body.userid;
   try {
     const data = await Model.find({_id: userid });
     res.send(data);
