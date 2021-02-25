@@ -81,7 +81,6 @@ export default function TextEditor() {
               'advlist autolink lists link image charmap print preview anchor',
               'searchreplace visualblocks code fullscreen',
               'insertdatetime media table paste code help wordcount',
-              'language',
             ],
             toolbar:
               'undo redo | formatselect | bold italic backcolor | \
