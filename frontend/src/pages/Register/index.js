@@ -11,18 +11,22 @@ import schemaValidation from './validateForm';
 import todosPaises from './allcountries.json';
 import Select from 'react-select';
 
-
 import { motion } from 'framer-motion';
 
-
 export default function Register() {
-
   const selectStyles = {
-    container: (provided) => ({ ...provided, width: '100%', zIndex: 1000 }),
-    indicatorSeparator: (provided) => ({ ...provided, display: 'none' })
+    container: (provided) => ({
+      ...provided,
+      width: '100%',
+      zIndex: 1000,
+    }),
+    indicatorSeparator: (provided) => ({ ...provided, display: 'none' }),
   };
 
-  const options = todosPaises.map((item) => ({ value: item.nome, label: item.nome }));
+  const options = todosPaises.map((item) => ({
+    value: item.nome,
+    label: item.nome,
+  }));
 
   const history = useHistory();
   const initialUserState = {
@@ -45,7 +49,7 @@ export default function Register() {
   };
   const handleCountrySelectChange = (value) => {
     setRegisterUser({ ...registerUser, country: value.value });
-  }
+  };
 
   function handleFormSubmit() {
     saveRegister();
@@ -98,96 +102,96 @@ export default function Register() {
       {submitted ? (
         <Spinner description="Realizando cadastro..." />
       ) : (
-          <div className="content">
-            <section>
-              <img src={logoImg} className="logo-image" alt="logo" />
-              <h1>Faça seu cadastro</h1>
-            </section>
-            <form onSubmit={handleSubmit(handleFormSubmit)}>
-              <input
-                id="name"
-                name="name"
-                placeholder="Nome"
-                value={registerUser.name}
-                onChange={handleInputChange}
-                ref={register}
-              />
-              <div className="input-group" style={{ color: 'red' }}>
-                {errors.name?.message}
-              </div>
+        <div className="content">
+          <section>
+            <img src={logoImg} className="logo-image" alt="logo" />
+            <h1>Faça seu cadastro</h1>
+          </section>
+          <form onSubmit={handleSubmit(handleFormSubmit)}>
+            <input
+              id="name"
+              name="name"
+              placeholder="Nome"
+              value={registerUser.name}
+              onChange={handleInputChange}
+              ref={register}
+            />
+            <div className="input-group" style={{ color: 'red' }}>
+              {errors.name?.message}
+            </div>
 
-              <input
-                id="email"
-                type="email"
-                name="email"
-                placeholder="E-mail"
-                value={registerUser.email}
-                onChange={handleInputChange}
-                ref={register}
-              />
-              <div className="input-group" style={{ color: 'red' }}>
-                {errors.email?.message}
-              </div>
-              <input
-                id="password"
-                type="password"
-                name="password"
-                placeholder="Senha"
-                value={registerUser.password}
-                onChange={handleInputChange}
-                ref={register}
-              />
-              <div className="input-group" style={{ color: 'red' }}>
-                {errors.password?.message}
-              </div>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              placeholder="E-mail"
+              value={registerUser.email}
+              onChange={handleInputChange}
+              ref={register}
+            />
+            <div className="input-group" style={{ color: 'red' }}>
+              {errors.email?.message}
+            </div>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="Senha"
+              value={registerUser.password}
+              onChange={handleInputChange}
+              ref={register}
+            />
+            <div className="input-group" style={{ color: 'red' }}>
+              {errors.password?.message}
+            </div>
 
-              <input
-                id="confirmpassword"
-                type="password"
-                name="confirmpassword"
-                placeholder="Confirme sua senha"
-                value={registerUser.confirmpassword}
-                onChange={handleInputChange}
+            <input
+              id="confirmpassword"
+              type="password"
+              name="confirmpassword"
+              placeholder="Confirme sua senha"
+              value={registerUser.confirmpassword}
+              onChange={handleInputChange}
+              ref={register}
+            />
+            <div className="input-group" style={{ color: 'red' }}>
+              {errors.confirmpassword?.message}
+            </div>
+            <div className="input-group">
+              <Select
+                id="country"
+                name="country"
+                onChange={handleCountrySelectChange}
+                options={options}
+                styles={selectStyles}
                 ref={register}
-              />
-              <div className="input-group" style={{ color: 'red' }}>
-                {errors.confirmpassword?.message}
-              </div>
-              <div className="input-group">
-                <Select
-                  id="country"
-                  name="country"
-                  onChange={handleCountrySelectChange}
-                  options={options}
-                  styles={selectStyles}
-                  ref={register}
-                ></Select>
+                placeholder="Selecione um pais"
+              ></Select>
+            </div>
+            <div className="input-group" style={{ color: 'red' }}>
+              {errors.country?.message}
+            </div>
 
-              </div>
-              <div className="input-group" style={{ color: 'red' }}>
-                {errors.country?.message}
-              </div>
-
-              <button
-                className="waves-effect waves-light btn-small green darken-2"
-                type="submit"
-                onClick={() => clearErrors()}
-                disabled={
-                  registerUser.country.length === 0 ||
-                  registerUser.name.length === 0 ||
-                  registerUser.email.length === 0 ||
-                  registerUser.password.length === 0
-                }
-              >
-                Cadastrar
+            <button
+              className="waves-effect waves-light btn-small green darken-2"
+              type="submit"
+              onClick={() => clearErrors()}
+              disabled={
+                registerUser.country.length === 0 ||
+                registerUser.name.length === 0 ||
+                registerUser.email.length === 0 ||
+                registerUser.password.length === 0
+              }
+            >
+              Cadastrar
             </button>
-            </form>
-            <Link className="back-link" to="/">
-              <button
-                className="button-back waves-effect waves-light btn-small "
-                type="submit"
-              >
-                Voltar
+          </form>
+          <Link className="back-link" to="/">
+            <button
+              className="button-back waves-effect waves-light btn-small "
+              type="submit"
+            >
+              Voltar
             </button>
           </Link>
         </div>

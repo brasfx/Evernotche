@@ -33,8 +33,8 @@ export default function PageSupp() {
 
   const saveRegister = () => {
     var data = {
-      name: dataSupport.name,
-      email: dataSupport.email,
+      name: getName,
+      email: getEmail,
       topic: dataSupport.topic,
       textTopic: dataSupport.textTopic,
       //file: dataSupport.file,
@@ -76,16 +76,20 @@ export default function PageSupp() {
               id="name"
               name="name"
               placeholder="Nome"
-              value={dataSupport.name}
+              value={getName}
               onChange={handleInputChange}
+              disabled
+              style={{ color: 'black  ' }}
             />
             <input
               id="email"
               type="email"
               name="email"
               placeholder="E-mail"
-              value={dataSupport.email}
+              value={getEmail}
               onChange={handleInputChange}
+              disabled
+              style={{ color: 'black  ' }}
             />
             <input
               id="topic"
