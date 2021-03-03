@@ -31,6 +31,14 @@ const removeNote = (data) => {
   return http.post('/notedelete', data);
 };
 
+const sendTrash = (data) => {
+  return http.post('/notetrash', data);
+};
+
+const findTrashcan = (data) => {
+  return http.post('/trashcan', data);
+};
+
 export default {
   create,
   createNote,
@@ -40,5 +48,8 @@ export default {
   login,
   support,
   recover,
+  sendTrash,
+  findTrashcan,
+  
 
 };
