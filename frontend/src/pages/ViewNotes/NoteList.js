@@ -1,27 +1,21 @@
-import React, {useContext} from 'react';
-import NotesContext from './context.js';
+import React, { useContext } from 'react';
+
 import Note from './Note.js';
 import routesServices from '../../services/routesServices'
 
-export default function NoteList() {
-    const {state} = useContext(NotesContext);
-    
-    
-    if (state.deleteNote) {
-        console.log("DELETE NOTE");
-        console.log(state.currentNote);
-        const data = state.currentNote
-        routesServices
-        .removeNote(data);
+export default function NoteList({ notes, dispatch }) {
 
-    }
+
+
+
 
     return (
         <div className="notes-container">
-            {state.notes.map((note, i) => {
-                return <Note note = {note} key = {i} />
+            {Object.keys(notes).map((id, i) => {
+                const note = notes[id];
+                return <Note note={note} dispatch={dispatch} key={i} />
             })}
-            
+
         </div>
     )
 

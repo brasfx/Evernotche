@@ -1,28 +1,28 @@
 export default function reducer(state, action) {
+
+
     switch (action.type) {
-        case 'SET_CURRENT_NOTE':
+        case 'SET_NOTE':
+            console.log(action.data.selected);
             return {
                 ...state,
-                currentNote: action.payload
+                [action.id]: action.data
             }
-        
+
         case 'UPDATE':
             return {
                 ...state,
+                ...action.data
             }
-        
+
         case 'DELETE_NOTE':
-            
             return {
-                ...state,
-                currentNote: action.payload,
-                deleteNote: true,
+                // TODO
+                ...state
             }
 
         default:
             return state;
-
-
     }
 
 }

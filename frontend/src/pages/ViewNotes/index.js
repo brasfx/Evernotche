@@ -1,20 +1,43 @@
-import React, {useContext, useReducer, useEffect} from 'react';
+import React, { useContext, useReducer, useEffect } from 'react';
 import Navbar from '../Home/Navbar.js';
-import NotesContext from './context.js';
-import notesReducer from './reducer.js'; 
+
+import notesReducer from './reducer.js';
 import NoteList from './NoteList.js';
 import Panel from './Panel.js';
+import routesServices from '../../services/routesServices'
+
+
 
 export default function ViewNotes() {
-  const initialState = useContext(NotesContext);
+
+  const initialState = {};
   const [state, dispatch] = useReducer(notesReducer, initialState);
 
+
+  useEffect(() => {
+    const user = {
+      userid: localStorage.getItem('id')
+    };
+    routesServices.findNote(user).then(function (result) {
+      console.log(result);
+      const notesData = result.data.reduce((acc, entry) => {
+        const { _id, payload, userid, timestamp } = entry;
+        acc[_id] = { id: _id, content: payload, owner: userid, timestamp, selected: false };
+        return acc;
+      }, {})
+
+      dispatch({ data: notesData, type: "UPDATE" });
+    });
+  }, []);
+
+
+
   return (
-    <NotesContext.Provider value={{state, dispatch}}>
+    <div>
       <Navbar />
-      <Panel />
-      <NoteList />
-    </NotesContext.Provider>
+      <Panel notes={state} dispatch={dispatch} />
+      <NoteList notes={state} dispatch={dispatch} />
+    </div>
 
   );
 }
