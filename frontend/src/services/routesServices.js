@@ -39,6 +39,10 @@ const findTrashcan = (data) => {
   return http.post('/trashcan', data);
 };
 
+const recoverNote = (data) => {
+  return http.post('/noterecover', data);
+};
+
 export default {
   create,
   createNote,
@@ -50,6 +54,7 @@ export default {
   recover,
   sendTrash,
   findTrashcan,
+  recoverNote,
   
 
 };
