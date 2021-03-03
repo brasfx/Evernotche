@@ -4,8 +4,9 @@ import routesServices from '../../services/routesServices';
 
 export default function TextEditor() {
   const LogContent = (content) => {
-    note.payload = content
-    note.userid = localStorage.getItem('id');
+    const payload = content;
+    const userid = localStorage.getItem('id');
+    setNote({ ...note, payload, userid });
   }
   const initialUserState = {
     title: 'teste',
@@ -14,13 +15,13 @@ export default function TextEditor() {
     timestamp: 'teste',
   };
 
-  
+
 
   const [note, setNote] = useState(initialUserState);
 
-  const SaveNote = (content) => {
-    console.log('Content was updated:', content);
-    
+  const SaveNote = (event) => {
+    event.preventDefault();
+
 
 
     var data = {
@@ -89,13 +90,13 @@ export default function TextEditor() {
             language: 'pt_BR',
           }}
           onEditorChange={LogContent}
-          
+
         />
         <button
-              className="waves-effect waves-light btn-small green darken-2"
-              type="submit"
-            >
-              Criar
+          className="waves-effect waves-light btn-small green darken-2"
+          type="submit"
+        >
+          Criar
         </button>
       </form>
     </div>
