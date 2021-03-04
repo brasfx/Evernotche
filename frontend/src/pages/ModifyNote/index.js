@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router'
+import Spinner from '../../components/Spinner';
 import routesServices from '../../services/routesServices';
 import Navbar from '../Home/Navbar'
 import TextEditor from './editor'
@@ -28,7 +29,7 @@ export default function ModifyNote() {
     return (
         <div>
             <Navbar />
-            {note && <TextEditor note={note} />}
+            {note ? <TextEditor note={note} /> : <Spinner description="Carregando..." />}
         </div>
     )
 }
