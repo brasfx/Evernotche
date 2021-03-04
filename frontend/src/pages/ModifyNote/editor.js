@@ -1,20 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import routesServices from '../../services/routesServices';
-import { useHistory } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 
 
-export default function TextEditor() {
+function TextEditor() {
+
+  //const state = { title: "Upload", userid: "topper", id: "asdvassdfga", timestamp: "14" }
   const LogContent = (content) => {
     const payload = content;
     const userid = localStorage.getItem('id');
     setNote({ ...note, payload, userid });
   }
+  const location = useLocation();
+  const { state } = location;
+  console.log(location);
   const initialUserState = {
-    title: 'teste',
-    payload: 'teste',
-    userid: 'teste',
-    timestamp: 'teste',
+    title: state.title,
+    payload: state.content,
+    userid: state.userid,
+    timestamp: state.timestamp,
   };
 
 
@@ -33,7 +38,7 @@ export default function TextEditor() {
       timestamp: note.timestamp,
     };
     routesServices
-      .createNote(data)
+      .updateNote(state.id, data)
       .then((res) => {
         history.push("/viewnotes");
       })
@@ -43,10 +48,11 @@ export default function TextEditor() {
 
   };
   return (
+
     <div>
       <form onSubmit={SaveNote}>
         <Editor
-          initialValue=""
+          initialValue={state.content}
           apiKey="jy6t6urrwi3ftemqyutf851d3ueq4y4q9cdqlud3havzhtbw"
           init={{
             height: 500,
@@ -94,8 +100,9 @@ export default function TextEditor() {
           type="submit"
         >
           Salvar
-        </button>
+          </button>
       </form>
     </div>
   );
 }
+export default TextEditor;

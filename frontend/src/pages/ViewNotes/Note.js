@@ -6,7 +6,7 @@ export default function Note({ note, dispatch }) {
     // const { dispatch } = useContext(NotesContext);
     function checkboxStatus(event) {
         dispatch({ type: 'SET_NOTE', id: note.id, data: { ...note, selected: event.target.checked } });
-        console.log("coé");
+
 
     }
 

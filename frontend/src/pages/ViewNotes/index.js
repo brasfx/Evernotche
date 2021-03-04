@@ -1,6 +1,5 @@
 import React, { useContext, useReducer, useEffect } from 'react';
 import Navbar from '../Home/Navbar.js';
-
 import notesReducer from './reducer.js';
 import NoteList from './NoteList.js';
 import Panel from './Panel.js';
