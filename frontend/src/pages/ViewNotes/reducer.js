@@ -3,13 +3,14 @@ export default function reducer(state, action) {
 
     switch (action.type) {
         case 'SET_NOTE':
-            console.log(action.data.selected);
+
             return {
                 ...state,
                 [action.id]: action.data
             }
 
         case 'UPDATE':
+            console.log("atualizou");
             return {
                 ...state,
                 ...action.data

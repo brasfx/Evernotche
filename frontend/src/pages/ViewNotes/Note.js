@@ -15,7 +15,9 @@ export default function Note({ note, dispatch }) {
             <div dangerouslySetInnerHTML={{ __html: note.content }} />
 
             <div className="btn-container">
-                <button className="edit" >Edit</button>
+                <Link to={{ pathname: 'editnote/' + note.id, state: note }}>
+                    <button className="edit" >Edit</button>
+                </Link>
                 <Link to={{ pathname: 'note/' + note.id, state: { notes: note } }}>
                     <button className="view">View</button>
                 </Link>

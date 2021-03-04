@@ -7,8 +7,8 @@ const createNote = (data) => {
   return http.post('/new-note', data);
 };
 
-const findNote  = (data) => {
-  return http.post('/note',data);
+const findNote = (data) => {
+  return http.post('/note', data);
 };
 
 const findAllNotes = () => {
@@ -42,6 +42,9 @@ const findTrashcan = (data) => {
 const recoverNote = (data) => {
   return http.post('/noterecover', data);
 };
+const updateNote = (id, data) => {
+  return http.put(`/note/${id}`, data);
+};
 
 export default {
   create,
@@ -55,6 +58,7 @@ export default {
   sendTrash,
   findTrashcan,
   recoverNote,
-  
+  updateNote,
+
 
 };
