@@ -4,7 +4,7 @@ import routesServices from '../../services/routesServices';
 import { useLocation, useHistory } from "react-router-dom";
 
 
-function TextEditor() {
+function TextEditor({ note: state }) {
 
   //const state = { title: "Upload", userid: "topper", id: "asdvassdfga", timestamp: "14" }
   const LogContent = (content) => {
@@ -12,9 +12,7 @@ function TextEditor() {
     const userid = localStorage.getItem('id');
     setNote({ ...note, payload, userid });
   }
-  const location = useLocation();
-  const { state } = location;
-  console.log(location);
+
   const initialUserState = {
     title: state.title,
     payload: state.content,
