@@ -6,7 +6,7 @@ export default function Note({ note, dispatch }) {
     // const { dispatch } = useContext(NotesContext);
     function checkboxStatus(event) {
         dispatch({ type: 'SET_NOTE', id: note.id, data: { ...note, selected: event.target.checked } });
-        console.log("coé");
+
 
     }
 
@@ -15,7 +15,9 @@ export default function Note({ note, dispatch }) {
             <div dangerouslySetInnerHTML={{ __html: note.content }} />
 
             <div className="btn-container">
-                <button className="edit" >Edit</button>
+                <Link to={{ pathname: 'editnote/' + note.id, state: note }}>
+                    <button className="edit" >Edit</button>
+                </Link>
                 <Link to={{ pathname: 'note/' + note.id, state: { notes: note } }}>
                     <button className="view">View</button>
                 </Link>
