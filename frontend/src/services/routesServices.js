@@ -54,6 +54,10 @@ const updateNote = (id, data) => {
   return http.put(`/note/${id}`, data);
 };
 
+const findSingleNote = ( data) => {
+  return http.put(`/noteedit`, data);
+};
+
 export default {
   create,
   createNote,
@@ -69,4 +73,5 @@ export default {
   updateNote,
   updateRegister,
   deleteAccount,
+  findSingleNote,
 };
