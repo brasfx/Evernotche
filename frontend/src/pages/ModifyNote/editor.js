@@ -93,12 +93,15 @@ function TextEditor({ note: state }) {
           onEditorChange={LogContent}
 
         />
-        <button
-          className="waves-effect waves-light btn-small green darken-2"
-          type="submit"
-        >
-          Salvar
-          </button>
+        <div style={{display: "grid", placeContent: "center"}}>
+          <button
+            className="waves-effect waves-light btn-small green darken-2"
+            type="submit"
+            
+          >
+            Salvar
+            </button>
+        </div>
       </form>
     </div>
   );

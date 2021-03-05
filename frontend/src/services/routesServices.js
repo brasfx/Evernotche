@@ -55,7 +55,7 @@ const updateNote = (id, data) => {
 };
 
 const findSingleNote = ( data) => {
-  return http.put(`/noteedit`, data);
+  return http.post(`/noteedit`, data);
 };
 
 export default {
