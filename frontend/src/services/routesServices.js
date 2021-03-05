@@ -3,6 +3,14 @@ const create = (data) => {
   return http.post('/new-register', data);
 };
 
+const updateRegister = (data) => {
+  return http.put('/register', data);
+};
+
+const deleteAccount = (data) => {
+  return http.delete('/register', data);
+};
+
 const createNote = (data) => {
   return http.post('/new-note', data);
 };
@@ -59,6 +67,6 @@ export default {
   findTrashcan,
   recoverNote,
   updateNote,
-
-
+  updateRegister,
+  deleteAccount,
 };
