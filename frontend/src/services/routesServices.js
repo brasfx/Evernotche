@@ -8,7 +8,7 @@ const updateRegister = (data) => {
 };
 
 const deleteAccount = (data) => {
-  return http.delete('/register', data);
+  return http.post('/register', data);
 };
 
 const createNote = (data) => {

@@ -211,6 +211,13 @@ export default function PageConfig() {
 
           <section>
             <form className="delete" onSubmit={handleFormSubmitDelete}>
+              <input
+                type="hidden"
+                id="id"
+                name="id"
+                value={getId}
+                onChange={handleInputChange}
+              />
               <h4>Excluir minha conta</h4>
               <button
                 className="waves-effect waves-light btn-small red darken-4"
