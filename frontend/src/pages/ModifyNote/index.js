@@ -12,16 +12,16 @@ export default function ModifyNote() {
         const user = {
             userid: localStorage.getItem('id')
         };
-        routesServices.findNote(user).then((result) => {
-
-            const notesData = result.data.reduce((acc, entry) => {
+        routesServices.findSingleNote({noteid: location.id, userid: user.userid}).then((result) => {
+    
+            const noteData = result.data.reduce((acc, entry) => {
                 const { _id, payload, userid, timestamp, title } = entry;
-                acc[_id] = { id: _id, title, content: payload, owner: userid, timestamp, selected: false };
+                acc = { id: _id, title, content: payload, owner: userid, timestamp, selected: false };
                 return acc;
             }, {})
-            console.log(notesData[location.id])
+            console.log(noteData)
 
-            setNote(notesData[location.id])
+            setNote(noteData)
 
         });
     }, []);
@@ -29,7 +29,9 @@ export default function ModifyNote() {
     return (
         <div>
             <Navbar />
-            {note ? <TextEditor note={note} /> : <Spinner description="Carregando..." />}
+            
+                {note ? <TextEditor note={note} /> : <div style={{display: "grid", placeContent: "center"}}> <Spinner description="Carregando..." /> </div>}
+            
         </div>
     )
 }
