@@ -4,6 +4,7 @@ import routesServices from '../../services/routesServices';
 import './style.css';
 import logoConfig from '../../assets/logo-config.png';
 import Spinner from '../../components/Spinner';
+import ContainerModal from '../../components/Modal';
 
 export default function PageConfig() {
   const getName = localStorage.getItem('name');
@@ -19,6 +20,16 @@ export default function PageConfig() {
   };
   const [dataSupport, setDataSupport] = useState(initialDataSupp);
   const [submitted, setSubmitted] = useState(false);
+  const [description, setDescription] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -70,6 +81,7 @@ export default function PageConfig() {
           id: res.data.id,
           name: res.data.name,
         });
+        setDescription('Realizando alteração de nome');
         setSubmitted(true);
         console.log(res.data);
       })
@@ -90,6 +102,7 @@ export default function PageConfig() {
           id: res.data.id,
           country: res.data.country,
         });
+        setDescription('Realizando alteração de país');
         setSubmitted(true);
         console.log(`País aqui:${res.data.country}`);
       })
@@ -110,6 +123,7 @@ export default function PageConfig() {
           id: res.data.id,
           password: res.data.password,
         });
+        setDescription('Realizando alteração de senha');
         setSubmitted(true);
         console.log(res.data);
       })
@@ -125,6 +139,7 @@ export default function PageConfig() {
     routesServices
       .deleteAccount(data)
       .then((res) => {
+        setDescription('Excluindo conta de usuário');
         setDataSupport({
           id: res.data.id,
         });
@@ -143,7 +158,7 @@ export default function PageConfig() {
   return (
     <div className="config-container">
       {submitted ? (
-        <Spinner description="Enviando formulário..." />
+        <Spinner description={description} />
       ) : (
         <div className="content">
           <img src={logoConfig} />
@@ -159,6 +174,7 @@ export default function PageConfig() {
                 onChange={handleInputChange}
               />
               <button
+                style={{ zIndex: 0 }}
                 className="waves-effect waves-light btn-small "
                 type="submit"
               >
@@ -180,6 +196,7 @@ export default function PageConfig() {
                 onChange={handleInputChange}
               />
               <button
+                style={{ zIndex: 0 }}
                 className="waves-effect waves-light btn-small "
                 type="submit"
               >
@@ -201,7 +218,8 @@ export default function PageConfig() {
                 onChange={handleInputChange}
               />
               <button
-                className="waves-effect waves-light btn-small "
+                style={{ zIndex: 0 }}
+                className="waves-effect waves-light btn-small"
                 type="submit"
               >
                 Alterar
@@ -209,24 +227,22 @@ export default function PageConfig() {
             </form>
           </section>
 
-          <section>
-            <form className="delete" onSubmit={handleFormSubmitDelete}>
-              <input
-                type="hidden"
-                id="id"
-                name="id"
-                value={getId}
-                onChange={handleInputChange}
-              />
-              <h4>Excluir minha conta</h4>
-              <button
-                className="waves-effect waves-light btn-small red darken-4"
-                type="submit"
-              >
-                Excluir
-              </button>
-            </form>
+          <section className="delete">
+            <h4>Excluir minha conta</h4>
+            <button
+              className="waves-effect waves-light btn-small red darken-4"
+              onClick={handleModalOpen}
+            >
+              Excluir
+            </button>
           </section>
+          {isModalOpen && (
+            <ContainerModal
+              type={'account'}
+              handleModalClose={handleModalClose}
+              handleFormSubmitDelete={handleFormSubmitDelete}
+            />
+          )}
         </div>
       )}
     </div>
