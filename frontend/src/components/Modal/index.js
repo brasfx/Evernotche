@@ -23,7 +23,7 @@ export default function ContainerModal(props) {
         <h2 className="title">Deseja realmente excluir sua {modalTitle} ?</h2>
         <div className="div-buttons">
           <button
-            clasName="button-modal"
+            className="button-modal"
             type="submit"
             onClick={handleFormSubmitDelete}
             className="waves-effect waves-light btn-small green darken-2"
@@ -31,7 +31,7 @@ export default function ContainerModal(props) {
             Sim
           </button>
           <button
-            clasName="button-modal"
+            className="button-modal"
             type="submit"
             onClick={handleModalClose}
             className="waves-effect waves-light btn-small red darken-4"
