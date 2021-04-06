@@ -21,9 +21,10 @@ export default function Note({ note, dispatch }) {
   const color = randomColor();
 
   return (
-    <div className="note" style={{ background: `${color}` }}>
-      <div dangerouslySetInnerHTML={{ __html: note.content }} />
 
+    <div className="note" style={{ background: `${color}` }}>
+
+      <div className="txt-container" dangerouslySetInnerHTML={{ __html: note.content }} />
       <div className="btn-container">
         <Link to={{ pathname: 'editnote/' + note.id, state: note }}>
           <button className="edit, waves-effect waves-light btn-small green darken-2 ">
