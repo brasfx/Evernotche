@@ -1,10 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect} from 'react';
 // import NotesContext from './context.js';
 import { Link } from 'react-router-dom';
 import './style.css';
+import routesServices from '../../services/routesServices';
+import { useLocation, useHistory } from "react-router-dom";
 
 export default function Note({ note, dispatch }) {
   // const { dispatch } = useContext(NotesContext);
+
+  const history = useHistory()
+
   function checkboxStatus(event) {
     dispatch({
       type: 'SET_NOTE',
@@ -13,12 +18,35 @@ export default function Note({ note, dispatch }) {
     });
   }
 
-  const randomColor = () => {
-    const hex = ((Math.random() * 0xffffff) << 0).toString(16);
-    return `#${hex}`;
-  };
+  // const randomColor = () => {
+  //   const hex = ((Math.random() * 0xffffff) << 0).toString(16);
+  //   return `#${hex}`;
+  // };
 
-  const color = randomColor();
+  //Usando timestamp por enquanto, criar um campo de cor na nota
+  const setNoteColor = (colorValue) => {
+    setColor(colorValue)
+
+    var data = {...note, timestamp: colorValue}
+
+    routesServices
+    .updateNote(note.id, data)
+    .then((res) => {
+      history.push("/viewnotes");
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+
+  }
+
+  //const color = randomColor();
+  const [color, setColor] = useState('')
+
+  useEffect(() => {
+    setColor(note.timestamp)
+
+  }, [])
 
   return (
 
@@ -53,6 +81,9 @@ export default function Note({ note, dispatch }) {
           />
           <span></span>
         </label>
+
+        <input type="color" id="favcolor" name="favcolor" onChange={event => setNoteColor(event.target.value)}></input>
+
       </div>
     </div>
   );

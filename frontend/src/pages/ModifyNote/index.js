@@ -14,6 +14,7 @@ export default function ModifyNote() {
         const user = {
             userid: localStorage.getItem('id')
         };
+        
         routesServices.findSingleNote({noteid: location.id, userid: user.userid}).then((result) => {
     
             const noteData = result.data.reduce((acc, entry) => {
@@ -24,6 +25,7 @@ export default function ModifyNote() {
             console.log(noteData)
 
             setNote(noteData)
+            setTitle(note.title)
 
         });
     }, []);
