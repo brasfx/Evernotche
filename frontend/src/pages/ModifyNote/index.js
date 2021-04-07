@@ -8,6 +8,8 @@ import TextEditor from './editor'
 export default function ModifyNote() {
     const location = useParams();
     const [note, setNote] = useState("");
+    const [title, setTitle] = useState('')
+
     useEffect(() => {
         const user = {
             userid: localStorage.getItem('id')
@@ -29,8 +31,9 @@ export default function ModifyNote() {
     return (
         <div>
             <Navbar />
-            
-                {note ? <TextEditor note={note} /> : <div style={{display: "grid", placeContent: "center"}}> <Spinner description="Carregando..." /> </div>}
+            <label class="titleLabel" style={{fontSize: "30px", color: "black"}}>Título</label>
+            <input defaultValue={note.title} onChange={event => setTitle(event.target.value)}></input>
+            {note ? <TextEditor note={note} newTitle={title}/> : <div style={{display: "grid", placeContent: "center"}}> <Spinner description="Carregando..." /> </div>}
             
         </div>
     )
