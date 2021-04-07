@@ -10,7 +10,7 @@ export default function Panel({ notes, dispatch }) {
         dispatch({ type: 'SET_NOTE', id: note.id, data: { ...note, selected } });
     }
     return (
-        <div className="panel-container">
+        <div className="panel-container" style={{backgroundColor: "blue", padding: "6px"}}>
             <button onClick={() => {
                 {
                     Object.keys(notes).map((id, i) => {
