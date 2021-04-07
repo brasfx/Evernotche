@@ -4,7 +4,7 @@ import routesServices from '../../services/routesServices';
 import { useLocation, useHistory } from "react-router-dom";
 
 
-function TextEditor({ note: state }) {
+function TextEditor({ note: state, newTitle}) {
 
   //const state = { title: "Upload", userid: "topper", id: "asdvassdfga", timestamp: "14" }
   const LogContent = (content) => {
@@ -27,10 +27,18 @@ function TextEditor({ note: state }) {
   const SaveNote = (event) => {
     event.preventDefault();
 
+    let titleAux = "";
 
+    if(newTitle === "") {
+      titleAux = "Nota"
+
+    } else {
+      titleAux = newTitle
+
+    }
 
     var data = {
-      title: note.title,
+      title: titleAux,
       payload: note.payload,
       userid: note.userid,
       timestamp: note.timestamp,

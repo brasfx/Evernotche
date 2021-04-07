@@ -51,8 +51,20 @@
   align-items: initial;
   align-content: flex-start;
 }
-.txt-container{
 
+.title-container{
+  font-size: 24px;
+  font-weight: bold;
+  
+  word-wrap: break-word;
+  padding: 10px;
+  max-width: 600px;
+  max-height: 300px; 
+  text-align: center;
+  overflow-y: auto;
+}
+
+.txt-container{
   word-wrap: break-word;
   padding: 10px;
   max-width: 600px;

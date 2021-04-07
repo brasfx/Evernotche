@@ -4,7 +4,7 @@ import routesServices from '../../services/routesServices';
 import { useHistory } from "react-router-dom";
 
 
-export default function TextEditor() {
+export default function TextEditor(props) {
   const LogContent = (content) => {
     const payload = content;
     const userid = localStorage.getItem('id');
@@ -24,10 +24,18 @@ export default function TextEditor() {
   const SaveNote = (event) => {
     event.preventDefault();
 
+    let titleAux = "";
 
+    if(props.title === "") {
+      titleAux = "Nota"
+
+    } else {
+      titleAux = props.title
+
+    }
 
     var data = {
-      title: note.title,
+      title: titleAux,
       payload: note.payload,
       userid: note.userid,
       timestamp: note.timestamp,

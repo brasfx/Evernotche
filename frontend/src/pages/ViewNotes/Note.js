@@ -24,6 +24,7 @@ export default function Note({ note, dispatch }) {
 
     <div className="note" style={{ background: `${color}` }}>
 
+      <div className="title-container">{note.title}</div>
       <div className="txt-container" dangerouslySetInnerHTML={{ __html: note.content }} />
       <div className="btn-container">
         <Link to={{ pathname: 'editnote/' + note.id, state: note }}>
