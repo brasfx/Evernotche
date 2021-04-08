@@ -28,7 +28,7 @@ const login = (data) => {
 };
 
 const support = (data) => {
-  return http.get(`/`, data);
+  return http.get(`/register`, data);
 };
 
 const recover = (data) => {
