@@ -7,6 +7,8 @@ import { useForm } from 'react-hook-form';
 import Spinner from '../../components/Spinner';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schemaValidation from './validateForm';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import todosPaises from './allcountries.json';
 import Select from 'react-select';
@@ -43,6 +45,8 @@ export default function Register() {
   const [registerUser, setRegisterUser] = useState(initialUserState);
   const [submitted, setSubmitted] = useState(false);
 
+  const errorEmail = () => toast.error('Email já cadastrado!');
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setRegisterUser({ ...registerUser, [name]: value });
@@ -76,17 +80,14 @@ export default function Register() {
           country: res.data.country,
         });
         setSubmitted(true);
-        console.log(res.data);
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((error) => {
+        console.log(error);
+        if (error) {
+          errorEmail();
+        }
       });
   };
-
-  // const newRegister = () => {
-  //   setRegisterUser(initialUserState);
-  //   setSubmitted(false);
-  // };
 
   return (
     <motion.div
@@ -99,6 +100,17 @@ export default function Register() {
       initial="hiden"
       animate="show"
     >
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {submitted ? (
         <Spinner description="Realizando cadastro..." />
       ) : (

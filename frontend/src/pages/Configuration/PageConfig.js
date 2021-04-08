@@ -5,6 +5,8 @@ import './style.css';
 import logoConfig from '../../assets/logo-config.png';
 import Spinner from '../../components/Spinner';
 import ContainerModal from '../../components/Modal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function PageConfig() {
   const getName = localStorage.getItem('name');
@@ -36,10 +38,15 @@ export default function PageConfig() {
     setDataSupport({ ...dataSupport, [name]: value });
   };
 
+  const changeName = () => toast.success('Nome alterado com sucesso!');
+  const changePassword = () => toast.success('Senha alterada com sucesso!');
+  const changeCountry = () => toast.success('País alterado com sucesso!');
+
   function handleFormSubmitName(event) {
     event.preventDefault();
     updateName();
     setTimeout(() => {
+      changeName();
       newRegister();
     }, 3000);
   }
@@ -48,6 +55,7 @@ export default function PageConfig() {
     event.preventDefault();
     updateCountry();
     setTimeout(() => {
+      changeCountry();
       newRegister();
     }, 3000);
   }
@@ -56,6 +64,7 @@ export default function PageConfig() {
     event.preventDefault();
     updatePassword();
     setTimeout(() => {
+      changePassword();
       newRegister();
     }, 3000);
   }
@@ -245,6 +254,17 @@ export default function PageConfig() {
           )}
         </div>
       )}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

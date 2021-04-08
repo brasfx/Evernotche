@@ -3,6 +3,8 @@ import routesServices from '../../services/routesServices';
 import './style.css';
 import logoSupp from '../../assets/logo-support.png';
 import Spinner from '../../components/Spinner';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function PageSupp() {
   const initialDataSupp = {
@@ -23,11 +25,14 @@ export default function PageSupp() {
     setDataSupport({ ...dataSupport, [name]: value });
   };
 
+  const notify = () => toast.success('Formulário enviado com sucesso!');
+
   function handleFormSubmit(event) {
     event.preventDefault();
     saveRegister();
     setTimeout(() => {
       newRegister();
+      notify();
     }, 3000);
   }
 
@@ -63,6 +68,17 @@ export default function PageSupp() {
   };
   return (
     <div className="support-container">
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {submitted ? (
         <Spinner description="Enviando formulário..." />
       ) : (

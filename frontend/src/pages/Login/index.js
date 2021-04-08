@@ -6,8 +6,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import schemaValidation from '../Login/validateLogin';
 import { motion } from 'framer-motion';
+import { ToastContainer, toast } from 'react-toastify';
 
 import './style.css';
+import 'react-toastify/dist/ReactToastify.css';
 import provisionalImg from '../../assets/slogan.png';
 import logoImg from '../../assets/logo_sem_fundo.png';
 
@@ -32,6 +34,8 @@ export default function Login() {
       loginAccount();
     }, 2000);
   };
+
+  const notify = () => toast.error('Usuário ou senha incorretos!');
 
   const loginAccount = async () => {
     var data = {
@@ -62,7 +66,7 @@ export default function Login() {
               user.password !== res.data.password))
         ) {
           history.push('/');
-          console.log('Não foi dessa vez!');
+          notify();
         }
         console.log(res.data);
       })
@@ -81,6 +85,17 @@ export default function Login() {
       initial="hiden"
       animate="show"
     >
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <motion.img
         src={provisionalImg}
         alt="provisoria"
