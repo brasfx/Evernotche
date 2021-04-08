@@ -2,7 +2,7 @@ import React, { useContext, useReducer } from 'react';
 //import NotesContext from './context.js';
 import './style.css';
 
-export default function Panel({ notes, dispatch }) {
+export default function Panel({ notes, dispatch, cngRows }) {
   /*const {state} = useContext(NotesContext);
     const {dispatch} = useContext(NotesContext);*/
 
@@ -61,6 +61,11 @@ export default function Panel({ notes, dispatch }) {
       >
         Selecionar todas as notas
       </button>
+      <button className="button-panel waves-effect waves-light btn-large grey darken-2"
+        onClick={cngRows}>
+        Change layout
+        </button>
     </div>
+
   );
 }

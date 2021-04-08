@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useEffect } from 'react';
+import React, { useContext, useReducer, useEffect, useState } from 'react';
 import Navbar from '../Home/Navbar.js';
 import notesReducer from './reducer.js';
 import NoteList from './NoteList.js';
@@ -11,8 +11,12 @@ export default function ViewNotes() {
 
   const initialState = {};
   const [state, dispatch] = useReducer(notesReducer, initialState);
+  const [rows, setRows] = useState(false);
 
+  function cngRows() {
+    setRows(!rows)
 
+  }
   useEffect(() => {
     const user = {
       userid: localStorage.getItem('id')
@@ -34,8 +38,8 @@ export default function ViewNotes() {
   return (
     <div>
       <Navbar />
-      <Panel notes={state} dispatch={dispatch} />
-      <NoteList notes={state} dispatch={dispatch} />
+      <Panel notes={state} dispatch={dispatch} cngRows={cngRows} />
+      <NoteList notes={state} dispatch={dispatch} rows={rows} />
     </div>
 
   );
