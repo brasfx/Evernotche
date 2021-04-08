@@ -28,7 +28,7 @@ const login = (data) => {
 };
 
 const support = (data) => {
-  return http.post(`/support`, data);
+  return http.post(`/`, data);
 };
 
 const recover = (data) => {
@@ -54,7 +54,7 @@ const updateNote = (id, data) => {
   return http.put(`/note/${id}`, data);
 };
 
-const findSingleNote = ( data) => {
+const findSingleNote = (data) => {
   return http.post(`/noteedit`, data);
 };
 
