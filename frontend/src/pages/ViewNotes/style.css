@@ -15,7 +15,9 @@
 
 .notes-container {
   display: grid;
+  
   place-content: center;
+ 
 }
 
 .teste {
