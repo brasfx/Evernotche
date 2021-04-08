@@ -1,7 +1,7 @@
 .support-container {
   width: 100%;
   max-width: 520px;
-  height: 89vh;
+  min-height: 89vh;
   margin: 0 auto;
   display: flex;
   align-items: center;

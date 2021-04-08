@@ -1,7 +1,7 @@
 .config-container {
   width: 100%;
   max-width: 520px;
-  height: 99vh;
+  min-height: 110vh;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -67,7 +67,7 @@ img {
 
 button {
   text-align: center;
-  width: 100px;
+  width: 120px;
 }
 
 .delete {
@@ -77,6 +77,6 @@ button {
   align-items: center;
 }
 .delete button {
-  width: 80px;
+  width: 90px;
   z-index: 0;
 }

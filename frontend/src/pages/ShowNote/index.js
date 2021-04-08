@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import './style.css';
 
-export default function ShowNote({ note, dispatch }) {
+export default function ShowNote() {
   const { state } = useLocation();
 
   return (
