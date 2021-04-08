@@ -9,3 +9,14 @@
   min-width: 300px;
   margin-bottom: 20px;
 }
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
+
+button {
+  align-content: space-between;
+  margin: 20px;
+}
