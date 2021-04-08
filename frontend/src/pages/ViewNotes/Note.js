@@ -64,13 +64,30 @@ export default function Note({ note, dispatch }) {
   }, []);
 
   return (
-    <div className="note" style={{ background: `${color}` }}>
+    <div className="note" style={{ background: color, position: "relative" }}>
+      <div className="tcheckbox" style={{ display: "flex", alignContent: "flex-end" }}>
+        <label>
+          <input
+            type="checkbox"
+            className="filled-in"
+            checked={note.selected}
+            onClick={checkboxStatus}
+          />
+          <span></span>
+        </label>
+
+        <input
+          type="color"
+          Value={note.timestamp}
+          onChange={(event) => setNoteColor(event.target.value)}
+        ></input>
+      </div >
       <div className="title-container">{note.title}</div>
       <div
-        className="txt-container"
+        className="txt-container" style={{ marginBottom: 32 }}
         dangerouslySetInnerHTML={{ __html: note.content }}
       />
-      <div className="btn-container">
+      <div className="btn-container" style={{ position: "absolute", bottom: 0 }}>
         <Link to={{ pathname: 'editnote/' + note.id, state: note }}>
           <button
             className="edit, waves-effect waves-light btn-small green darken-2 "
@@ -103,23 +120,7 @@ export default function Note({ note, dispatch }) {
           />
         )}
 
-        <label>
-          <input
-            type="checkbox"
-            className="filled-in"
-            checked={note.selected}
-            onClick={checkboxStatus}
-          />
-          <span></span>
-        </label>
-
-        <input
-          type="color"
-          id="favcolor"
-          name="favcolor"
-          onChange={(event) => setNoteColor(event.target.value)}
-        ></input>
       </div>
-    </div>
+    </div >
   );
 }
