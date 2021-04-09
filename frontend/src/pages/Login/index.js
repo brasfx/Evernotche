@@ -13,20 +13,22 @@ import './style.css';
 import 'react-toastify/dist/ReactToastify.css';
 import provisionalImg from '../../assets/slogan.png';
 import logoImg from '../../assets/logo_sem_fundo.png';
+import us from '../../assets/eng.png';
+import br from '../../assets/ptbr.png';
 
-import { useTranslation } from 'react-i18next'
-import i18next from 'i18next'
+import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
 
 export default function Login() {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   //Schema validation moved to login function
   const schemaValidation = yup.object().shape({
     email: yup
-      .string(t("require_email_message"))
-      .email(t("required_valid_email_message"))
-      .required(t("required_field_message")),
-    password: yup.string().required(t("required_field_message")),
+      .string(t('require_email_message'))
+      .email(t('required_valid_email_message'))
+      .required(t('required_field_message')),
+    password: yup.string().required(t('required_field_message')),
   });
 
   const history = useHistory();
@@ -46,13 +48,10 @@ export default function Login() {
 
   const changeLanguage = () => {
     if (i18next.language == 'en') {
-      i18next.changeLanguage('pt')
-    
+      i18next.changeLanguage('pt');
     } else {
-      i18next.changeLanguage('en')
-
+      i18next.changeLanguage('en');
     }
-
   };
 
   const handleLoginSubmit = () => {
@@ -61,7 +60,7 @@ export default function Login() {
     }, 2000);
   };
 
-  const notify = () => toast.error(t("wrong_user_or_password"));
+  const notify = () => toast.error(t('wrong_user_or_password'));
 
   const loginAccount = async () => {
     var data = {
@@ -99,7 +98,6 @@ export default function Login() {
       .catch((e) => {
         console.log(e);
       });
-
   };
   return (
     <motion.div
@@ -112,6 +110,35 @@ export default function Login() {
       initial="hiden"
       animate="show"
     >
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: '35%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'right',
+          padding: '10px',
+        }}
+      >
+        <label style={{ color: 'black' }}>{t('change_language')}</label>
+        <button
+          onClick={changeLanguage}
+          className="waves-effect waves-light btn-large"
+          style={{
+            backgroundColor: '#FFFFFF',
+            textAlign: 'center',
+            marginTop: '10px',
+          }}
+        >
+          {i18next.language == 'en' ? (
+            <img src={br} style={{ width: '50px', alignItems: 'center' }} />
+          ) : (
+            <img src={us} style={{ width: '50px' }} />
+          )}
+        </button>
+      </div>
+
       <ToastContainer
         position="top-left"
         autoClose={5000}
@@ -135,6 +162,7 @@ export default function Login() {
         initial="hiden"
         animate="show"
       />
+
       <motion.section
         className="form"
         transition={{ delay: 0.2, duration: 0.5 }}
@@ -165,7 +193,7 @@ export default function Login() {
           <input
             id="password"
             name="password"
-            placeholder={t("password_placeholder")}
+            placeholder={t('password_placeholder')}
             type="password"
             value={user.password}
             onChange={handleLoginChange}
@@ -178,19 +206,17 @@ export default function Login() {
             type="submit"
             className="waves-effect waves-light btn-small green darken-2"
           >
-            {t("login_button")}
+            {t('login_button')}
           </button>
         </form>
         <div className="resendRegister">
           <Link className="back-link" to="/register">
-            {t("not_registered")}
+            {t('not_registered')}
           </Link>
           <Link className="back-link" to="/recover-password">
-            {t("recover_password")}
+            {t('recover_password')}
           </Link>
         </div>
-
-        <button onClick={changeLanguage}>{t('change_language')}</button>
       </motion.section>
     </motion.div>
   );
