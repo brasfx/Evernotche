@@ -8,5 +8,54 @@
     "wrong_user_or_password": "Wrong user or password!",
     "require_email_message": "Please, enter an email",
     "required_valid_email_message": "Please, enter a valid email!",
-    "required_field_message": "This field is required"
+    "required_field_message": "This field is required",
+    "home_page": "Home",
+    "add_note": "Add note",
+    "all_notes": "All notes",
+    "settings": "Settings",
+    "trash": "Trash",
+    "support": "Support",
+    "insert_note_placeholder": "Enter the title of your note here",
+    "note_title": "Note title",
+    "save_note": "Save",
+    "page_not_found_message": "Error 404 - Page not found",
+    "edit": "Edit",
+    "back": "Back",
+    "view": "View",
+    "delete": "Delete",
+    "change_layout": "Change layout",
+    "select_all_notes": "Select all",
+    "loading_message": "Loading...",
+    "name_changed_successfully": "Name changed successfully!",
+    "password_changed_successfully": "Password changed successfully!",
+    "country_changed_successfully": "Country changed successfully!",
+    "changing_name": "Changing name",
+    "changing_country": "Changing country",
+    "changing_password": "Changing password",
+    "enter_new_name": "Enter new name",
+    "enter_new_country": "Enter new country",
+    "enter_new_password": "Enter new password",
+    "confirm": "Confirm",
+    "my_settings": "My settings",
+    "delete_account": "Delete my account",
+    "deleting_account": "Deleting user account",
+    "change_name_message": "Change name",
+    "change_country_message": "Change country",
+    "change_password_message": "Change password",
+    "form_sent_successfully": "The form was sent successfully!",
+    "sending_form_message": "Sending form...",
+    "support_form_title": "Support form",
+    "subject": "Subject",
+    "tell_us_message": "Tell us about your problem",
+    "send": "Send"
+
+
+
+
+
+
+
+
+
+
 }

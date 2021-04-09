@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Navbar from '../Home/Navbar';
 import TextEditor from '../Home/Editor';
+import { useTranslation } from 'react-i18next'
 
 export default function AddNote() {
   const [title, setTitle] = useState('');
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -16,11 +18,11 @@ export default function AddNote() {
           marginLeft: '10px',
         }}
       >
-        Título da nota
+        {t("note_title")}
       </h3>
       <input
         onChange={(event) => setTitle(event.target.value)}
-        placeholder="Insira aqui o titulo da sua nota"
+        placeholder={t("insert_note_placeholder")}
         style={{
           marginLeft: '10px',
         }}

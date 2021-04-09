@@ -2,9 +2,12 @@ import React, { useContext, useReducer } from 'react';
 //import NotesContext from './context.js';
 import './style.css';
 
+import { useTranslation } from 'react-i18next'
+
 export default function Panel({ notes, dispatch, cngRows }) {
   /*const {state} = useContext(NotesContext);
     const {dispatch} = useContext(NotesContext);*/
+  const { t } = useTranslation()
 
   const selectedNotes = [];
   function setSelect(note, selected) {
@@ -59,11 +62,11 @@ export default function Panel({ notes, dispatch, cngRows }) {
           }
         }}
       >
-        Selecionar todas as notas
+        {t("select_all_notes")}
       </button>
       <button className="button-panel waves-effect waves-light btn-large grey darken-2"
         onClick={cngRows}>
-        Change layout
+          {t("change_layout")}
         </button>
     </div>
 

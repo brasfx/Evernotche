@@ -4,11 +4,13 @@ import Spinner from '../../components/Spinner';
 import routesServices from '../../services/routesServices';
 import Navbar from '../Home/Navbar'
 import TextEditor from './editor'
+import { useTranslation } from 'react-i18next'
 
 export default function ModifyNote() {
     const location = useParams();
     const [note, setNote] = useState("");
     const [title, setTitle] = useState('')
+    const { t } = useTranslation()
 
     useEffect(() => {
         const user = {
@@ -33,9 +35,9 @@ export default function ModifyNote() {
     return (
         <div>
             <Navbar />
-            <label class="titleLabel" style={{fontSize: "30px", color: "black"}}>Título</label>
+            <label class="titleLabel" style={{fontSize: "30px", color: "black"}}>{t("note_title")}</label>
             <input defaultValue={note.title} onChange={event => setTitle(event.target.value)}></input>
-            {note ? <TextEditor note={note} newTitle={title}/> : <div style={{display: "grid", placeContent: "center"}}> <Spinner description="Carregando..." /> </div>}
+            {note ? <TextEditor note={note} newTitle={title}/> : <div style={{display: "grid", placeContent: "center"}}> <Spinner description={t("loading_message")} /> </div>}
             
         </div>
     )

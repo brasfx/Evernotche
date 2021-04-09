@@ -1,9 +1,11 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import './style.css';
+import { useTranslation } from 'react-i18next'
 
 export default function ShowNote() {
   const { state } = useLocation();
+  const { t } = useTranslation()
 
   return (
     <div className="container">
@@ -18,13 +20,13 @@ export default function ShowNote() {
           }}
         >
           <button className="edit, waves-effect waves-light btn-small green darken-2 ">
-            Editar
+            {t("edit")}
           </button>
         </Link>
 
         <Link to="/viewnotes">
           <button className="btn waves-effect waves-light btn-small ">
-            Voltar
+            {t("back")}
           </button>
         </Link>
       </section>

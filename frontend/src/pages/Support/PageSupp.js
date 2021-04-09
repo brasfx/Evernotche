@@ -5,8 +5,11 @@ import logoSupp from '../../assets/logo-support.png';
 import Spinner from '../../components/Spinner';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from 'react-i18next'
 
 export default function PageSupp() {
+  const { t } = useTranslation()
+
   const initialDataSupp = {
     name: '',
     email: '',
@@ -25,7 +28,7 @@ export default function PageSupp() {
     setDataSupport({ ...dataSupport, [name]: value });
   };
 
-  const notify = () => toast.success('Formulário enviado com sucesso!');
+  const notify = () => toast.success(t("form_sent_successfully"));
 
   function handleFormSubmit(event) {
     event.preventDefault();
@@ -80,12 +83,12 @@ export default function PageSupp() {
         pauseOnHover
       />
       {submitted ? (
-        <Spinner description="Enviando formulário..." />
+        <Spinner description={t("sending_form_message")} />
       ) : (
         <div className="content">
           <section>
             <img src={logoSupp} className="logo-image" alt="logo-supp" />
-            <h1>Formulário de suporte </h1>
+            <h1>{t("support_form_title")}</h1>
           </section>
           <form onSubmit={handleFormSubmit}>
             <input
@@ -101,7 +104,7 @@ export default function PageSupp() {
               id="email"
               type="email"
               name="email"
-              placeholder="E-mail"
+              placeholder="Email"
               value={getEmail}
               onChange={handleInputChange}
               disabled
@@ -111,7 +114,7 @@ export default function PageSupp() {
               id="topic"
               type="text"
               name="topic"
-              placeholder="Assunto"
+              placeholder={t("subject")}
               value={dataSupport.topic}
               onChange={handleInputChange}
             />
@@ -122,7 +125,7 @@ export default function PageSupp() {
                 type="text"
                 id="textTopic"
                 name="textTopic"
-                placeholder="Escreva um pouco sobre seu problema"
+                placeholder={t("tell_us_message")}
                 value={dataSupport.textTopic}
                 onChange={handleInputChange}
               ></textarea>
@@ -142,7 +145,7 @@ export default function PageSupp() {
               className="waves-effect waves-light btn-small green darken-2"
               type="submit"
             >
-              Enviar
+              {t("send")}
             </button>
           </form>
         </div>
