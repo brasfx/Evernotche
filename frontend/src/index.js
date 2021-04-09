@@ -11,7 +11,6 @@ import HttpApi from 'i18next-http-backend'
 import 'materialize-css/dist/css/materialize.min.css';
 import './index.css';
 //import './test.json' as translation_file
-import enTranslation from './test.json'
 
 import App from './App';
 
@@ -56,7 +55,6 @@ i18next
 
   //i18next.loadResources(enTranslation)
   i18next.changeLanguage('pt')
-  console.log(enTranslation)
 
 ReactDOM.render(
   <React.StrictMode>

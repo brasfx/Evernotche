@@ -8,8 +8,52 @@ import './Navbar.css';
 import { IconContext } from 'react-icons';
 import img from '../../assets/default_user.png';
 import LogoProfile from '../../components/LogoProfile';
+import { useTranslation } from 'react-i18next'
+
+import * as BiIcons from 'react-icons/bi';
 
 function Navbar() {
+  const {t} = useTranslation()
+  const SidebarData = [
+    {
+      title:  t("home_page"),
+      path: '/home',
+      icon: <AiIcons.AiFillHome />,
+      cName: 'nav-text',
+      id: 'first',
+    },
+    {
+      title: t("add_note"),
+      path: '/addnote',
+      icon: <FiIcons.FiFilePlus />,
+      cName: 'nav-text',
+    },
+    {
+      title:  t("all_notes"),
+      path: '/viewnotes',
+      icon: <FiIcons.FiFileText />,
+      cName: 'nav-text',
+    },
+    {
+      title: t("settings"),
+      path: '/configuration',
+      icon: <FiIcons.FiSettings />,
+      cName: 'nav-text',
+    },
+    {
+      title: t("trash"),
+      path: '#',
+      icon: <FiIcons.FiTrash2 />,
+      cName: 'nav-text',
+    },
+    {
+      title: t("support"),
+      path: '/support',
+      icon: <BiIcons.BiSupport />,
+      cName: 'nav-text',
+    },
+  ];
+
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);

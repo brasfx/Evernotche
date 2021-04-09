@@ -5,9 +5,11 @@ import './style.css';
 import routesServices from '../../services/routesServices';
 import { useLocation, useHistory } from 'react-router-dom';
 import ContainerModal from '../../components/Modal';
+import { useTranslation } from 'react-i18next'
 
 export default function Note({ note, dispatch }) {
   // const { dispatch } = useContext(NotesContext);
+  const { t } = useTranslation()
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const history = useHistory();
@@ -93,7 +95,7 @@ export default function Note({ note, dispatch }) {
             className="edit, waves-effect waves-light btn-small green darken-2 "
             style={{ zIndex: 0 }}
           >
-            Editar
+            {t("edit")}
           </button>
         </Link>
         <Link to={{ pathname: 'note/' + note.id, state: { notes: note } }}>
@@ -101,7 +103,7 @@ export default function Note({ note, dispatch }) {
             className="view, waves-effect waves-light btn-small"
             style={{ zIndex: 0 }}
           >
-            Visualizar
+            {t("view")}
           </button>
         </Link>
         <button
@@ -109,7 +111,7 @@ export default function Note({ note, dispatch }) {
           className="delete, waves-effect waves-light btn-small red darken-4"
           onClick={handleModalOpen}
         >
-          Excluir
+          {t("delete")}
         </button>
 
         {isModalOpen && (

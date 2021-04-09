@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import routesServices from '../../services/routesServices';
 import { useHistory } from "react-router-dom";
-
+import i18next from "i18next";
+import { useTranslation } from 'react-i18next'
 
 export default function TextEditor(props) {
   const LogContent = (content) => {
@@ -17,9 +18,15 @@ export default function TextEditor(props) {
     timestamp: 'teste',
   };
 
-
+  const { t } = useTranslation();
   const history = useHistory()
   const [note, setNote] = useState(initialUserState);
+  let editor_language = "";
+
+  if(i18next.language == "pt") editor_language = "pt_BR"
+  if(i18next.language == "en") editor_language = "en_US"
+
+  console.log(editor_language)
 
   const SaveNote = (event) => {
     event.preventDefault();
@@ -27,7 +34,9 @@ export default function TextEditor(props) {
     let titleAux = "";
 
     if(props.title === "") {
-      titleAux = "Nota"
+      
+      if(i18next.language == "pt") titleAux = "Nota"
+      if(i18next.language == "en") titleAux = "Note"
 
     } else {
       titleAux = props.title
@@ -92,7 +101,7 @@ export default function TextEditor(props) {
               'undo redo | formatselect | bold italic backcolor | \
               alignleft aligncenter alignright alignjustify | \
               bullist numlist outdent indent | removeformat | help',
-            language: 'pt_BR',
+            language: editor_language,
           }}
           onEditorChange={LogContent}
 
@@ -102,7 +111,7 @@ export default function TextEditor(props) {
             className="waves-effect waves-light btn-small green darken-2"
             type="submit"
           >
-            Salvar
+            {t("save_note")}
           </button>
         </div>
       </form>

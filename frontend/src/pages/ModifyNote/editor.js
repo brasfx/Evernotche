@@ -2,7 +2,8 @@ import React, { useState, useEffect, memo } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import routesServices from '../../services/routesServices';
 import { useLocation, useHistory } from "react-router-dom";
-
+import i18next from "i18next";
+import { useTranslation } from 'react-i18next'
 
 function TextEditor({ note: state, newTitle}) {
 
@@ -20,9 +21,14 @@ function TextEditor({ note: state, newTitle}) {
     timestamp: state.timestamp,
   };
 
-
+  const { t } = useTranslation();
   const history = useHistory()
   const [note, setNote] = useState(initialUserState);
+  let editor_language = "";
+
+  if(i18next.language == "pt") editor_language = "pt_BR"
+  if(i18next.language == "en") editor_language = "en_US"
+
 
   const SaveNote = (event) => {
     event.preventDefault();
@@ -30,7 +36,8 @@ function TextEditor({ note: state, newTitle}) {
     let titleAux = "";
 
     if(newTitle === "") {
-      titleAux = "Nota"
+      if(i18next.language == "pt") titleAux = "Nota"
+      if(i18next.language == "en") titleAux = "Note"
 
     } else {
       titleAux = newTitle
@@ -96,7 +103,7 @@ function TextEditor({ note: state, newTitle}) {
               'undo redo | formatselect | bold italic backcolor | \
               alignleft aligncenter alignright alignjustify | \
               bullist numlist outdent indent | removeformat | help',
-            language: 'pt_BR',
+            language: editor_language,
           }}
           onEditorChange={LogContent}
 
@@ -107,7 +114,7 @@ function TextEditor({ note: state, newTitle}) {
             type="submit"
             
           >
-            Salvar
+            {t("save_note")}
             </button>
         </div>
       </form>
