@@ -7,6 +7,7 @@ import { SidebarData } from './SideBarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
 import img from '../../assets/default_user.png';
+import LogoProfile from '../../components/LogoProfile';
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
@@ -51,12 +52,13 @@ function Navbar() {
             </li>
             <li style={{ textAlign: 'center', marginBottom: '30px' }}>
               <Link to="#">
-                <img
+                {/* <img
                   className="circle "
                   src={img}
                   alt="foto-perfil"
                   style={{ width: '100px', height: '100px' }}
-                />
+                /> */}
+                <LogoProfile />
                 <h6>{getName}</h6>
                 <h6>{getEmail}</h6>
               </Link>
