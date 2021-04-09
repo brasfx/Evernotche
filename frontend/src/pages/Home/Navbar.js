@@ -52,12 +52,6 @@ function Navbar() {
             </li>
             <li style={{ textAlign: 'center', marginBottom: '30px' }}>
               <Link to="#">
-                {/* <img
-                  className="circle "
-                  src={img}
-                  alt="foto-perfil"
-                  style={{ width: '100px', height: '100px' }}
-                /> */}
                 <LogoProfile />
                 <h6>{getName}</h6>
                 <h6>{getEmail}</h6>
