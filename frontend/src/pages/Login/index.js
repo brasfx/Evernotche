@@ -4,7 +4,8 @@ import routesServices from '../../services/routesServices';
 //import { history } from '../../history';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import schemaValidation from '../Login/validateLogin';
+import * as yup from 'yup';
+//import schemaValidation from '../Login/validateLogin';
 import { motion } from 'framer-motion';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -13,7 +14,21 @@ import 'react-toastify/dist/ReactToastify.css';
 import provisionalImg from '../../assets/slogan.png';
 import logoImg from '../../assets/logo_sem_fundo.png';
 
+import { useTranslation } from 'react-i18next'
+import i18next from 'i18next'
+
 export default function Login() {
+  const { t } = useTranslation()
+
+  //Schema validation moved to login function
+  const schemaValidation = yup.object().shape({
+    email: yup
+      .string(t("require_email_message"))
+      .email(t("required_valid_email_message"))
+      .required(t("required_field_message")),
+    password: yup.string().required(t("required_field_message")),
+  });
+
   const history = useHistory();
   const userLogin = {
     email: '',
@@ -29,13 +44,24 @@ export default function Login() {
     setUser({ ...user, [name]: value });
   };
 
+  const changeLanguage = () => {
+    if (i18next.language == 'en') {
+      i18next.changeLanguage('pt')
+    
+    } else {
+      i18next.changeLanguage('en')
+
+    }
+
+  };
+
   const handleLoginSubmit = () => {
     setTimeout(() => {
       loginAccount();
     }, 2000);
   };
 
-  const notify = () => toast.error('Usuário ou senha incorretos!');
+  const notify = () => toast.error(t("wrong_user_or_password"));
 
   const loginAccount = async () => {
     var data = {
@@ -73,6 +99,7 @@ export default function Login() {
       .catch((e) => {
         console.log(e);
       });
+
   };
   return (
     <motion.div
@@ -120,7 +147,7 @@ export default function Login() {
       >
         <img className="logo-image" src={logoImg} alt="logo" />
         <form onSubmit={handleSubmit(handleLoginSubmit)}>
-          <h1>Faça seu login</h1>
+          <h1>{t('login_message')}</h1>
           <div className="input-group" style={{ color: 'red' }}></div>
           <input
             id="name"
@@ -138,7 +165,7 @@ export default function Login() {
           <input
             id="password"
             name="password"
-            placeholder="Senha"
+            placeholder={t("password_placeholder")}
             type="password"
             value={user.password}
             onChange={handleLoginChange}
@@ -151,17 +178,19 @@ export default function Login() {
             type="submit"
             className="waves-effect waves-light btn-small green darken-2"
           >
-            Entrar
+            {t("login_button")}
           </button>
         </form>
         <div className="resendRegister">
           <Link className="back-link" to="/register">
-            Não possui cadastro?
+            {t("not_registered")}
           </Link>
           <Link className="back-link" to="/recover-password">
-            Recuperar senha
+            {t("recover_password")}
           </Link>
         </div>
+
+        <button onClick={changeLanguage}>{t('change_language')}</button>
       </motion.section>
     </motion.div>
   );

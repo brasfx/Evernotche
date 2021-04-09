@@ -1,0 +1,12 @@
+{
+    "login_message": "Faça seu login",
+    "change_language": "Mudar idioma",
+    "not_registered": "Não possui cadastro?",
+    "recover_password": "Recuperar senha",
+    "login_button": "Entrar",
+    "password_placeholder": "Senha",
+    "wrong_user_or_password": "Usuário ou senha incorretos!",
+    "require_email_message": "Por favor, insira um email",
+    "required_valid_email_message": "Por favor, insira um email válido!",
+    "required_field_message": "Este campo é obrigatório"
+}
