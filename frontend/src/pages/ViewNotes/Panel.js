@@ -1,20 +1,29 @@
-import React, { useContext, useReducer } from 'react';
+import React, { useContext, useReducer, useState, useEffect } from "react";
 //import NotesContext from './context.js';
-import './style.css';
+import "./style.css";
 
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next";
+import * as FaIcons from "react-icons/fa";
 
-export default function Panel({ notes, dispatch, cngRows }) {
+export default function Panel({ notes, dispatch, cngRows, setSearchQuery }) {
   /*const {state} = useContext(NotesContext);
     const {dispatch} = useContext(NotesContext);*/
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const selectedNotes = [];
   function setSelect(note, selected) {
-    dispatch({ type: 'SET_NOTE', id: note.id, data: { ...note, selected } });
+    dispatch({ type: "SET_NOTE", id: note.id, data: { ...note, selected } });
   }
   return (
     <div className="panel-container">
+      <div>
+        <FaIcons.FaSearch />
+        <input
+          type="text"
+          onChange={(event) => setSearchQuery(event.target.value)}
+          style={{ maxWidth: "600px", margin: 10 }}
+        />
+      </div>
       <button
         className="button-panel waves-effect waves-light btn-large grey darken-2"
         onClick={() => {
@@ -64,11 +73,12 @@ export default function Panel({ notes, dispatch, cngRows }) {
       >
         {t("select_all_notes")}
       </button>
-      <button className="button-panel waves-effect waves-light btn-large grey darken-2"
-        onClick={cngRows}>
-          {t("change_layout")}
-        </button>
+      <button
+        className="button-panel waves-effect waves-light btn-large grey darken-2"
+        onClick={cngRows}
+      >
+        {t("change_layout")}
+      </button>
     </div>
-
   );
 }

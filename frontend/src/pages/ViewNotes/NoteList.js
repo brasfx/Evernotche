@@ -1,24 +1,19 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState } from "react";
 
-import Note from './Note.js';
-import routesServices from '../../services/routesServices';
-import './style.css';
+import Note from "./Note.js";
+import routesServices from "../../services/routesServices";
+import "./style.css";
 
 export default function NoteList({ notes, dispatch, rows }) {
-
-
-
-
-
   return (
-    <div className="notes-container" style={{ gridTemplateColumns: `${rows ? "700px" : "600px 600px 600px"}` }}>
-
-      {
-        Object.keys(notes).map((id, i) => {
-          const note = notes[id];
-          return <Note note={note} dispatch={dispatch} key={i} />;
-        })
-      }
-    </div >
+    <div
+      className="notes-container"
+      style={{ gridTemplateColumns: `${rows ? "700px" : "600px 600px 600px"}` }}
+    >
+      {Object.keys(notes).map((id, i) => {
+        const note = notes[id];
+        return <Note note={note} dispatch={dispatch} key={i} />;
+      })}
+    </div>
   );
 }
