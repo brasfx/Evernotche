@@ -4,7 +4,7 @@ import Note from "./Note.js";
 import routesServices from "../../services/routesServices";
 import "./style.css";
 
-export default function NoteList({ notes, dispatch, rows, setColor, color }) {
+export default function NoteList({ notes, dispatch, rows }) {
   return (
     <div
       className="notes-container"
@@ -12,15 +12,7 @@ export default function NoteList({ notes, dispatch, rows, setColor, color }) {
     >
       {Object.keys(notes).map((id, i) => {
         const note = notes[id];
-        return (
-          <Note
-            note={note}
-            dispatch={dispatch}
-            key={i}
-            setColor={setColor}
-            color={color}
-          />
-        );
+        return <Note note={note} dispatch={dispatch} key={i} />;
       })}
     </div>
   );

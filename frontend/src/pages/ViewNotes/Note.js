@@ -7,7 +7,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import ContainerModal from "../../components/Modal";
 import { useTranslation } from "react-i18next";
 
-export default function Note({ note, dispatch, setColor, color }) {
+export default function Note({ note, dispatch }) {
   // const { dispatch } = useContext(NotesContext);
   const { t } = useTranslation();
 
@@ -30,11 +30,6 @@ export default function Note({ note, dispatch, setColor, color }) {
     setIsModalOpen(false);
   };
 
-  // const randomColor = () => {
-  //   const hex = ((Math.random() * 0xffffff) << 0).toString(16);
-  //   return `#${hex}`;
-  // };
-
   const deleteNote = () => {
     dispatch({ type: "DELETE_NOTE", payload: note });
     setTimeout(() => {
@@ -44,10 +39,9 @@ export default function Note({ note, dispatch, setColor, color }) {
 
   //Usando timestamp por enquanto, criar um campo de cor na nota
   const setNoteColor = (colorValue) => {
-    setColor(colorValue);
-    console.log("color changed");
+    note.timestamp = colorValue;
 
-    var data = { ...note, timestamp: color };
+    var data = { ...note };
 
     routesServices
       .updateNote(note.id, data)
@@ -58,8 +52,6 @@ export default function Note({ note, dispatch, setColor, color }) {
         console.log(e);
       });
   };
-
-  //const color = randomColor();
 
   return (
     <div

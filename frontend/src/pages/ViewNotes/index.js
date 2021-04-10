@@ -10,7 +10,6 @@ export default function ViewNotes() {
   const [state, dispatch] = useReducer(notesReducer, initialState);
   const [rows, setRows] = useState(false);
   const [searchQuery, setSearchQuery] = useState();
-  const [color, setColor] = useState("");
 
   function cngRows() {
     setRows(!rows);
@@ -51,7 +50,7 @@ export default function ViewNotes() {
 
       dispatch({ data: notesData, type: "UPDATE" });
     });
-  }, [searchQuery, color]);
+  }, [searchQuery]);
 
   return (
     <div>
@@ -62,13 +61,7 @@ export default function ViewNotes() {
         cngRows={cngRows}
         setSearchQuery={setSearchQuery}
       />
-      <NoteList
-        notes={state}
-        dispatch={dispatch}
-        rows={rows}
-        setColor={setColor}
-        color={color}
-      />
+      <NoteList notes={state} dispatch={dispatch} rows={rows} />
     </div>
   );
 }
