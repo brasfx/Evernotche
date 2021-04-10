@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
-import routesServices from '../../services/routesServices';
-import './style.css';
-import logoReset from '../../assets/resetPassword.png';
-import Spinner from '../../components/Spinner';
-import { Link, useHistory } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import routesServices from "../../services/routesServices";
+import "./style.css";
+import logoReset from "../../assets/resetPassword.png";
+import Spinner from "../../components/Spinner";
+import { Link, useHistory } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function RecoverPassword() {
+  const { t } = useTranslation();
+
   const history = useHistory();
   const initialData = {
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   };
   const [recoverPassword, setRecoverPassword] = useState(initialData);
   const [submitted, setSubmitted] = useState(false);
@@ -24,12 +27,12 @@ export default function RecoverPassword() {
     event.preventDefault();
     saveRegister();
     setTimeout(() => {
-      history.push('/');
+      history.push("/");
     }, 3000);
   }
 
   function randomPassword() {
-    let pass = '';
+    let pass = "";
     pass += Math.random().toString(36).substr(2);
     pass = pass.substr(0, 10);
     return pass;
@@ -64,26 +67,26 @@ export default function RecoverPassword() {
       className="recover-container"
       transition={{ delay: 0, duration: 0.7 }}
       variants={{
-        show: { opacity: 1, z: '0' },
-        hiden: { opacity: 0, z: '100%' },
+        show: { opacity: 1, z: "0" },
+        hiden: { opacity: 0, z: "100%" },
       }}
       initial="hiden"
       animate="show"
     >
       {submitted ? (
-        <Spinner description="Enviando dados para seu email..." />
+        <Spinner description={t("sending_data_to_email")} />
       ) : (
         <div className="content">
           <section>
             <img src={logoReset} className="logo-image" alt="logo-supp" />
-            <h1>Recuperação de senha</h1>
+            <h1>{t("password_recovery")}</h1>
           </section>
           <form onSubmit={handleFormSubmit}>
             <input
               id="email"
               type="email"
               name="email"
-              placeholder="Insira seu email de login"
+              placeholder={t("enter_login_email")}
               value={recoverPassword.email}
               onChange={handleInputChange}
             />
@@ -92,7 +95,7 @@ export default function RecoverPassword() {
               className="waves-effect waves-light btn-small green darken-2"
               type="submit"
             >
-              Enviar
+              {t("send")}
             </button>
           </form>
           <Link className="back-link" to="/">
@@ -100,7 +103,7 @@ export default function RecoverPassword() {
               className="button-back waves-effect waves-light btn-small "
               type="submit"
             >
-              Voltar
+              {t("back")}
             </button>
           </Link>
         </div>

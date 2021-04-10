@@ -1,42 +1,53 @@
-import React, { useState, Component, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import routesServices from '../../services/routesServices';
-import './style.css';
-import logoImg from '../../assets/logo.png';
-import { useForm } from 'react-hook-form';
-import Spinner from '../../components/Spinner';
-import { yupResolver } from '@hookform/resolvers/yup';
-import schemaValidation from './validateForm';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState, Component, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import routesServices from "../../services/routesServices";
+import "./style.css";
+import logoImg from "../../assets/logo.png";
+import { useForm } from "react-hook-form";
+import Spinner from "../../components/Spinner";
+import { yupResolver } from "@hookform/resolvers/yup";
+import schemaValidation from "./validateForm";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import todosPaises from './allcountries.json';
-import Select from 'react-select';
+import todosPaises from "./allcountries_pt.json";
+import allCountries from "./allcountries_en.json";
+import Select from "react-select";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
+
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 export default function Register() {
+  const { t } = useTranslation();
+
   const selectStyles = {
     container: (provided) => ({
       ...provided,
-      width: '100%',
+      width: "100%",
       zIndex: 1000,
     }),
-    indicatorSeparator: (provided) => ({ ...provided, display: 'none' }),
+    indicatorSeparator: (provided) => ({ ...provided, display: "none" }),
   };
 
-  const options = todosPaises.map((item) => ({
-    value: item.nome,
-    label: item.nome,
+  let countriesJson = "";
+
+  if (i18next.language === "pt") countriesJson = todosPaises;
+  if (i18next.language === "en") countriesJson = allCountries;
+
+  const options = countriesJson.map((item) => ({
+    value: item.name,
+    label: item.name,
   }));
 
   const history = useHistory();
   const initialUserState = {
-    name: '',
-    email: '',
-    password: '',
-    confirmpassword: '',
-    country: '',
+    name: "",
+    email: "",
+    password: "",
+    confirmpassword: "",
+    country: "",
   };
 
   const { register, handleSubmit, errors, clearErrors } = useForm({
@@ -45,7 +56,7 @@ export default function Register() {
   const [registerUser, setRegisterUser] = useState(initialUserState);
   const [submitted, setSubmitted] = useState(false);
 
-  const errorEmail = () => toast.error('Email já cadastrado!');
+  const errorEmail = () => toast.error(t("email_already_registered"));
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -58,7 +69,7 @@ export default function Register() {
   function handleFormSubmit() {
     saveRegister();
     setTimeout(() => {
-      history.push('/');
+      history.push("/");
     }, 5000);
   }
 
@@ -94,8 +105,8 @@ export default function Register() {
       className="register-container"
       transition={{ delay: 0, duration: 0.7 }}
       variants={{
-        show: { opacity: 1, z: '0' },
-        hiden: { opacity: 0, z: '100%' },
+        show: { opacity: 1, z: "0" },
+        hiden: { opacity: 0, z: "100%" },
       }}
       initial="hiden"
       animate="show"
@@ -112,23 +123,23 @@ export default function Register() {
         pauseOnHover
       />
       {submitted ? (
-        <Spinner description="Realizando cadastro..." />
+        <Spinner description={t("registering_message")} />
       ) : (
         <div className="content">
           <section>
             <img src={logoImg} className="logo-image" alt="logo" />
-            <h1>Faça seu cadastro</h1>
+            <h1>{t("register_command_message")}</h1>
           </section>
           <form onSubmit={handleSubmit(handleFormSubmit)}>
             <input
               id="name"
               name="name"
-              placeholder="Nome"
+              placeholder={t("name_placeholder")}
               value={registerUser.name}
               onChange={handleInputChange}
               ref={register}
             />
-            <div className="input-group" style={{ color: 'red' }}>
+            <div className="input-group" style={{ color: "red" }}>
               {errors.name?.message}
             </div>
 
@@ -136,24 +147,24 @@ export default function Register() {
               id="email"
               type="email"
               name="email"
-              placeholder="E-mail"
+              placeholder={t("email")}
               value={registerUser.email}
               onChange={handleInputChange}
               ref={register}
             />
-            <div className="input-group" style={{ color: 'red' }}>
+            <div className="input-group" style={{ color: "red" }}>
               {errors.email?.message}
             </div>
             <input
               id="password"
               type="password"
               name="password"
-              placeholder="Senha"
+              placeholder={t("password")}
               value={registerUser.password}
               onChange={handleInputChange}
               ref={register}
             />
-            <div className="input-group" style={{ color: 'red' }}>
+            <div className="input-group" style={{ color: "red" }}>
               {errors.password?.message}
             </div>
 
@@ -161,12 +172,12 @@ export default function Register() {
               id="confirmpassword"
               type="password"
               name="confirmpassword"
-              placeholder="Confirme sua senha"
+              placeholder={t("confirm_password_command")}
               value={registerUser.confirmpassword}
               onChange={handleInputChange}
               ref={register}
             />
-            <div className="input-group" style={{ color: 'red' }}>
+            <div className="input-group" style={{ color: "red" }}>
               {errors.confirmpassword?.message}
             </div>
             <div className="input-group">
@@ -177,10 +188,10 @@ export default function Register() {
                 options={options}
                 styles={selectStyles}
                 ref={register}
-                placeholder="Selecione um pais"
+                placeholder={t("country_selection_message")}
               ></Select>
             </div>
-            <div className="input-group" style={{ color: 'red' }}>
+            <div className="input-group" style={{ color: "red" }}>
               {errors.country?.message}
             </div>
 
@@ -195,7 +206,7 @@ export default function Register() {
                 registerUser.password.length === 0
               }
             >
-              Cadastrar
+              {t("register")}
             </button>
           </form>
           <Link className="back-link" to="/">
@@ -203,7 +214,7 @@ export default function Register() {
               className="button-back waves-effect waves-light btn-small "
               type="submit"
             >
-              Voltar
+              {t("back")}
             </button>
           </Link>
         </div>
