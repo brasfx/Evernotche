@@ -1,22 +1,22 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from "react";
 // import NotesContext from './context.js';
-import { Link } from 'react-router-dom';
-import './style.css';
-import routesServices from '../../services/routesServices';
-import { useLocation, useHistory } from 'react-router-dom';
-import ContainerModal from '../../components/Modal';
-import { useTranslation } from 'react-i18next'
+import { Link } from "react-router-dom";
+import "./style.css";
+import routesServices from "../../services/routesServices";
+import { useLocation, useHistory } from "react-router-dom";
+import ContainerModal from "../../components/Modal";
+import { useTranslation } from "react-i18next";
 
-export default function Note({ note, dispatch }) {
+export default function Note({ note, dispatch, setColor, color }) {
   // const { dispatch } = useContext(NotesContext);
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const history = useHistory();
 
   function checkboxStatus(event) {
     dispatch({
-      type: 'SET_NOTE',
+      type: "SET_NOTE",
       id: note.id,
       data: { ...note, selected: event.target.checked },
     });
@@ -36,22 +36,23 @@ export default function Note({ note, dispatch }) {
   // };
 
   const deleteNote = () => {
-    dispatch({ type: 'DELETE_NOTE', payload: note });
+    dispatch({ type: "DELETE_NOTE", payload: note });
     setTimeout(() => {
-      history.push('/viewnotes');
+      history.push("/viewnotes");
     }, 1000);
   };
 
   //Usando timestamp por enquanto, criar um campo de cor na nota
   const setNoteColor = (colorValue) => {
     setColor(colorValue);
+    console.log("color changed");
 
-    var data = { ...note, timestamp: colorValue };
+    var data = { ...note, timestamp: color };
 
     routesServices
       .updateNote(note.id, data)
       .then((res) => {
-        history.push('/viewnotes');
+        history.push("/viewnotes");
       })
       .catch((e) => {
         console.log(e);
@@ -59,15 +60,16 @@ export default function Note({ note, dispatch }) {
   };
 
   //const color = randomColor();
-  const [color, setColor] = useState('');
-
-  useEffect(() => {
-    setColor(note.timestamp);
-  }, []);
 
   return (
-    <div className="note" style={{ background: color, position: "relative" }}>
-      <div className="tcheckbox" style={{ display: "flex", alignContent: "flex-end" }}>
+    <div
+      className="note"
+      style={{ background: note.timestamp, position: "relative" }}
+    >
+      <div
+        className="tcheckbox"
+        style={{ display: "flex", alignContent: "flex-end" }}
+      >
         <label>
           <input
             type="checkbox"
@@ -80,17 +82,21 @@ export default function Note({ note, dispatch }) {
 
         <input
           type="color"
-          Value={note.timestamp}
+          value={note.timestamp}
           onChange={(event) => setNoteColor(event.target.value)}
         ></input>
-      </div >
+      </div>
       <div className="title-container">{note.title}</div>
       <div
-        className="txt-container" style={{ marginBottom: 32 }}
+        className="txt-container"
+        style={{ marginBottom: 32 }}
         dangerouslySetInnerHTML={{ __html: note.content }}
       />
-      <div className="btn-container" style={{ position: "absolute", bottom: 0 }}>
-        <Link to={{ pathname: 'editnote/' + note.id, state: note }}>
+      <div
+        className="btn-container"
+        style={{ position: "absolute", bottom: 0 }}
+      >
+        <Link to={{ pathname: "editnote/" + note.id, state: note }}>
           <button
             className="edit, waves-effect waves-light btn-small green darken-2 "
             style={{ zIndex: 0 }}
@@ -98,7 +104,7 @@ export default function Note({ note, dispatch }) {
             {t("edit")}
           </button>
         </Link>
-        <Link to={{ pathname: 'note/' + note.id, state: { notes: note } }}>
+        <Link to={{ pathname: "note/" + note.id, state: { notes: note } }}>
           <button
             className="view, waves-effect waves-light btn-small"
             style={{ zIndex: 0 }}
@@ -116,13 +122,12 @@ export default function Note({ note, dispatch }) {
 
         {isModalOpen && (
           <ContainerModal
-            type={'note'}
+            type={"note"}
             handleModalClose={handleModalClose}
             handleFormSubmitDelete={deleteNote}
           />
         )}
-
       </div>
-    </div >
+    </div>
   );
 }
