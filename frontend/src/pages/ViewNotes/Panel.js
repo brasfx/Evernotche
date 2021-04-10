@@ -16,12 +16,14 @@ export default function Panel({ notes, dispatch, cngRows, setSearchQuery }) {
   }
   return (
     <div className="panel-container">
-      <div>
-        <FaIcons.FaSearch />
+      <div style={{ position: "relative" }}>
+        <FaIcons.FaSearch
+          style={{ position: "absolute", bottom: 65, left: -20 }}
+        />
         <input
           type="text"
           onChange={(event) => setSearchQuery(event.target.value)}
-          style={{ maxWidth: "600px", margin: 10 }}
+          style={{ maxWidth: "600px" }}
         />
       </div>
       <button
