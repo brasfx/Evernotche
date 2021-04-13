@@ -31,16 +31,21 @@
   flex-direction: column;
   border: 1px solid white;
   box-shadow: 0 0 800px rgb(0, 0, 0, 0.1);
-  max-width: 600px;
+  max-width: 1000px;
   border-radius: 10px;
   text-align: center;
 }
-.btn-container {
+.btn-container-vn {
   margin-top: 15px;
   display: flex;
+  grid-template-columns: 30% 30% 30%;
+  grid-gap: 3.99%;
   flex-direction: row;
+  width: 100%;
   justify-content: space-around;
   align-items: center;
+  padding: 2%;
+  align-content: flex-start;
 }
 .button-panel {
   width: 200px;

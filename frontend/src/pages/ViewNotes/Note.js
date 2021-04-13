@@ -87,13 +87,13 @@ export default function Note({ note, dispatch }) {
         dangerouslySetInnerHTML={{ __html: note.content }}
       />
       <div
-        className="btn-container"
-        style={{ position: 'absolute', bottom: 0 }}
+        className="btn-container-vn"
+        style={{ position: 'absolute', bottom: 0, left: 0 }}
       >
         <Link to={{ pathname: 'editnote/' + note.id, state: note }}>
           <button
             className="edit, waves-effect waves-light btn-small green darken-2 "
-            style={{ zIndex: 0 }}
+            style={{ zIndex: 0, width: "auto", minWidth: 0, margin: "0" }}
           >
             {t('edit')}
           </button>
@@ -101,13 +101,13 @@ export default function Note({ note, dispatch }) {
         <Link to={{ pathname: 'note/' + note.id, state: { notes: note } }}>
           <button
             className="view, waves-effect waves-light btn-small"
-            style={{ zIndex: 0 }}
+            style={{ zIndex: 0, width: "auto", minWidth: 0, margin: "0" }}
           >
             {t('view')}
           </button>
         </Link>
         <button
-          style={{ zIndex: 0 }}
+          style={{ zIndex: 0, width: "auto", minWidth: 0, margin: "0" }}
           className="delete, waves-effect waves-light btn-small red darken-4"
           onClick={handleModalOpen}
         >

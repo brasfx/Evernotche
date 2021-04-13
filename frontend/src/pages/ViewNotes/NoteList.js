@@ -8,7 +8,7 @@ export default function NoteList({ notes, dispatch, rows }) {
   return (
     <div
       className="notes-container"
-      style={{ gridTemplateColumns: `${rows ? "700px" : "600px 600px 600px"}` }}
+      style={{ gridTemplateColumns: `${rows ? "50%" : " 40%  40%"}` }}
     >
       {Object.keys(notes).map((id, i) => {
         const note = notes[id];
