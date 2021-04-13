@@ -32,7 +32,7 @@ export default function Note({ note, dispatch }) {
 
   const deleteNote = () => {
     console.log(note.id)
-    dispatch({ type: "DELETE_NOTE", payload: note });
+    dispatch({ type: "SEND_TRASH", payload: note.id });
     setTimeout(() => {
       history.push("/viewnotes");
     }, 1000);

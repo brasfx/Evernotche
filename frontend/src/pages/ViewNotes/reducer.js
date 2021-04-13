@@ -15,11 +15,15 @@ export default function reducer(state, action) {
         ...action.data,
       };
 
-    case "DELETE_NOTE":
-      console.log(action.payload);
+    case "SEND_TRASH":
+      const note = {
+        userid: localStorage.getItem("id"),
+        noteid: action.payload,
+      };
+      console.log(note);
       return {
         // TODO
-        ...routesServices.removeNote(action.payload),
+        ...routesServices.sendTrash(note),
         //...routesServices.sendTrash(action.payload),
       };
 

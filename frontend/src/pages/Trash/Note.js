@@ -30,12 +30,20 @@ export default function Note({ note, dispatch }) {
     setIsModalOpen(false);
   };
 
-  const deleteNote = () => {
-    dispatch({ type: "DELETE_NOTE", payload: note });
+  const recoverNote = () => {
+    dispatch({ type: "RECOVER", payload: note.id });
     setTimeout(() => {
       history.push("/trash");
     }, 1000);
   };
+
+  const deleteNote = () => {
+    dispatch({ type: "DELETE_NOTE", payload: note.id });
+    setTimeout(() => {
+      history.push("/trash");
+    }, 1000);
+  };
+
 
   return (
     <div
@@ -74,12 +82,13 @@ export default function Note({ note, dispatch }) {
             {t("edit")}
           </button>
         </Link>
-        <Link to={{ pathname: "note/" + note.id, state: { notes: note } }}>
+        <Link>
           <button
             className="view, waves-effect waves-light btn-small"
             style={{ zIndex: 0 }}
+            onClick={recoverNote}
           >
-            {t("view")}
+            {t("recover")}
           </button>
         </Link>
         <button

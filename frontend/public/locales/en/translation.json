@@ -23,6 +23,7 @@
   "back": "Back",
   "view": "View",
   "delete": "Delete",
+  "recover": "Recover",
   "change_layout": "Change layout",
   "select_all_notes": "Select all",
   "loading_message": "Loading...",
