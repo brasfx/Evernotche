@@ -12,7 +12,13 @@ export default function ContainerModal(props) {
     handleModalClose(true);
   };
 
-  const modalTitle = type == 'note' ? 'nota' : 'conta';
+  const modalTitle =
+    type == 'note'
+      ? 'Deseja realmente excluir sua nota?'
+      : type == 'account'
+      ? ' Deseja realmente excluir sua conta?'
+      : 'Sua nota será excluida definitivamente, deseja continuar?';
+
   return (
     <div>
       <Modal isOpen={true} className="modal">
@@ -20,7 +26,7 @@ export default function ContainerModal(props) {
           <h2 className="title"></h2>
           <ButtonClose setModalClose={setModalClose} icon="close" />
         </div>
-        <h2 className="title">Deseja realmente excluir sua {modalTitle} ?</h2>
+        <h3 className="title"> {modalTitle} </h3>
         <div className="div-buttons">
           <button
             className="button-modal"

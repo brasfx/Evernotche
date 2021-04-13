@@ -1,9 +1,9 @@
-import React, { useContext, useReducer, useState, useEffect } from "react";
+import React, { useContext, useReducer, useState, useEffect } from 'react';
 //import NotesContext from './context.js';
-import "./style.css";
+import './style.css';
 
-import { useTranslation } from "react-i18next";
-import * as FaIcons from "react-icons/fa";
+import { useTranslation } from 'react-i18next';
+import * as FaIcons from 'react-icons/fa';
 
 export default function Panel({ notes, dispatch, cngRows, setSearchQuery }) {
   /*const {state} = useContext(NotesContext);
@@ -12,21 +12,22 @@ export default function Panel({ notes, dispatch, cngRows, setSearchQuery }) {
 
   const selectedNotes = [];
   function setSelect(note, selected) {
-    dispatch({ type: "SET_NOTE", id: note.id, data: { ...note, selected } });
+    dispatch({ type: 'SET_NOTE', id: note.id, data: { ...note, selected } });
   }
   return (
     <div className="panel-container">
-      <div style={{ position: "relative" }}>
+      <div style={{ position: 'relative' }}>
         <FaIcons.FaSearch
-          style={{ position: "absolute", bottom: 65, left: -20 }}
+          style={{ position: 'absolute', bottom: 65, left: -20 }}
         />
         <input
           type="text"
           onChange={(event) => setSearchQuery(event.target.value)}
-          style={{ maxWidth: "600px" }}
+          style={{ maxWidth: '600px' }}
         />
       </div>
       <button
+        style={{ zIndex: 0 }}
         className="button-panel waves-effect waves-light btn-large grey darken-2"
         onClick={() => {
           {
@@ -45,10 +46,11 @@ export default function Panel({ notes, dispatch, cngRows, setSearchQuery }) {
           }
         }}
       >
-        Checar notas selecionadas
+        {t('check_notes')}
       </button>
 
       <button
+        style={{ zIndex: 0 }}
         className="button-panel waves-effect waves-light btn-large grey darken-2"
         onClick={() => {
           let counter = 0;
@@ -73,13 +75,14 @@ export default function Panel({ notes, dispatch, cngRows, setSearchQuery }) {
           }
         }}
       >
-        {t("select_all_notes")}
+        {t('select_all_notes')}
       </button>
       <button
+        style={{ zIndex: 0 }}
         className="button-panel waves-effect waves-light btn-large grey darken-2"
         onClick={cngRows}
       >
-        {t("change_layout")}
+        {t('change_layout')}
       </button>
     </div>
   );

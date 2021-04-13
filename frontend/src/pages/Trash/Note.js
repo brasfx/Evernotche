@@ -1,11 +1,11 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from 'react';
 // import NotesContext from './context.js';
-import { Link } from "react-router-dom";
-import "./style.css";
-import routesServices from "../../services/routesServices";
-import { useLocation, useHistory } from "react-router-dom";
-import ContainerModal from "../../components/Modal";
-import { useTranslation } from "react-i18next";
+import { Link } from 'react-router-dom';
+import './style.css';
+import routesServices from '../../services/routesServices';
+import { useLocation, useHistory } from 'react-router-dom';
+import ContainerModal from '../../components/Modal';
+import { useTranslation } from 'react-i18next';
 
 export default function Note({ note, dispatch }) {
   // const { dispatch } = useContext(NotesContext);
@@ -16,7 +16,7 @@ export default function Note({ note, dispatch }) {
 
   function checkboxStatus(event) {
     dispatch({
-      type: "SET_NOTE",
+      type: 'SET_NOTE',
       id: note.id,
       data: { ...note, selected: event.target.checked },
     });
@@ -31,28 +31,35 @@ export default function Note({ note, dispatch }) {
   };
 
   const recoverNote = () => {
-    dispatch({ type: "RECOVER", payload: note.id });
+    dispatch({ type: 'RECOVER', payload: note.id });
     setTimeout(() => {
-      history.push("/trash");
+      history.push('/viewnotes');
+      history.push('/trash');
     }, 1000);
   };
 
   const deleteNote = () => {
-    dispatch({ type: "DELETE_NOTE", payload: note.id });
+    dispatch({ type: 'DELETE_NOTE', payload: note.id });
     setTimeout(() => {
-      history.push("/trash");
+      history.push('/viewnotes');
+      history.push('/trash');
     }, 1000);
   };
-
 
   return (
     <div
       className="note"
-      style={{ background: note.timestamp, position: "relative" }}
+      style={{
+        background: note.timestamp,
+        position: 'relative',
+      }}
     >
       <div
         className="tcheckbox"
-        style={{ display: "flex", alignContent: "flex-end" }}
+        style={{
+          display: 'flex',
+          alignContent: 'flex-end',
+        }}
       >
         <label>
           <input
@@ -72,23 +79,15 @@ export default function Note({ note, dispatch }) {
       />
       <div
         className="btn-container"
-        style={{ position: "absolute", bottom: 0 }}
+        style={{ bottom: 0, alignItems: 'center' }}
       >
-        <Link to={{ pathname: "editnote/" + note.id, state: note }}>
-          <button
-            className="edit, waves-effect waves-light btn-small green darken-2 "
-            style={{ zIndex: 0 }}
-          >
-            {t("edit")}
-          </button>
-        </Link>
         <Link>
           <button
             className="view, waves-effect waves-light btn-small"
             style={{ zIndex: 0 }}
             onClick={recoverNote}
           >
-            {t("recover")}
+            {t('recover')}
           </button>
         </Link>
         <button
@@ -96,12 +95,12 @@ export default function Note({ note, dispatch }) {
           className="delete, waves-effect waves-light btn-small red darken-4"
           onClick={handleModalOpen}
         >
-          {t("delete")}
+          {t('delete')}
         </button>
 
         {isModalOpen && (
           <ContainerModal
-            type={"note"}
+            type={'trash'}
             handleModalClose={handleModalClose}
             handleFormSubmitDelete={deleteNote}
           />

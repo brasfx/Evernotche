@@ -60,5 +60,7 @@
   "register": "Register",
   "sending_data_to_email": "Sending data to your email...",
   "password_recovery": "Password recovery",
-  "enter_login_email": "Enter your login email"
+  "enter_login_email": "Enter your login email",
+  "share": "Share",
+  "check_notes": "Check selected notes"
 }

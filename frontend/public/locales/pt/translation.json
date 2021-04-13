@@ -60,5 +60,7 @@
   "register": "Registrar",
   "sending_data_to_email": "Enviando dados para seu email...",
   "password_recovery": "Recuperação de senha",
-  "enter_login_email": "Insira seu e-mail de login"
+  "enter_login_email": "Insira seu e-mail de login",
+  "share": "Compartilhar",
+  "check_notes": "Checar notas selecionadas"
 }
