@@ -31,6 +31,7 @@ export default function Note({ note, dispatch }) {
   };
 
   const deleteNote = () => {
+    console.log(note.id)
     dispatch({ type: "DELETE_NOTE", payload: note });
     setTimeout(() => {
       history.push("/viewnotes");

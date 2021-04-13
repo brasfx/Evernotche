@@ -1,3 +1,5 @@
+import routesServices from "../../services/routesServices";
+
 export default function reducer(state, action) {
   switch (action.type) {
     case "SET_NOTE":
@@ -14,9 +16,10 @@ export default function reducer(state, action) {
       };
 
     case "DELETE_NOTE":
+      console.log(action.payload);
       return {
         // TODO
-        ...state,
+        ...routesServices.removeNote(action.payload),
       };
 
     default:
