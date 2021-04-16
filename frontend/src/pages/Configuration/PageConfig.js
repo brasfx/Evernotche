@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import routesServices from '../../services/routesServices';
-import './style.css';
-import logoConfig from '../../assets/logo-config.png';
-import Spinner from '../../components/Spinner';
-import ContainerModal from '../../components/Modal';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+
+import routesServices from '../../services/routesServices';
+import Spinner from '../../components/Spinner';
+import ContainerModal from '../../components/Modal';
+import {
+  validateName,
+  validateCountry,
+  validatePassword,
+} from './validateChangeConfig';
+
 import us from '../../assets/eng.png';
 import br from '../../assets/ptbr.png';
+import logoConfig from '../../assets/logo-config.png';
+
+import 'react-toastify/dist/ReactToastify.css';
+import './style.css';
 
 export default function PageConfig() {
   const getName = localStorage.getItem('name');
@@ -39,6 +49,30 @@ export default function PageConfig() {
   const [description, setDescription] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const {
+    register: registerName,
+    handleSubmit: handleSubmitName,
+    errors: errorsName,
+  } = useForm({
+    resolver: yupResolver(validateName),
+  });
+
+  const {
+    register: registerPass,
+    handleSubmit: handleSubmitPass,
+    errors: errorsPass,
+  } = useForm({
+    resolver: yupResolver(validatePassword),
+  });
+
+  const {
+    register: registerCountry,
+    handleSubmit: handleSubmitCountry,
+    errors: errorsCountry,
+  } = useForm({
+    resolver: yupResolver(validateCountry),
+  });
+
   const handleModalOpen = () => {
     setIsModalOpen(true);
   };
@@ -59,8 +93,7 @@ export default function PageConfig() {
 
   const changeCountry = () => toast.success(t('country_changed_successfully'));
 
-  function handleFormSubmitName(event) {
-    event.preventDefault();
+  function handleFormSubmitName() {
     updateName();
     setTimeout(() => {
       changeName();
@@ -68,8 +101,7 @@ export default function PageConfig() {
     }, 3000);
   }
 
-  function handleFormSubmitCountry(event) {
-    event.preventDefault();
+  function handleFormSubmitCountry() {
     updateCountry();
     setTimeout(() => {
       changeCountry();
@@ -77,8 +109,7 @@ export default function PageConfig() {
     }, 3000);
   }
 
-  function handleFormSubmitPassword(event) {
-    event.preventDefault();
+  function handleFormSubmitPassword() {
     updatePassword();
     setTimeout(() => {
       changePassword();
@@ -191,14 +222,17 @@ export default function PageConfig() {
           <h1>{t('my_settings')}</h1>
           <section>
             <h4>{t('change_name_message')}</h4>
-            <form onSubmit={handleFormSubmitName}>
+            <form onSubmit={handleSubmitName(handleFormSubmitName)}>
               <input
                 id="name"
                 name="name"
+                type="text"
                 placeholder={t('enter_new_name')}
                 value={dataSupport.name}
                 onChange={handleInputChange}
+                ref={registerName}
               />
+
               <button
                 style={{ zIndex: 0 }}
                 className="waves-effect waves-light btn-small "
@@ -207,12 +241,13 @@ export default function PageConfig() {
                 {t('confirm')}
               </button>
             </form>
+            <div className="error-message">{errorsName.name?.message}</div>
           </section>
 
           <section>
             <h4>{t('change_country_message')}</h4>
 
-            <form onSubmit={handleFormSubmitCountry}>
+            <form onSubmit={handleSubmitCountry(handleFormSubmitCountry)}>
               <input
                 id="country"
                 name="country"
@@ -220,7 +255,9 @@ export default function PageConfig() {
                 placeholder={t('enter_new_country')}
                 value={dataSupport.country}
                 onChange={handleInputChange}
+                ref={registerCountry}
               />
+
               <button
                 style={{ zIndex: 0 }}
                 className="waves-effect waves-light btn-small "
@@ -229,12 +266,15 @@ export default function PageConfig() {
                 {t('confirm')}
               </button>
             </form>
+            <div className="error-message">
+              {errorsCountry.country?.message}
+            </div>
           </section>
 
           <section>
             <h4>{t('change_password_message')}</h4>
 
-            <form onSubmit={handleFormSubmitPassword}>
+            <form onSubmit={handleSubmitPass(handleFormSubmitPassword)}>
               <input
                 id="password"
                 name="password"
@@ -242,6 +282,7 @@ export default function PageConfig() {
                 placeholder={t('enter_new_password')}
                 value={dataSupport.password}
                 onChange={handleInputChange}
+                ref={registerPass}
               />
               <button
                 style={{ zIndex: 0 }}
@@ -251,6 +292,7 @@ export default function PageConfig() {
                 {t('confirm')}
               </button>
             </form>
+            <div className="error-message">{errorsPass.password?.message}</div>
           </section>
 
           <section className="delete">

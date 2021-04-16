@@ -31,8 +31,8 @@ export default function Note({ note, dispatch }) {
   };
 
   const deleteNote = () => {
-    console.log(note.id)
-    dispatch({ type: "SEND_TRASH", payload: note.id });
+    console.log(note.id);
+    dispatch({ type: 'SEND_TRASH', payload: note.id });
     setTimeout(() => {
       history.push('/home');
       history.push('/viewnotes');
@@ -80,6 +80,7 @@ export default function Note({ note, dispatch }) {
           onChange={(event) => setNoteColor(event.target.value)}
         ></input>
       </div>
+
       <div className="title-container">{note.title}</div>
       <div
         className="txt-container"
@@ -93,7 +94,7 @@ export default function Note({ note, dispatch }) {
         <Link to={{ pathname: 'editnote/' + note.id, state: note }}>
           <button
             className="edit, waves-effect waves-light btn-small green darken-2 "
-            style={{ zIndex: 0, width: "auto", minWidth: 0, margin: "0" }}
+            style={{ zIndex: 0, width: 'auto', minWidth: 0, margin: '0' }}
           >
             {t('edit')}
           </button>
@@ -101,13 +102,13 @@ export default function Note({ note, dispatch }) {
         <Link to={{ pathname: 'note/' + note.id, state: { notes: note } }}>
           <button
             className="view, waves-effect waves-light btn-small"
-            style={{ zIndex: 0, width: "auto", minWidth: 0, margin: "0" }}
+            style={{ zIndex: 0, width: 'auto', minWidth: 0, margin: '0' }}
           >
             {t('view')}
           </button>
         </Link>
         <button
-          style={{ zIndex: 0, width: "auto", minWidth: 0, margin: "0" }}
+          style={{ zIndex: 0, width: 'auto', minWidth: 0, margin: '0' }}
           className="delete, waves-effect waves-light btn-small red darken-4"
           onClick={handleModalOpen}
         >

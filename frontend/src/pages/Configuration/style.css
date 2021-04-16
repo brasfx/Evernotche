@@ -80,3 +80,9 @@ button {
   width: 90px;
   z-index: 0;
 }
+
+.error-message {
+  text-align: justify;
+  color: red;
+  font-size: 12px;
+}
