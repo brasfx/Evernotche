@@ -55,6 +55,7 @@ export default function Note({ note, dispatch }) {
       });
   };
 
+
   return (
     <div
       className="note"
@@ -80,7 +81,7 @@ export default function Note({ note, dispatch }) {
           onChange={(event) => setNoteColor(event.target.value)}
         ></input>
       </div>
-      <div className="title-container">{note.title}</div>
+      <div className="title-container" style={{ color: `${parseInt(Number(parseInt(note.timestamp.replace(/^#/, ''), 16)), 10) < parseInt(Number("0x808080"), 10) ? 'white' : 'black'}` }}>{note.title}</div>
       <div
         className="txt-container"
         style={{ marginBottom: 32 }}
@@ -122,6 +123,6 @@ export default function Note({ note, dispatch }) {
           />
         )}
       </div>
-    </div>
+    </div >
   );
 }
