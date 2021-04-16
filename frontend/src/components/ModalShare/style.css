@@ -1,0 +1,54 @@
+.modal-share {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 80px;
+  left: 470px;
+  right: 470px;
+  bottom: 80px;
+  outline: none;
+  padding: 0px 30px;
+  background-color: #fff;
+  border-radius: 3px;
+  border: 1px solid #0003;
+  box-shadow: 1px 1px 2px 0px #0008;
+  height: 410px;
+  max-width: 500px;
+}
+.title-share {
+  font-size: 1.7rem;
+  align-items: center;
+  align-self: center;
+  text-align: center;
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding-top: 10px;
+}
+.input {
+  padding: 3px;
+}
+
+.button-modal {
+  margin-left: 80px;
+  align-items: center;
+}
+
+.div-buttons {
+  display: flex;
+  flex-direction: row;
+  padding: 50px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.button-close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 10px;
+  text-align: center;
+}
