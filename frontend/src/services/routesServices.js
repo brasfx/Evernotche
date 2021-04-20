@@ -58,6 +58,10 @@ const findSingleNote = (data) => {
   return http.post(`/noteedit`, data);
 };
 
+const share = (data) => {
+  return http.post('/share', data);
+};
+
 export default {
   create,
   createNote,
@@ -74,4 +78,5 @@ export default {
   updateRegister,
   deleteAccount,
   findSingleNote,
+  share,
 };
