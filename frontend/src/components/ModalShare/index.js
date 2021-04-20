@@ -8,14 +8,13 @@ import routesServices from '../../services/routesServices';
 Modal.setAppElement('#root');
 
 export default function ContainerModal(props) {
-  const { handleModalClose } = props;
+  const { handleModalClose, id_note } = props;
 
   const history = useHistory();
-  const getId = localStorage.getItem('id');
 
   const initialData = {
+    id: id_note,
     email: ' ',
-    id: getId,
   };
 
   const [shareOneNote, setShareOneNote] = useState(initialData);
@@ -36,13 +35,14 @@ export default function ContainerModal(props) {
 
   const shareNote = () => {
     var data = {
-      id: getId,
+      id: id_note,
       email: shareOneNote.email,
     };
     routesServices
       .share(data)
       .then((res) => {
         setShareOneNote({
+          id: res.data.id,
           email: res.data.email,
         });
         setSubmitted(true);

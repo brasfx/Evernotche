@@ -53,7 +53,9 @@ export default function ShowNote() {
         >
           {t('share')}
         </button>
-        {isModalOpen && <Modal handleModalClose={handleModalClose} />}
+        {isModalOpen && (
+          <Modal handleModalClose={handleModalClose} id_note={state.notes.id} />
+        )}
       </section>
     </div>
   );
