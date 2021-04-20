@@ -17,8 +17,6 @@ export default function ShowNote() {
     setIsModalOpen(false);
   };
 
-  const shareNote = () => {};
-
   return (
     <div className="container">
       <section className="text">
@@ -55,12 +53,7 @@ export default function ShowNote() {
         >
           {t('share')}
         </button>
-        {isModalOpen && (
-          <Modal
-            handleModalClose={handleModalClose}
-            handleFormShare={shareNote}
-          />
-        )}
+        {isModalOpen && <Modal handleModalClose={handleModalClose} />}
       </section>
     </div>
   );

@@ -1,15 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
 import ButtonClose from './ButtonClose';
 import './style.css';
+import routesServices from '../../services/routesServices';
 
 Modal.setAppElement('#root');
 
 export default function ContainerModal(props) {
-  const { handleModalClose, handleFormShare } = props;
+  const { handleModalClose } = props;
+
+  const initialData = {
+    email: ' ',
+  };
+
+  const history = useHistory();
+
+  const [shareOneNote, setShareOneNote] = useState(initialData);
+  const [submitted, setSubmitted] = useState(false);
 
   const setModalClose = () => {
     handleModalClose(true);
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setShareOneNote({ ...shareOneNote, [name]: value });
+  };
+
+  function handleFormShareNote() {
+    shareNote();
+  }
+
+  const shareNote = () => {
+    var data = {
+      email: shareOneNote.email,
+    };
+    routesServices
+      .share(data)
+      .then((res) => {
+        setShareOneNote({
+          email: res.data.email,
+        });
+        setSubmitted(true);
+        console.log(`Email aqui:${res.data.email}`);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const resetShareNote = () => {
+    setShareOneNote('');
+    setSubmitted(false);
   };
 
   return (
@@ -20,21 +63,29 @@ export default function ContainerModal(props) {
           <ButtonClose setModalClose={setModalClose} icon="close" />
         </div>
         <h4 className="title-share">Insira um email</h4>
-        <div class="input-field col s12">
-          <input id="email" type="email" class="validate" />
-          <label for="email">Email</label>
-          <span class="helper-text" data-error="" data-success=""></span>
-        </div>
-        <div className="div-buttons">
-          <button
-            className="button-modal"
-            type="submit"
-            onClick={handleFormShare}
-            className="waves-effect waves-light btn-small green darken-2"
-          >
-            Enviar
-          </button>
-        </div>
+        <form onSubmit={handleFormShareNote}>
+          <div class="input-field col s12">
+            <input
+              id="email"
+              type="email"
+              class="validate"
+              name="email"
+              value={shareOneNote.email}
+              onChange={handleInputChange}
+            />
+            <label for="email">Email</label>
+            <span class="helper-text" data-error="" data-success=""></span>
+          </div>
+          <div className="div-buttons">
+            <button
+              className="button-modal"
+              type="submit"
+              className="waves-effect waves-light btn-small green darken-2"
+            >
+              Enviar
+            </button>
+          </div>
+        </form>
       </Modal>
     </div>
   );
