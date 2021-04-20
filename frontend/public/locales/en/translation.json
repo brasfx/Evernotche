@@ -62,5 +62,11 @@
   "password_recovery": "Password recovery",
   "enter_login_email": "Enter your login email",
   "share": "Share",
-  "check_notes": "Check selected notes"
+  "check_notes": "Delete selected notes",
+  "confirm_note_deletion": "Are you sure you want to delete this note?",
+  "confirm_account_deletion": " Are you sure you want to delete your account?",
+  "final_confirm_note_deletion": "Your note will be deleted permanently, do you wish to continue?",
+  "confirm_multiple_deletion": "All selected notes will be deleted, do you wish to continue?",
+  "yes": "Yes",
+  "no": "No"
 }

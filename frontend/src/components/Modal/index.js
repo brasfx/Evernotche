@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import ButtonClose from './ButtonClose';
 import './style.css';
+import { useTranslation } from 'react-i18next';
+
 
 Modal.setAppElement('#root');
 
 export default function ContainerModal(props) {
+  const { t } = useTranslation();
+
   const { handleModalClose, type, handleFormSubmitDelete } = props;
 
   const setModalClose = () => {
@@ -14,10 +18,12 @@ export default function ContainerModal(props) {
 
   const modalTitle =
     type == 'note'
-      ? 'Deseja realmente excluir sua nota?'
+      ? t('confirm_note_deletion')
       : type == 'account'
-      ? ' Deseja realmente excluir sua conta?'
-      : 'Sua nota será excluida definitivamente, deseja continuar?';
+        ? t('confirm_account_deletion')
+        : type == 'confirm_multiple'
+          ? t('confirm_multiple_deletion') : t('final_confirm_note_deletion')
+
 
   return (
     <div>
@@ -34,7 +40,7 @@ export default function ContainerModal(props) {
             onClick={handleFormSubmitDelete}
             className="waves-effect waves-light btn-small green darken-2"
           >
-            Sim
+            {t('yes')}
           </button>
           <button
             className="button-modal"
@@ -42,7 +48,7 @@ export default function ContainerModal(props) {
             onClick={handleModalClose}
             className="waves-effect waves-light btn-small red darken-4"
           >
-            Não
+            {t('no')}
           </button>
         </div>
       </Modal>

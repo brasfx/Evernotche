@@ -62,5 +62,11 @@
   "password_recovery": "Recuperação de senha",
   "enter_login_email": "Insira seu e-mail de login",
   "share": "Compartilhar",
-  "check_notes": "Checar notas selecionadas"
+  "check_notes": "Excluir múltiplas",
+  "confirm_note_deletion": "Deseja realmente excluir sua nota?",
+  "confirm_account_deletion": " Deseja realmente excluir sua conta?",
+  "final_confirm_note_deletion": "Sua nota será excluida definitivamente, deseja continuar?",
+  "confirm_multiple_deletion": "Todas as notas selecionadas serão excluídas, deseja realmente continuar?",
+  "yes": "Sim",
+  "no": "Não"
 }
