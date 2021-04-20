@@ -10,11 +10,13 @@ Modal.setAppElement('#root');
 export default function ContainerModal(props) {
   const { handleModalClose } = props;
 
+  const history = useHistory();
+  const getId = localStorage.getItem('id');
+
   const initialData = {
     email: ' ',
+    id: getId,
   };
-
-  const history = useHistory();
 
   const [shareOneNote, setShareOneNote] = useState(initialData);
   const [submitted, setSubmitted] = useState(false);
@@ -34,6 +36,7 @@ export default function ContainerModal(props) {
 
   const shareNote = () => {
     var data = {
+      id: getId,
       email: shareOneNote.email,
     };
     routesServices
