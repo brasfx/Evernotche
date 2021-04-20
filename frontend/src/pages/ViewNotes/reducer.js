@@ -26,7 +26,11 @@ export default function reducer(state, action) {
         ...routesServices.sendTrash(note),
         //...routesServices.sendTrash(action.payload),
       };
-
+    case "SEND_TRASH_BULK":
+      console.log(action.payload);
+      return {
+        ...action.payload,
+      };
     default:
       return state;
   }
