@@ -29,8 +29,12 @@ export default function ContainerModal(props) {
     setShareOneNote({ ...shareOneNote, [name]: value });
   };
 
-  function handleFormShareNote() {
+  function handleFormShareNote(event) {
+    event.preventDefault();
     shareNote();
+    setTimeout(() => {
+      history.push(`/viewnotes`);
+    }, 1000);
   }
 
   const shareNote = () => {
