@@ -18,6 +18,9 @@ const validatePassword = yup.object().shape({
     .string()
     .min(6, 'A senha deve conter no mínimo 6 caracteres!')
     .required('O campo é obrigatório!'),
+  confirmpassword: yup
+    .string('Por favor,confirme sua senha!')
+    .oneOf([yup.ref('password'), null], 'As senhas são imcompativeis!'),
 });
 
 export { validateName, validatePassword, validateCountry };

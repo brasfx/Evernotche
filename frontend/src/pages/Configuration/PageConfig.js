@@ -41,6 +41,7 @@ export default function PageConfig() {
   const initialDataSupp = {
     name: '',
     password: '',
+    confirmpassword: '',
     country: '',
     id: getId,
   };
@@ -271,7 +272,7 @@ export default function PageConfig() {
             </div>
           </section>
 
-          <section>
+          <section style={{ display: 'flex', flexDirection: 'column' }}>
             <h4>{t('change_password_message')}</h4>
 
             <form onSubmit={handleSubmitPass(handleFormSubmitPassword)}>
@@ -284,6 +285,7 @@ export default function PageConfig() {
                 onChange={handleInputChange}
                 ref={registerPass}
               />
+
               <button
                 style={{ zIndex: 0 }}
                 className="waves-effect waves-light btn-small"
@@ -292,7 +294,20 @@ export default function PageConfig() {
                 {t('confirm')}
               </button>
             </form>
+            <input
+              style={{ width: '230px' }}
+              id="confirmpassword"
+              type="password"
+              name="confirmpassword"
+              placeholder={t('confirm_password_command')}
+              value={dataSupport.confirmpassword}
+              onChange={handleInputChange}
+              ref={registerPass}
+            />
             <div className="error-message">{errorsPass.password?.message}</div>
+            <div className="error-message">
+              {errorsPass.confirmpassword?.message}
+            </div>
           </section>
 
           <section className="delete">
