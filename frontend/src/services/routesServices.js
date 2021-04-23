@@ -62,6 +62,17 @@ const share = (data) => {
   return http.post('/share', data);
 };
 
+const findFinished = (data) => {
+  return http.post('/finished', data);
+};
+const markFinished = (data) => {
+  return http.post('/markFinished', data);
+};
+const unmarkFinished = (data) => {
+  return http.post('/unmarkfinished', data);
+};
+
+
 export default {
   create,
   createNote,
@@ -79,4 +90,7 @@ export default {
   deleteAccount,
   findSingleNote,
   share,
+  findFinished,
+  markFinished,
+  unmarkFinished,
 };
