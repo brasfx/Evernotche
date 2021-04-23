@@ -26,12 +26,13 @@ import { db } from './models/index.js';
 
 const app = express();
 
-var corsOptions = {
-  origin: 'https://evernotche.vercel.app/',
-  optionsSuccessStatus: 200,
-};
+// var corsOptions = {
+//   origin: 'https://evernotche.vercel.app',
+//   optionsSuccessStatus: 200,
+// };
 
-app.use(cors(corsOptions));
+app.use('*', cors());
+app.use(express.json());
 
 //define o dominio de origem para consumo do servico
 app.use(bodyParser.json());

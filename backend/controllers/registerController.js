@@ -2,8 +2,9 @@ import { db } from '../models/index.js';
 import { logger } from '../config/logger.js';
 //import { error } from 'winston';
 import pkg from 'winston';
-import nodemailer from 'nodemailer';
+//import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import sgMail from '@sendgrid/mail';
 
 dotenv.config();
 const { error } = pkg;
@@ -28,36 +29,22 @@ const create = async (req, res) => {
     </ul>
     `;
 
-    let transporter = nodemailer.createTransport({
-      service: 'gmail',
-      host: 'smtp.gmail.com',
-
-      auth: {
-        user: `${process.env.EMAIL_LOGIN}`, // generated ethereal user
-        pass: `${process.env.EMAIL_PASSWORD}`,
-        port: 587,
-        secure: true,
-      },
-      tls: {
-        rejectUnauthorized: false,
-      },
-    });
-
-    let mailOptions = {
-      from: `Evernotche Web <${process.env.EMAIL_LOGIN}>`,
-      to: `${email}`, // list of receivers
-      subject: 'Confirmação criação de conta ',
-      text: 'Hello world?',
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+      to: `${email}`, // Change to your recipient
+      from: `${process.env.EMAIL_LOGIN}`, // Change to your verified sender
+      subject: 'Confirmação criação de conta',
+      text: 'Seja bem vindo!',
       html: message,
     };
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return console.log(error);
-      }
-      console.log('Message sent: %s', info.messageId);
-      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-      res.render('contact', { message: 'Email enviado com sucesso!' });
-    });
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log('Email enviado');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   } catch (error) {
     res
       .status(500)
@@ -107,11 +94,12 @@ const update = async (req, res) => {
     });
   }
 
-  const id = req.params.id;
+  const { id } = req.body;
 
   try {
     const data = await Model.updateOne({ _id: id }, req.body);
-    res.send({ message: 'Usuario atualizado com sucesso' });
+    //res.send({ message: 'Usuario atualizado com sucesso' });
+    res.send(req.body);
 
     logger.info(`PUT /register - ${id} - ${JSON.stringify(req.body)}`);
   } catch (error) {
@@ -123,11 +111,12 @@ const update = async (req, res) => {
 };
 //usuário é removido a partir de seu ID
 const remove = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.body;
 
   try {
     const data = await Model.deleteOne({ _id: id });
-    res.send({ message: 'Usuario excluido com sucesso' });
+    //res.send({ message: 'Usuario excluido com sucesso' });
+    res.send(JSON.stringify(data));
 
     logger.info(`DELETE / register - ${id}`);
   } catch (error) {
@@ -140,51 +129,43 @@ const remove = async (req, res) => {
 };
 
 const support = async (req, res) => {
-  const { name, email, topic, textTopic, file } = req.body;
+  try {
+    const { name, email, topic, textTopic } = req.body;
 
-  let message = `
-    <p>Solicitação de suporte do cliente</p>
-    <p>Favor verificar e fornecer um retorno o mais rápido possivel!</p>
+    let message = `
+  <p>Solicitação de suporte do cliente</p>
+  <p>Favor verificar e fornecer um retorno o mais rápido possivel!</p>
 
-    <h4>Dados para suporte</h4>
-    <ul>
-      <li><b>Nome do usuário:</b> ${name}</li>
-      <li><b>Email do usuário:</b> ${email}</li>
-      <li><b>Assunto:</b> ${topic}</li>
-      <li><b>Mensagem:</b> ${textTopic}</li>
-    </ul>
-    `;
-
-  let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host: 'smtp.gmail.com',
-
-    auth: {
-      user: `${process.env.EMAIL_LOGIN}`, // generated ethereal user
-      pass: `${process.env.EMAIL_PASSWORD}`,
-      port: 587,
-      secure: true,
-    },
-    tls: {
-      rejectUnauthorized: false,
-    },
-  });
-
-  let mailOptions = {
-    from: `Suporte <${process.env.EMAIL_LOGIN}>`,
-    to: `${process.env.EMAIL_LOGIN}`, // list of receivers
-    subject: 'Pedido de suporte',
-    text: 'Suporte ao usuário',
-    html: message,
-  };
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return console.log(error);
-    }
-    console.log('Message sent: %s', info.messageId);
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-    res.render('support', { message: 'Email de suporte enviado com sucesso!' });
-  });
+  <h4>Dados para suporte</h4>
+  <ul>
+    <li><b>Nome do usuário:</b> ${name}</li>
+    <li><b>Email do usuário:</b> ${email}</li>
+    <li><b>Assunto:</b> ${topic}</li>
+    <li><b>Mensagem:</b> ${textTopic}</li>
+  </ul>
+  `;
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+      to: `${process.env.EMAIL_LOGIN}`,
+      from: `${process.env.EMAIL_LOGIN}`,
+      subject: 'Solicitação de suporte',
+      text: 'Solicitação de suporte',
+      html: message,
+    };
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log('Email enviado');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } catch (error) {
+    res.status(500).send({
+      message: error.message || 'Erro ao enviar email de suporte! ',
+    });
+    logger.error(`SUPPORT /send-email - ${JSON.stringify(error.message)}`);
+  }
 };
 
 //recuperar senha
@@ -212,41 +193,27 @@ const recoverPassword = async (req, res) => {
     <p>Caso não tenha solicitado esse serviço, favor entrar em contato conosco pelo email: ${process.env.EMAIL_LOGIN} e informe o problema.</p>
     `;
 
-    let transporter = nodemailer.createTransport({
-      service: 'gmail',
-      host: 'smtp.gmail.com',
-
-      auth: {
-        user: `${process.env.EMAIL_LOGIN}`, // generated ethereal user
-        pass: `${process.env.EMAIL_PASSWORD}`,
-        port: 587,
-        secure: true,
-      },
-      tls: {
-        rejectUnauthorized: false,
-      },
-    });
-
-    let mailOptions = {
-      from: `Evernotche Web <${process.env.EMAIL_LOGIN}>`,
-      to: `${email}`, // list of receivers
-      subject: 'Recuperação de senha ',
-      text: 'Hello world?',
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+      to: `${email}`, // Change to your recipient
+      from: `${process.env.EMAIL_LOGIN}`, // Change to your verified sender
+      subject: 'Recuperação de senha',
+      text: 'Recuperação de senha',
       html: message,
     };
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return console.log(error);
-      }
-      console.log('Message sent: %s', info.messageId);
-      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-      res.render('contact', { message: 'Email enviado com sucesso!' });
-    });
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log('Email enviado');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   } catch (error) {
     res.status(500).send({
-      message: error.message || 'Erro ao atualizar o usuario de id: ' + id,
+      message: error.message || 'Erro ao recuperar senha',
     });
-    logger.error(`PUT /register - ${JSON.stringify(error.message)}`);
+    logger.error(`PUT /recover-password - ${JSON.stringify(error.message)}`);
   }
 };
 
