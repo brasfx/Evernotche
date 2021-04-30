@@ -15,7 +15,8 @@ export default function TextEditor(props) {
     title: 'teste',
     payload: 'teste',
     userid: 'teste',
-    timestamp: 'teste',
+    timestamp: new Date(),
+    color: 'teste',
   };
 
   const { t } = useTranslation();
@@ -23,8 +24,8 @@ export default function TextEditor(props) {
   const [note, setNote] = useState(initialUserState);
   let editor_language = "";
 
-  if(i18next.language == "pt") editor_language = "pt_BR"
-  if(i18next.language == "en") editor_language = "en_US"
+  if (i18next.language == "pt") editor_language = "pt_BR"
+  if (i18next.language == "en") editor_language = "en_US"
 
   console.log(editor_language)
 
@@ -33,10 +34,10 @@ export default function TextEditor(props) {
 
     let titleAux = "";
 
-    if(props.title === "") {
-      
-      if(i18next.language == "pt") titleAux = "Nota"
-      if(i18next.language == "en") titleAux = "Note"
+    if (props.title === "") {
+
+      if (i18next.language == "pt") titleAux = "Nota"
+      if (i18next.language == "en") titleAux = "Note"
 
     } else {
       titleAux = props.title
@@ -47,7 +48,8 @@ export default function TextEditor(props) {
       title: titleAux,
       payload: note.payload,
       userid: note.userid,
-      timestamp: note.timestamp,
+      color: note.color,
+      timestamp: new Date(),
     };
     routesServices
       .createNote(data)
@@ -106,7 +108,7 @@ export default function TextEditor(props) {
           onEditorChange={LogContent}
 
         />
-        <div style={{display: "grid", placeContent: "center"}}>
+        <div style={{ display: "grid", placeContent: "center" }}>
           <button
             className="waves-effect waves-light btn-small green darken-2"
             type="submit"

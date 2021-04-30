@@ -10,6 +10,7 @@ export default function ViewNotes() {
   const [state, dispatch] = useReducer(notesReducer, initialState);
   const [rows, setRows] = useState(false);
   const [searchQuery, setSearchQuery] = useState();
+  const [notesOrder, setNotesOrder] = useState();
 
   function cngRows() {
     setRows(!rows);
@@ -18,9 +19,21 @@ export default function ViewNotes() {
   useEffect(() => {
     const user = {
       userid: localStorage.getItem("id"),
-    };
 
-    console.log("ue");
+    };
+    console.log(notesOrder);
+    switch (notesOrder) {
+      case 'newest':
+
+      case 'oldest':
+      case 'A-Z':
+      case 'Z-A':
+
+
+      default: break;
+    }
+
+
 
     routesServices.findNote(user).then(function (result) {
       let filteredResult = result.data;
@@ -36,21 +49,22 @@ export default function ViewNotes() {
       }
 
       const notesData = filteredResult.reduce((acc, entry) => {
-        const { _id, payload, userid, timestamp, title } = entry;
+        const { _id, payload, userid, color, title, timestamp } = entry;
         acc[_id] = {
           id: _id,
           title,
           content: payload,
           owner: userid,
-          timestamp,
+          color,
           selected: false,
+          timestamp,
         };
         return acc;
       }, {});
 
       dispatch({ data: notesData, type: "UPDATE" });
     });
-  }, [searchQuery]);
+  }, [searchQuery, notesOrder]);
 
   return (
     <div>
@@ -60,6 +74,7 @@ export default function ViewNotes() {
         dispatch={dispatch}
         cngRows={cngRows}
         setSearchQuery={setSearchQuery}
+        setNotesOrder={setNotesOrder}
       />
       <NoteList notes={state} dispatch={dispatch} rows={rows} />
     </div>

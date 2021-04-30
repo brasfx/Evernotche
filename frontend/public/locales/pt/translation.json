@@ -68,5 +68,8 @@
   "final_confirm_note_deletion": "Sua nota será excluida definitivamente, deseja continuar?",
   "confirm_multiple_deletion": "Todas as notas selecionadas serão excluídas, deseja realmente continuar?",
   "yes": "Sim",
-  "no": "Não"
+  "no": "Não",
+  "sort_selection_message": "Ordenar notas",
+  "sort_by_oldest": "Mais antigas",
+  "sort_by_newest": "Mais recentes"
 }
