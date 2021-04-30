@@ -68,5 +68,6 @@
   "final_confirm_note_deletion": "Your note will be deleted permanently, do you wish to continue?",
   "confirm_multiple_deletion": "All selected notes will be deleted, do you wish to continue?",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "limit_note": "Maximum message size reached, please reduce!"
 }

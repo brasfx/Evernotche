@@ -68,5 +68,6 @@
   "final_confirm_note_deletion": "Sua nota será excluida definitivamente, deseja continuar?",
   "confirm_multiple_deletion": "Todas as notas selecionadas serão excluídas, deseja realmente continuar?",
   "yes": "Sim",
-  "no": "Não"
+  "no": "Não",
+  "limit_note": "Tamanho máximo da mensagem atingida, favor reduzir!"
 }
