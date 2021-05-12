@@ -1,25 +1,25 @@
-import React from "react";
+import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   useHistory,
-} from "react-router-dom";
-import Register from "./pages/Register";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import AddNote from "./pages/AddNote";
-import ViewNotes from "./pages/ViewNotes";
-import Trash from "./pages/Trash";
-import Support from "./pages/Support";
-import ShowNote from "./pages/ShowNote";
+} from 'react-router-dom';
+import Register from './pages/Register';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import AddNote from './pages/AddNote';
+import ViewNotes from './pages/ViewNotes';
+import Trash from './pages/Trash';
+import Support from './pages/Support';
+import ShowNote from './pages/ShowNote';
 //import Teste from './pages/Teste';
 //import { history } from './history';
-import NotFound from "./pages/NotFound";
-import PrivateRoute from "./pages/PrivateRoute";
-import RecoverPassword from "./pages/RecoverPassword";
-import ModifyNote from "./pages/ModifyNote";
-import Configuration from "./pages/Configuration";
+import NotFound from './pages/NotFound';
+import PrivateRoute from './pages/PrivateRoute';
+import RecoverPassword from './pages/RecoverPassword';
+import ModifyNote from './pages/ModifyNote';
+import Configuration from './pages/Configuration';
 
 export default function Routes() {
   const history = useHistory();
@@ -37,7 +37,7 @@ export default function Routes() {
         <PrivateRoute exact path="/configuration" component={Configuration} />
         <Route exact path="/recover-password" component={RecoverPassword} />
         <Route exact path="/" component={Login} />
-        <PrivateRoute component={NotFound} />
+        <Route component={NotFound} />
       </Switch>
     </Router>
   );

@@ -18,7 +18,7 @@
   "insert_note_placeholder": "Enter the title of your note here",
   "note_title": "Note title",
   "save_note": "Save",
-  "page_not_found_message": "Error 404 - Page not found",
+  "page_not_found_message": "Parece que você está perdido!",
   "edit": "Edit",
   "back": "Back",
   "view": "View",
@@ -69,5 +69,6 @@
   "confirm_multiple_deletion": "All selected notes will be deleted, do you wish to continue?",
   "yes": "Yes",
   "no": "No",
-  "limit_note": "Maximum message size reached, please reduce!"
+  "limit_note": "Maximum message size reached, please reduce!",
+  "message_page_not_found": "It looks like you're lost!"
 }
