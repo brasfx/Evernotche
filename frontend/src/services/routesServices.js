@@ -68,20 +68,20 @@ const unmarkFinished = (data) => {
   return http.post('/unmarkfinished', data);
 };
 
-const findNotesLimited = () => {
-  return http.post('/notehome');
+const findNotesLimited = (data) => {
+  return http.post('/notehome', data);
 };
-const findNotesDateAscending = () => {
-  return http.post('/notenewer');
+const findNotesDateAscending = (data) => {
+  return http.post('/notenewer',data);
 };
-const findNotesDateDescending = () => {
-  return http.post('/noteolder');
+const findNotesDateDescending = (data) => {
+  return http.post('/noteolder',data);
 };
-const findNotesAZ = () => {
-  return http.post('/noteaz');
+const findNotesAZ = (data) => {
+  return http.post('/noteaz',data);
 };
-const findNotesZA = () => {
-  return http.post('/noteza');
+const findNotesZA = (data) => {
+  return http.post('/noteza',data);
 };
 
 
