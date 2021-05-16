@@ -6,16 +6,54 @@ import { useTranslation } from 'react-i18next';
 import * as FaIcons from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import routesServices from "../../services/routesServices";
+import Select from 'react-select';
 
-export default function Panel({ notes, dispatch, cngRows, setSearchQuery }) {
+export default function Panel({ notes, dispatch, cngRows, setSearchQuery, setNotesOrder }) {
   /*const {state} = useContext(NotesContext);
     const {dispatch} = useContext(NotesContext);*/
   const { t } = useTranslation();
+  const selectStyles = {
+    container: (provided) => ({
+      ...provided,
+      width: '100%',
+      display: 'flex',
+      height: '54px',
+      zIndex: 1000,
+      position: 'relative',
+      display: 'inline-block',
+      verticalAlign: 'middle',
+      margin: 20,
+      maxWidth: '200px',
+
+
+    }),
+    indicatorSeparator: (provided) => ({ ...provided, display: 'none' }),
+    valueContainer: (provided) => ({ ...provided, height: '54px' }),
+    menu: (provided) => ({ ...provided, margin: 2, }),
+
+  };
+
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [notestoDelete, setNotestoDelete] = useState([]);
+  const [sortType, setSortType] = useState("A-Z");
   const history = useHistory();
   const selectedNotes = [];
+  const options = [
+    { value: 'A-Z', label: 'A-Z' },
+    { value: 'Z-A', label: 'Z-A' },
+    { value: 'oldest', label: t('sort_by_oldest') },
+    { value: 'newest', label: t('sort_by_newest') }
+  ]
+
+  const handleSortChange = (value) => {
+    const option = value.value
+    setSortType(option);
+    setNotesOrder(option);
+
+
+
+  };
   function setSelect(note, selected) {
     dispatch({ type: 'SET_NOTE', id: note.id, data: { ...note, selected } });
   }
@@ -45,14 +83,16 @@ export default function Panel({ notes, dispatch, cngRows, setSearchQuery }) {
   };
   return (
     <div className="panel-container">
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: 'relative', display: "flex ", verticalAlign: 'middle', maxHeight: 54, margin: "20px" }}>
         <FaIcons.FaSearch
-          style={{ position: 'absolute', bottom: 65, left: -20 }}
+          style={{
+            position: 'absolute', top: "45%", right: "100%"
+          }}
         />
         <input
           type="text"
           onChange={(event) => setSearchQuery(event.target.value)}
-          style={{ maxWidth: '600px' }}
+          style={{ maxWidth: '170px' }}
         />
       </div>
       <button
@@ -69,9 +109,6 @@ export default function Panel({ notes, dispatch, cngRows, setSearchQuery }) {
                 );
               }
             });
-
-
-
 
             setNotestoDelete(selectedNotes);
 
@@ -115,6 +152,7 @@ export default function Panel({ notes, dispatch, cngRows, setSearchQuery }) {
       >
         {t('change_layout')}
       </button>
+
       {isModalOpen && (
         <ContainerModal
           type={'confirm_multiple'}
@@ -122,6 +160,17 @@ export default function Panel({ notes, dispatch, cngRows, setSearchQuery }) {
           handleFormSubmitDelete={deleteNote}
         />
       )}
+
+      <Select
+        id="country"
+        name="country"
+        onChange={handleSortChange}
+        options={options}
+        styles={selectStyles}
+
+        placeholder={t('sort_selection_message')}
+      ></Select>
+
     </div>
   );
 }

@@ -10,9 +10,39 @@ export default function ViewNotes() {
   const [state, dispatch] = useReducer(notesReducer, initialState);
   const [rows, setRows] = useState(false);
   const [searchQuery, setSearchQuery] = useState();
+  const [notesOrder, setNotesOrder] = useState();
 
   function cngRows() {
     setRows(!rows);
+  }
+
+  function filterResult(filteredResult) {
+    const upperCaseSearchQuery = searchQuery.toUpperCase();
+
+    filteredResult = filteredResult.filter(
+      (e) =>
+        e.title.toUpperCase().includes(upperCaseSearchQuery) ||
+        e.payload.toUpperCase().includes(upperCaseSearchQuery)
+    );
+
+    return filteredResult;
+  }
+
+  function reduceResult(filteredResult) {
+    filteredResult.reduce((acc, entry) => {
+      const { _id, payload, userid, timestamp, title } = entry;
+      acc[_id] = {
+        id: _id,
+        title,
+        content: payload,
+        owner: userid,
+        timestamp,
+        selected: false,
+      };
+      return acc;
+    }, {});
+
+    return filteredResult;
   }
 
   useEffect(() => {
@@ -20,37 +50,29 @@ export default function ViewNotes() {
       userid: localStorage.getItem("id"),
     };
 
-    console.log("ue");
+    switch (notesOrder) {
+      case "newest":
 
-    routesServices.findNote(user).then(function (result) {
+      case "oldest":
+      case "A-Z":
+      case "Z-A":
+
+      default:
+        break;
+    }
+
+    routesServices.findNote(user).then((result) => {
       let filteredResult = result.data;
 
       if (searchQuery) {
-        const upperCaseSearchQuery = searchQuery.toUpperCase();
-
-        filteredResult = filteredResult.filter(
-          (e) =>
-            e.title.toUpperCase().includes(upperCaseSearchQuery) ||
-            e.payload.toUpperCase().includes(upperCaseSearchQuery)
-        );
+        filteredResult = filterResult(filteredResult);
       }
 
-      const notesData = filteredResult.reduce((acc, entry) => {
-        const { _id, payload, userid, timestamp, title } = entry;
-        acc[_id] = {
-          id: _id,
-          title,
-          content: payload,
-          owner: userid,
-          timestamp,
-          selected: false,
-        };
-        return acc;
-      }, {});
+      const notesData = reduceResult(filteredResult);
 
       dispatch({ data: notesData, type: "UPDATE" });
     });
-  }, [searchQuery]);
+  }, [searchQuery, notesOrder]);
 
   return (
     <div>
@@ -60,6 +82,7 @@ export default function ViewNotes() {
         dispatch={dispatch}
         cngRows={cngRows}
         setSearchQuery={setSearchQuery}
+        setNotesOrder={setNotesOrder}
       />
       <NoteList notes={state} dispatch={dispatch} rows={rows} />
     </div>

@@ -18,7 +18,8 @@ export default function TextEditor(props) {
     title: 'teste',
     payload: 'teste',
     userid: 'teste',
-    timestamp: 'teste',
+    timestamp: new Date(),
+    color: 'teste',
   };
 
   const { t } = useTranslation();
@@ -28,6 +29,7 @@ export default function TextEditor(props) {
 
   if (i18next.language == 'pt') editor_language = 'pt_BR';
   if (i18next.language == 'en') editor_language = 'en_US';
+
 
   const messageLimitNote = () => toast.error(t('limit_note'));
 
@@ -49,7 +51,8 @@ export default function TextEditor(props) {
       title: titleAux,
       payload: note.payload,
       userid: note.userid,
-      timestamp: note.timestamp,
+      color: note.color,
+      timestamp: new Date(),
     };
     routesServices
       .createNote(data)
@@ -107,7 +110,8 @@ export default function TextEditor(props) {
           }}
           onEditorChange={LogContent}
         />
-        <div style={{ display: 'grid', placeContent: 'center' }}>
+        <div style={{ display: "grid", placeContent: "center" }}>
+
           <button
             className="waves-effect waves-light btn-small green darken-2"
             type="submit"

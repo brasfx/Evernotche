@@ -50,7 +50,7 @@ export default function Note({ note, dispatch }) {
     <div
       className="note"
       style={{
-        background: note.timestamp,
+        background: note.color,
         position: 'relative',
       }}
     >

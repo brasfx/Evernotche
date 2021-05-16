@@ -39,9 +39,9 @@ export default function Note({ note, dispatch }) {
     }, 1000);
   };
 
-  //Usando timestamp por enquanto, criar um campo de cor na nota
+  //Usando color por enquanto, criar um campo de cor na nota
   const setNoteColor = (colorValue) => {
-    note.timestamp = colorValue;
+    note.color = colorValue;
 
     var data = { ...note };
 
@@ -58,7 +58,7 @@ export default function Note({ note, dispatch }) {
   return (
     <div
       className="note"
-      style={{ background: note.timestamp, position: 'relative' }}
+      style={{ background: note.color, position: 'relative' }}
     >
       <div
         className="tcheckbox"
@@ -76,21 +76,20 @@ export default function Note({ note, dispatch }) {
 
         <input
           type="color"
-          value={note.timestamp}
+          value={note.color}
           onChange={(event) => setNoteColor(event.target.value)}
         ></input>
       </div>
       <div
         className="title-container"
         style={{
-          color: `${
-            parseInt(
-              Number(parseInt(note.timestamp.replace(/^#/, ''), 16)),
-              10
-            ) < parseInt(Number('0x808080'), 10)
-              ? 'white'
-              : 'black'
-          }`,
+          color: `${parseInt(
+            Number(parseInt(note.color.replace(/^#/, ''), 16)),
+            10
+          ) < parseInt(Number('0x808080'), 10)
+            ? 'white'
+            : 'black'
+            }`,
         }}
       >
         {note.title}
