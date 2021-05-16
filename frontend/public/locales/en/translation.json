@@ -71,7 +71,7 @@
   "no": "No",
   "sort_selection_message": "Sort by",
   "sort_by_oldest": "Oldest",
-  "sort_by_newest": "Newest"
+  "sort_by_newest": "Newest",
   "limit_note": "Maximum message size reached, please reduce!",
   "message_page_not_found": "It looks like you're lost!"
 }
