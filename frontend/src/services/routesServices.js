@@ -19,10 +19,6 @@ const findNote = (data) => {
   return http.post('/note', data);
 };
 
-const findAllNotes = () => {
-  return http.get('/note');
-};
-
 const login = (data) => {
   return http.post(`/login`, data);
 };
@@ -72,11 +68,26 @@ const unmarkFinished = (data) => {
   return http.post('/unmarkfinished', data);
 };
 
+const findNotesLimited = () => {
+  return http.get('/notehome');
+};
+const findNotesDateAscending = () => {
+  return http.get('/notenewer');
+};
+const findNotesDateDescending = () => {
+  return http.get('/noteolder');
+};
+const findNotesAZ = () => {
+  return http.get('/noteaz');
+};
+const findNotesZA = () => {
+  return http.get('/noteza');
+};
+
 
 export default {
   create,
   createNote,
-  findAllNotes,
   findNote,
   removeNote,
   login,
@@ -93,4 +104,9 @@ export default {
   findFinished,
   markFinished,
   unmarkFinished,
+  findNotesLimited,
+  findNotesDateAscending,
+  findNotesDateDescending,
+  findNotesAZ,
+  findNotesZA,
 };

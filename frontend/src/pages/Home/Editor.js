@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import routesServices from '../../services/routesServices';
-import { useHistory } from "react-router-dom";
-import i18next from "i18next";
-import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom';
+import i18next from 'i18next';
+import { useTranslation } from 'react-i18next';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function TextEditor(props) {
   const LogContent = (content) => {
     const payload = content;
     const userid = localStorage.getItem('id');
     setNote({ ...note, payload, userid });
-  }
+  };
   const initialUserState = {
     title: 'teste',
     payload: 'teste',
@@ -20,28 +23,28 @@ export default function TextEditor(props) {
   };
 
   const { t } = useTranslation();
-  const history = useHistory()
+  const history = useHistory();
   const [note, setNote] = useState(initialUserState);
-  let editor_language = "";
+  let editor_language = '';
 
-  if (i18next.language == "pt") editor_language = "pt_BR"
-  if (i18next.language == "en") editor_language = "en_US"
+  if (i18next.language == 'pt') editor_language = 'pt_BR';
+  if (i18next.language == 'en') editor_language = 'en_US';
 
-  console.log(editor_language)
+
+  const messageLimitNote = () => toast.error(t('limit_note'));
+
+  console.log(editor_language);
 
   const SaveNote = (event) => {
     event.preventDefault();
 
-    let titleAux = "";
+    let titleAux = '';
 
-    if (props.title === "") {
-
-      if (i18next.language == "pt") titleAux = "Nota"
-      if (i18next.language == "en") titleAux = "Note"
-
+    if (props.title === '') {
+      if (i18next.language == 'pt') titleAux = 'Nota';
+      if (i18next.language == 'en') titleAux = 'Note';
     } else {
-      titleAux = props.title
-
+      titleAux = props.title;
     }
 
     var data = {
@@ -54,12 +57,12 @@ export default function TextEditor(props) {
     routesServices
       .createNote(data)
       .then((res) => {
-        history.push("/viewnotes");
+        history.push('/viewnotes');
       })
       .catch((e) => {
+        messageLimitNote();
         console.log(e);
       });
-
   };
   return (
     <div>
@@ -106,17 +109,28 @@ export default function TextEditor(props) {
             language: editor_language,
           }}
           onEditorChange={LogContent}
-
         />
         <div style={{ display: "grid", placeContent: "center" }}>
+
           <button
             className="waves-effect waves-light btn-small green darken-2"
             type="submit"
           >
-            {t("save_note")}
+            {t('save_note')}
           </button>
         </div>
       </form>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

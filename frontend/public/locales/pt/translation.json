@@ -18,7 +18,7 @@
   "insert_note_placeholder": "Insira aqui o titulo da sua nota",
   "note_title": "Título da nota",
   "save_note": "Salvar",
-  "page_not_found_message": "Erro 404 - Página não encontrada",
+  "page_not_found_message": "Parece que você está perdido!",
   "edit": "Editar",
   "back": "Voltar",
   "view": "Visualizar",
@@ -72,4 +72,6 @@
   "sort_selection_message": "Ordenar notas",
   "sort_by_oldest": "Mais antigas",
   "sort_by_newest": "Mais recentes"
+  "limit_note": "Tamanho máximo da mensagem atingido, favor reduzir!",
+  "message_page_not_found": "Parece que você está perdido!"
 }
