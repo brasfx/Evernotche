@@ -69,5 +69,9 @@
   "confirm_multiple_deletion": "Todas as notas selecionadas serão excluídas, deseja realmente continuar?",
   "yes": "Sim",
   "no": "Não",
-  "limit_note": "Tamanho máximo da mensagem atingida, favor reduzir!"
+  "sort_selection_message": "Ordenar notas",
+  "sort_by_oldest": "Mais antigas",
+  "sort_by_newest": "Mais recentes",
+  "limit_note": "Tamanho máximo da mensagem atingido, favor reduzir!",
+  "message_page_not_found": "Parece que você está perdido!"
 }

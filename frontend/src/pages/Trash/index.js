@@ -34,13 +34,13 @@ export default function Trash() {
       }
 
       const notesData = filteredResult.reduce((acc, entry) => {
-        const { _id, payload, userid, timestamp, title } = entry;
+        const { _id, payload, userid, color, title } = entry;
         acc[_id] = {
           id: _id,
           title,
           content: payload,
           owner: userid,
-          timestamp,
+          color,
           selected: false,
         };
         return acc;

@@ -5,7 +5,7 @@ import { useLocation, useHistory } from "react-router-dom";
 import i18next from "i18next";
 import { useTranslation } from 'react-i18next'
 
-function TextEditor({ note: state, newTitle}) {
+function TextEditor({ note: state, newTitle }) {
 
   //const state = { title: "Upload", userid: "topper", id: "asdvassdfga", timestamp: "14" }
   const LogContent = (content) => {
@@ -18,7 +18,8 @@ function TextEditor({ note: state, newTitle}) {
     title: state.title,
     payload: state.content,
     userid: state.userid,
-    timestamp: state.timestamp,
+    timestamp: new Date(),
+    color: state.color,
   };
 
   const { t } = useTranslation();
@@ -26,8 +27,8 @@ function TextEditor({ note: state, newTitle}) {
   const [note, setNote] = useState(initialUserState);
   let editor_language = "";
 
-  if(i18next.language == "pt") editor_language = "pt_BR"
-  if(i18next.language == "en") editor_language = "en_US"
+  if (i18next.language == "pt") editor_language = "pt_BR"
+  if (i18next.language == "en") editor_language = "en_US"
 
 
   const SaveNote = (event) => {
@@ -35,9 +36,9 @@ function TextEditor({ note: state, newTitle}) {
 
     let titleAux = "";
 
-    if(newTitle === "") {
-      if(i18next.language == "pt") titleAux = "Nota"
-      if(i18next.language == "en") titleAux = "Note"
+    if (newTitle === "") {
+      if (i18next.language == "pt") titleAux = "Nota"
+      if (i18next.language == "en") titleAux = "Note"
 
     } else {
       titleAux = newTitle
@@ -48,7 +49,8 @@ function TextEditor({ note: state, newTitle}) {
       title: titleAux,
       payload: note.payload,
       userid: note.userid,
-      timestamp: note.timestamp,
+      color: note.color,
+      timestamp: new Date(),
     };
     routesServices
       .updateNote(state.id, data)
@@ -108,14 +110,14 @@ function TextEditor({ note: state, newTitle}) {
           onEditorChange={LogContent}
 
         />
-        <div style={{display: "grid", placeContent: "center"}}>
+        <div style={{ display: "grid", placeContent: "center" }}>
           <button
             className="waves-effect waves-light btn-small green darken-2"
             type="submit"
-            
+
           >
             {t("save_note")}
-            </button>
+          </button>
         </div>
       </form>
     </div>
