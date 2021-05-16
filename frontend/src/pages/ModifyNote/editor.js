@@ -18,7 +18,6 @@ function TextEditor({ note: state, newTitle }) {
     title: state.title,
     payload: state.content,
     userid: state.userid,
-    timestamp: new Date(),
     color: state.color,
   };
 
@@ -50,7 +49,6 @@ function TextEditor({ note: state, newTitle }) {
       payload: note.payload,
       userid: note.userid,
       color: note.color,
-      timestamp: new Date(),
     };
     routesServices
       .updateNote(state.id, data)

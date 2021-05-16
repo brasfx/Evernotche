@@ -30,13 +30,12 @@ export default function ViewNotes() {
 
   function reduceResult(filteredResult) {
     filteredResult.reduce((acc, entry) => {
-      const { _id, payload, userid, timestamp, title } = entry;
+      const { _id, payload, userid, title } = entry;
       acc[_id] = {
         id: _id,
         title,
         content: payload,
         owner: userid,
-        timestamp,
         selected: false,
       };
       return acc;
@@ -61,7 +60,7 @@ export default function ViewNotes() {
         break;
     }
 
-    routesServices.findNote(user).then((result) => {
+    routesServices.findNotesLimited(user).then((result) => {
       let filteredResult = result.data;
 
       if (searchQuery) {

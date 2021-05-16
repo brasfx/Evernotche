@@ -18,7 +18,6 @@ export default function TextEditor(props) {
     title: 'teste',
     payload: 'teste',
     userid: 'teste',
-    timestamp: new Date(),
     color: 'teste',
   };
 
@@ -52,7 +51,6 @@ export default function TextEditor(props) {
       payload: note.payload,
       userid: note.userid,
       color: note.color,
-      timestamp: new Date(),
     };
     routesServices
       .createNote(data)
