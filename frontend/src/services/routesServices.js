@@ -69,19 +69,19 @@ const unmarkFinished = (data) => {
 };
 
 const findNotesLimited = () => {
-  return http.get('/notehome');
+  return http.post('/notehome');
 };
 const findNotesDateAscending = () => {
-  return http.get('/notenewer');
+  return http.post('/notenewer');
 };
 const findNotesDateDescending = () => {
-  return http.get('/noteolder');
+  return http.post('/noteolder');
 };
 const findNotesAZ = () => {
-  return http.get('/noteaz');
+  return http.post('/noteaz');
 };
 const findNotesZA = () => {
-  return http.get('/noteza');
+  return http.post('/noteza');
 };
 
 
