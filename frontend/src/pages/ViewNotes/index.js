@@ -16,51 +16,59 @@ export default function ViewNotes() {
     setRows(!rows);
   }
 
+  function filterResult(filteredResult) {
+    const upperCaseSearchQuery = searchQuery.toUpperCase();
+
+    filteredResult = filteredResult.filter(
+      (e) =>
+        e.title.toUpperCase().includes(upperCaseSearchQuery) ||
+        e.payload.toUpperCase().includes(upperCaseSearchQuery)
+    );
+
+    return filteredResult;
+  }
+
+  function reduceResult(filteredResult) {
+    filteredResult.reduce((acc, entry) => {
+      const { _id, payload, userid, timestamp, title } = entry;
+      acc[_id] = {
+        id: _id,
+        title,
+        content: payload,
+        owner: userid,
+        timestamp,
+        selected: false,
+      };
+      return acc;
+    }, {});
+
+    return filteredResult;
+  }
+
   useEffect(() => {
     const user = {
       userid: localStorage.getItem("id"),
-
     };
-    console.log(notesOrder);
+
     switch (notesOrder) {
-      case 'newest':
+      case "newest":
 
-      case 'oldest':
-      case 'A-Z':
-      case 'Z-A':
+      case "oldest":
+      case "A-Z":
+      case "Z-A":
 
-
-      default: break;
+      default:
+        break;
     }
 
-
-
-    routesServices.findNote(user).then(function (result) {
+    routesServices.findNote(user).then((result) => {
       let filteredResult = result.data;
 
       if (searchQuery) {
-        const upperCaseSearchQuery = searchQuery.toUpperCase();
-
-        filteredResult = filteredResult.filter(
-          (e) =>
-            e.title.toUpperCase().includes(upperCaseSearchQuery) ||
-            e.payload.toUpperCase().includes(upperCaseSearchQuery)
-        );
+        filteredResult = filterResult(filteredResult);
       }
 
-      const notesData = filteredResult.reduce((acc, entry) => {
-        const { _id, payload, userid, color, title, timestamp } = entry;
-        acc[_id] = {
-          id: _id,
-          title,
-          content: payload,
-          owner: userid,
-          color,
-          selected: false,
-          timestamp,
-        };
-        return acc;
-      }, {});
+      const notesData = reduceResult(filteredResult);
 
       dispatch({ data: notesData, type: "UPDATE" });
     });
