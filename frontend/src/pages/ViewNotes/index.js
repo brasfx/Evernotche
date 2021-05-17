@@ -52,27 +52,74 @@ export default function ViewNotes() {
 
     switch (notesOrder) {
       case "newest":
+        routesServices.findNotesDateDescending(user).then((result) => {
+          let filteredResult = result.data;
+
+          if (searchQuery) {
+            filteredResult = filterResult(filteredResult);
+          }
+
+          const notesData = reduceResult(filteredResult);
+          console.log(notesData);
+
+          dispatch({ data: notesData, type: "UPDATE" });
+        });
 
       case "oldest":
+        routesServices.findNotesDateAscending(user).then((result) => {
+          let filteredResult = result.data;
+
+          if (searchQuery) {
+            filteredResult = filterResult(filteredResult);
+          }
+
+          const notesData = reduceResult(filteredResult);
+          console.log(notesData);
+
+          dispatch({ data: notesData, type: "UPDATE" });
+        });
+
       case "A-Z":
+        routesServices.findNotesAZ(user).then((result) => {
+          let filteredResult = result.data;
+
+          if (searchQuery) {
+            filteredResult = filterResult(filteredResult);
+          }
+
+          const notesData = reduceResult(filteredResult);
+          console.log(notesData);
+
+          dispatch({ data: notesData, type: "UPDATE" });
+        });
+
       case "Z-A":
+        routesServices.findNotesZA(user).then((result) => {
+          let filteredResult = result.data;
 
-      default:
-        break;
+          if (searchQuery) {
+            filteredResult = filterResult(filteredResult);
+          }
+
+          const notesData = reduceResult(filteredResult);
+          console.log(notesData);
+
+          dispatch({ data: notesData, type: "UPDATE" });
+        });
+      /*       default:
+        routesServices.findNotesDateDescending(user).then((result) => {
+          let filteredResult = result.data;
+
+          if (searchQuery) {
+            filteredResult = filterResult(filteredResult);
+          }
+
+          const notesData = reduceResult(filteredResult);
+          console.log(notesData);
+
+          dispatch({ data: notesData, type: "UPDATE" });
+        }); */
     }
-
-    routesServices.findNotesLimited(user).then((result) => {
-      let filteredResult = result.data;
-
-      if (searchQuery) {
-        filteredResult = filterResult(filteredResult);
-      }
-
-      const notesData = reduceResult(filteredResult);
-      console.log(notesData);
-
-      dispatch({ data: notesData, type: "UPDATE" });
-    });
   }, [searchQuery, notesOrder]);
 
   return (

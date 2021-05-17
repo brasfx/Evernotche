@@ -1,38 +1,40 @@
-import React, { useContext, useReducer, useState, useEffect } from 'react';
+import React, { useContext, useReducer, useState, useEffect } from "react";
 //import NotesContext from './context.js';
-import './style.css';
-import ContainerModal from '../../components/Modal';
-import { useTranslation } from 'react-i18next';
-import * as FaIcons from 'react-icons/fa';
-import { useHistory } from 'react-router-dom';
+import "./style.css";
+import ContainerModal from "../../components/Modal";
+import { useTranslation } from "react-i18next";
+import * as FaIcons from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 import routesServices from "../../services/routesServices";
-import Select from 'react-select';
+import Select from "react-select";
 
-export default function Panel({ notes, dispatch, cngRows, setSearchQuery, setNotesOrder }) {
+export default function Panel({
+  notes,
+  dispatch,
+  cngRows,
+  setSearchQuery,
+  setNotesOrder,
+}) {
   /*const {state} = useContext(NotesContext);
     const {dispatch} = useContext(NotesContext);*/
   const { t } = useTranslation();
   const selectStyles = {
     container: (provided) => ({
       ...provided,
-      width: '100%',
-      display: 'flex',
-      height: '54px',
+      width: "100%",
+      display: "flex",
+      height: "54px",
       zIndex: 1000,
-      position: 'relative',
-      display: 'inline-block',
-      verticalAlign: 'middle',
+      position: "relative",
+      display: "inline-block",
+      verticalAlign: "middle",
       margin: 20,
-      maxWidth: '200px',
-
-
+      maxWidth: "200px",
     }),
-    indicatorSeparator: (provided) => ({ ...provided, display: 'none' }),
-    valueContainer: (provided) => ({ ...provided, height: '54px' }),
-    menu: (provided) => ({ ...provided, margin: 2, }),
-
+    indicatorSeparator: (provided) => ({ ...provided, display: "none" }),
+    valueContainer: (provided) => ({ ...provided, height: "54px" }),
+    menu: (provided) => ({ ...provided, margin: 2 }),
   };
-
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [notestoDelete, setNotestoDelete] = useState([]);
@@ -40,22 +42,25 @@ export default function Panel({ notes, dispatch, cngRows, setSearchQuery, setNot
   const history = useHistory();
   const selectedNotes = [];
   const options = [
-    { value: 'A-Z', label: 'A-Z' },
-    { value: 'Z-A', label: 'Z-A' },
-    { value: 'oldest', label: t('sort_by_oldest') },
-    { value: 'newest', label: t('sort_by_newest') }
-  ]
+    { value: "A-Z", label: "A-Z" },
+    { value: "Z-A", label: "Z-A" },
+    { value: "oldest", label: t("sort_by_oldest") },
+    { value: "newest", label: t("sort_by_newest") },
+  ];
+
+  useEffect(() => {
+    handleSortChange(options[3]);
+  }, []);
 
   const handleSortChange = (value) => {
-    const option = value.value
+    if (value) console.log(value);
+
+    const option = value.value;
     setSortType(option);
     setNotesOrder(option);
-
-
-
   };
   function setSelect(note, selected) {
-    dispatch({ type: 'SET_NOTE', id: note.id, data: { ...note, selected } });
+    dispatch({ type: "SET_NOTE", id: note.id, data: { ...note, selected } });
   }
   const handleModalOpen = () => {
     setIsModalOpen(true);
@@ -77,22 +82,32 @@ export default function Panel({ notes, dispatch, cngRows, setSearchQuery, setNot
     });
     // dispatch({ type: 'SEND_TRASH_BULK', payload: notestoDelete });
     setTimeout(() => {
-      history.push('/home');
-      history.push('/viewnotes');
+      history.push("/home");
+      history.push("/viewnotes");
     }, 1000);
   };
   return (
     <div className="panel-container">
-      <div style={{ position: 'relative', display: "flex ", verticalAlign: 'middle', maxHeight: 54, margin: "20px" }}>
+      <div
+        style={{
+          position: "relative",
+          display: "flex ",
+          verticalAlign: "middle",
+          maxHeight: 54,
+          margin: "20px",
+        }}
+      >
         <FaIcons.FaSearch
           style={{
-            position: 'absolute', top: "45%", right: "100%"
+            position: "absolute",
+            top: "45%",
+            right: "100%",
           }}
         />
         <input
           type="text"
           onChange={(event) => setSearchQuery(event.target.value)}
-          style={{ maxWidth: '170px' }}
+          style={{ maxWidth: "170px" }}
         />
       </div>
       <button
@@ -116,7 +131,7 @@ export default function Panel({ notes, dispatch, cngRows, setSearchQuery, setNot
           }
         }}
       >
-        {t('check_notes')}
+        {t("check_notes")}
       </button>
 
       <button
@@ -144,18 +159,18 @@ export default function Panel({ notes, dispatch, cngRows, setSearchQuery, setNot
           }
         }}
       >
-        {t('select_all_notes')}
+        {t("select_all_notes")}
       </button>
       <button
         className="button-panel waves-effect waves-light btn-large grey darken-2"
         onClick={cngRows}
       >
-        {t('change_layout')}
+        {t("change_layout")}
       </button>
 
       {isModalOpen && (
         <ContainerModal
-          type={'confirm_multiple'}
+          type={"confirm_multiple"}
           handleModalClose={handleModalClose}
           handleFormSubmitDelete={deleteNote}
         />
@@ -167,10 +182,8 @@ export default function Panel({ notes, dispatch, cngRows, setSearchQuery, setNot
         onChange={handleSortChange}
         options={options}
         styles={selectStyles}
-
-        placeholder={t('sort_selection_message')}
+        placeholder={t("sort_selection_message")}
       ></Select>
-
     </div>
   );
 }
