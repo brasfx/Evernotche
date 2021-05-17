@@ -29,11 +29,12 @@ export default function ViewNotes() {
   }
 
   function reduceResult(filteredResult) {
-    filteredResult.reduce((acc, entry) => {
-      const { _id, payload, userid, title } = entry;
+    filteredResult = filteredResult.reduce((acc, entry) => {
+      const { _id, payload, userid, title, color } = entry;
       acc[_id] = {
         id: _id,
         title,
+        color,
         content: payload,
         owner: userid,
         selected: false,
@@ -68,6 +69,7 @@ export default function ViewNotes() {
       }
 
       const notesData = reduceResult(filteredResult);
+      console.log(notesData);
 
       dispatch({ data: notesData, type: "UPDATE" });
     });
