@@ -1,7 +1,7 @@
 import Navbar from "./Navbar";
 import React, { useContext, useReducer, useEffect, useState } from "react";
 import notesReducer from "../ViewNotes/reducer.js";
-import NoteList from "../ViewNotes/NoteList";
+import NoteList from "./NoteList";
 import routesServices from "../../services/routesServices";
 
 export default function Home() {
