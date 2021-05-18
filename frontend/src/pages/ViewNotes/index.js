@@ -1,9 +1,9 @@
-import React, { useContext, useReducer, useEffect, useState } from 'react';
-import Navbar from '../Home/Navbar.js';
-import notesReducer from './reducer.js';
-import NoteList from './NoteList.js';
-import Panel from './Panel.js';
-import routesServices from '../../services/routesServices';
+import React, { useContext, useReducer, useEffect, useState } from "react";
+import Navbar from "../Home/Navbar.js";
+import notesReducer from "./reducer.js";
+import NoteList from "./NoteList.js";
+import Panel from "./Panel.js";
+import routesServices from "../../services/routesServices";
 
 export default function ViewNotes() {
   const initialState = {};
@@ -47,11 +47,11 @@ export default function ViewNotes() {
 
   useEffect(() => {
     const user = {
-      userid: localStorage.getItem('id'),
+      userid: localStorage.getItem("id"),
     };
 
     switch (notesOrder) {
-      case 'newest':
+      case "newest":
         routesServices.findNotesDateDescending(user).then((result) => {
           let filteredResult = result.data;
 
@@ -62,10 +62,10 @@ export default function ViewNotes() {
           const notesData = reduceResult(filteredResult);
           //console.log(notesData);
 
-          dispatch({ data: notesData, type: 'UPDATE' });
+          dispatch({ data: notesData, type: "UPDATE" });
         });
 
-      case 'oldest':
+      case "oldest":
         routesServices.findNotesDateAscending(user).then((result) => {
           let filteredResult = result.data;
 
@@ -76,10 +76,10 @@ export default function ViewNotes() {
           const notesData = reduceResult(filteredResult);
           //console.log(notesData);
 
-          dispatch({ data: notesData, type: 'UPDATE' });
+          dispatch({ data: notesData, type: "UPDATE" });
         });
 
-      case 'A-Z':
+      case "A-Z":
         routesServices.findNotesAZ(user).then((result) => {
           let filteredResult = result.data;
 
@@ -90,10 +90,10 @@ export default function ViewNotes() {
           const notesData = reduceResult(filteredResult);
           //console.log(notesData);
 
-          dispatch({ data: notesData, type: 'UPDATE' });
+          dispatch({ data: notesData, type: "UPDATE" });
         });
 
-      case 'Z-A':
+      case "Z-A":
         routesServices.findNotesZA(user).then((result) => {
           let filteredResult = result.data;
 
@@ -104,21 +104,8 @@ export default function ViewNotes() {
           const notesData = reduceResult(filteredResult);
           //console.log(notesData);
 
-          dispatch({ data: notesData, type: 'UPDATE' });
-        });
-      /*       default:
-        routesServices.findNotesDateDescending(user).then((result) => {
-          let filteredResult = result.data;
-
-          if (searchQuery) {
-            filteredResult = filterResult(filteredResult);
-          }
-
-          const notesData = reduceResult(filteredResult);
-          console.log(notesData);
-
           dispatch({ data: notesData, type: "UPDATE" });
-        }); */
+        });
     }
   }, [searchQuery, notesOrder]);
 

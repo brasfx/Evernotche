@@ -5,7 +5,6 @@ export default function reducer(state, action) {
     noteid: action.payload,
   };
   switch (action.type) {
-    
     case "SET_NOTE":
       return {
         ...state,
@@ -13,29 +12,19 @@ export default function reducer(state, action) {
       };
 
     case "UPDATE":
-      console.log(action.data);
-
       return {
         ...action.data,
       };
 
     case "RECOVER":
-
-      console.log(note);
       return {
-        // TODO
         ...routesServices.recoverNote(note),
-        //...routesServices.sendTrash(action.payload),
       };
 
-      case "DELETE_NOTE":
-
-        console.log(note);
-        return {
-          // TODO
-          ...routesServices.removeNote(note),
-          //...routesServices.sendTrash(action.payload),
-        };
+    case "DELETE_NOTE":
+      return {
+        ...routesServices.removeNote(note),
+      };
 
     default:
       return state;
