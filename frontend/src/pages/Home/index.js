@@ -34,7 +34,7 @@ export default function Home() {
       let filteredResult = result.data;
 
       const notesData = reduceResult(filteredResult);
-      console.log(notesData);
+      //console.log(notesData);
 
       dispatch({ data: notesData, type: "UPDATE" });
     });

@@ -5,10 +5,10 @@ import logoSupp from '../../assets/logo-support.png';
 import Spinner from '../../components/Spinner';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next';
 
 export default function PageSupp() {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const initialDataSupp = {
     name: '',
@@ -28,7 +28,7 @@ export default function PageSupp() {
     setDataSupport({ ...dataSupport, [name]: value });
   };
 
-  const notify = () => toast.success(t("form_sent_successfully"));
+  const notify = () => toast.success(t('form_sent_successfully'));
 
   function handleFormSubmit(event) {
     event.preventDefault();
@@ -58,7 +58,7 @@ export default function PageSupp() {
           //file: res.data.file,
         });
         setSubmitted(true);
-        console.log(res.data);
+        //console.log(res.data);
       })
       .catch((e) => {
         console.log(e);
@@ -83,12 +83,12 @@ export default function PageSupp() {
         pauseOnHover
       />
       {submitted ? (
-        <Spinner description={t("sending_form_message")} />
+        <Spinner description={t('sending_form_message')} />
       ) : (
         <div className="content">
           <section>
             <img src={logoSupp} className="logo-image" alt="logo-supp" />
-            <h1>{t("support_form_title")}</h1>
+            <h1>{t('support_form_title')}</h1>
           </section>
           <form onSubmit={handleFormSubmit}>
             <input
@@ -114,7 +114,7 @@ export default function PageSupp() {
               id="topic"
               type="text"
               name="topic"
-              placeholder={t("subject")}
+              placeholder={t('subject')}
               value={dataSupport.topic}
               onChange={handleInputChange}
             />
@@ -125,7 +125,7 @@ export default function PageSupp() {
                 type="text"
                 id="textTopic"
                 name="textTopic"
-                placeholder={t("tell_us_message")}
+                placeholder={t('tell_us_message')}
                 value={dataSupport.textTopic}
                 onChange={handleInputChange}
               ></textarea>
@@ -145,7 +145,7 @@ export default function PageSupp() {
               className="waves-effect waves-light btn-small green darken-2"
               type="submit"
             >
-              {t("send")}
+              {t('send')}
             </button>
           </form>
         </div>

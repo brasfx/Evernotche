@@ -31,7 +31,7 @@ export default function Note({ note, dispatch }) {
   };
 
   const deleteNote = () => {
-    console.log(note.id);
+    //console.log(note.id);
     dispatch({ type: "SEND_TRASH", payload: note.id });
     setTimeout(() => {
       history.push("/home");

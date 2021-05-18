@@ -11,4 +11,4 @@ export default axios.create({
   },
 });
 
-console.log(`Conectado ao DB ${process.env.REACT_APP_BACKEND}`);
+//console.log(`Conectado ao DB ${process.env.REACT_APP_BACKEND}`);
