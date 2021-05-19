@@ -1,7 +1,7 @@
 .login-container {
   width: 100%;
   max-width: 1520px;
-  height: 110vh;
+  height: 100vh;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
