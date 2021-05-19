@@ -32,12 +32,25 @@ const noteSchema = new Schema({
       required: true,
     },
     userid: {
-      type: String,
+      type: Array,
       required: false, //TODO
     },
-    timestamp: {
+    date: {
+      type: Date,
+      required: false,
+      default: Date.now //TODO
+    },
+    trash: {
+      type: Number,
+      required: false,
+    },
+    color: {
       type: String,
-      required: false, //TODO
+      required: false,
+    },
+    finished: {
+      type: Number,
+      required: false,
     },
   });
   const noteModel =  mongoose.model('note', noteSchema, 'note');

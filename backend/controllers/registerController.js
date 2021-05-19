@@ -20,12 +20,12 @@ const create = async (req, res) => {
     logger.info(`POST /register - ${JSON.stringify(register)}`);
 
     let message = `
-    <h3>Obrigado por nos escolher</h3>
-    <h3>Seus dados do Evernotche Web</h3>
+    <p>Obrigado por nos escolher</p>
+    <h4>Seus dados do Evernotche Web</h4>
     <ul>
-      <li>Nome: ${name}</li>
-      <li>Email: ${email}</li>
-      <li>Senha: ${password}</li>
+      <li><b>Nome:</b> ${name}</li>
+      <li><b>Email:</b> ${email}</li>
+      <li><b>Senha:</b> ${password}</li>
     </ul>
     `;
 
@@ -133,7 +133,7 @@ const support = async (req, res) => {
     const { name, email, topic, textTopic } = req.body;
 
     let message = `
-  <p>Solicitação de suporte do cliente</p>
+  <h4>Solicitação de suporte do cliente</h4>
   <p>Favor verificar e fornecer um retorno o mais rápido possivel!</p>
 
   <h4>Dados para suporte</h4>
